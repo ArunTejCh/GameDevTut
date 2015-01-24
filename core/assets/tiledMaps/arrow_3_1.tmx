@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Interior_Home_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Interior_Home_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="Exterior_Town_TileD" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Town_TileD.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="385" name="Dungeon_Sewer_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Dungeon_Sewer_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="Interior_Home_TileC" tilewidth="32" tileheight="32">
+  <image source="../packed/Interior_Home_TileC.png" width="512" height="512"/>
+ </tileset>
+ <layer name="backgrounds" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYBrFo3gUj+JRPIqHGAYAciUDYQ==
+  </data>
+ </layer>
+ <layer name="collides" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJy9VNEKgDAIdP//IfVWT6un6Gn1WS1CELlNM+hAmJo3tWNED7ZEtCcy4f0uWvc3f67nRdkKeKL8tz9XO4SdgKc04h7+t/tCM7MN1UblMz+qQ/EBzNwznruAHIpPQY14EdUgAtJUVIMISFOWBnl/LQ1Yd1saZN/631/5rToG0qeXP4t9tPgtffb4W+ce9Fuh62Re5rxvjEavL6tnj650X56dMy4bQYkg
+  </data>
+ </layer>
+ <layer name="backgrounds2" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzbyMTAsAmIYYAXyg5lZGAIA+JwRlRxGJBkgmBC4CBQzSEkdbJQdirQ3DQgTmdEFacWiAaa68wIoSkB7jjclc2ISg8EyKZymA1HYEbjMNIaonGwgsbpdgMW89czYhcnFtjQOKyth2hcjmQAAHkhC98=
+  </data>
+ </layer>
+</map>
