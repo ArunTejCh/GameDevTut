@@ -19,8 +19,10 @@ public class ArrowEnemy extends Enemy{
     public void collideWith(Actor actor) {
         if (actor instanceof Sword)
             this.health -= 15;
-        else if (actor instanceof Arrow && actor != arrowActor)
+        else if (actor instanceof Arrow && actor != arrowActor) {
             this.health -= 10;
+            actor.remove();
+        }
         if (this.health <= 0)
             this.remove();
         Gdx.app.log("HERO", "Health is : " + this.health);

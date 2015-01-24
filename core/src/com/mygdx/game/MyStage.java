@@ -22,21 +22,19 @@ public class MyStage extends Stage {
     public MyStage() {
         group = new Group();
         hero = new Protagonist("test");
-        boss = new Boss("test");
         SwordEnemy se1 = new SwordEnemy("test", false);
         ArrowEnemy ae1 = new ArrowEnemy("test", true);
         gameEngine = new GameEngine();
 
         hero.setPosition(0, 0);
-        boss.setPosition(14,7);
+        //boss.setPosition(14, 7);
 
-        se1.setPosition(3, 5);
-        ae1.setPosition(6, 8);
+        se1.setPosition(10, 0);
+        ae1.setPosition(4, 0);
 
         group.addActor(hero);
-
         group.addActor(new TexActor(ActorType.OLD_MAN, 4,4));
-        group.addActor(boss);
+        //group.addActor(boss);
         group.addActor(se1);
         group.addActor(ae1);
         addActor(group);
@@ -62,7 +60,7 @@ public class MyStage extends Stage {
         for(int i=0; i<childrenA.size; i++){
             for(int j=0; j<childrenB.size; j++){
                 Actor actorA = childrenA.get(i);
-                Actor actorB = childrenA.get(j);
+                Actor actorB = childrenB.get(j);
                 if(actorA != actorB) {
                     if(!gameEngine.meets(actorA, actorB))
                         continue;
@@ -89,10 +87,31 @@ public class MyStage extends Stage {
                 if(tile == null) continue;
                 String type = (String) tile.getProperties().get("type");
                 if("hero".equalsIgnoreCase(type)){
-                    hero.setPosition(i, Math.abs(j));
+                    hero.setPosition(i, j);
                 }
                 if("boss".equalsIgnoreCase(type)){
-                    boss.setPosition(i, Math.abs(j));
+                    boss = new Boss("test");
+                    boss.setPosition(i, j);
+                }
+                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
+                    Enemy enemy = new ArrowEnemy("test", true);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-arrow-y".equalsIgnoreCase(type)) {
+                    Enemy enemy = new ArrowEnemy("test", false);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-sword".equalsIgnoreCase(type)) {
+                    Enemy enemy = new SwordEnemy("test", true);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-sword-y".equalsIgnoreCase(type)) {
+                    Enemy enemy = new SwordEnemy("test", false);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
+                    Enemy enemy = new ArrowEnemy("test", true);
+                    enemy.setPosition(i, j);
                 }
 
             }

@@ -19,10 +19,10 @@ public class Arrow extends Actor {
     float moveTime = 0.2f;
     float width = 0.7f;
     float height = 0.3f;
+    private boolean removeSelf = false;
 
     TextureRegion right, down, up, left;
     private Direction shootDir;
-
 
     public Arrow() {
 
@@ -38,6 +38,13 @@ public class Arrow extends Actor {
 
     }
 
+    public Direction getShootDir(){
+        return shootDir;
+    }
+
+    public void removeSelf(){
+        removeSelf = true;
+    }
 
     public void shoot(Direction direction) {
         shootDir = direction;
@@ -74,6 +81,13 @@ public class Arrow extends Actor {
         };
         Action flow = Actions.forever(Actions.sequence(step, check));
         addAction(flow);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (removeSelf)
+            this.remove();
     }
 
     @Override

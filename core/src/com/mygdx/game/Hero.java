@@ -55,7 +55,7 @@ public class Hero extends Character {
         super.act(delta);
         if (usingDefensiveWeapon) {
             timeDifference += delta;
-            if (timeDifference > 0.8)
+            if (timeDifference > 0.8f)
                 reset();
         }
     }
@@ -70,8 +70,23 @@ public class Hero extends Character {
             this.setX((getX() + 8) % 16);
             this.setY((getY() + 4) % 9);
         }
-        else if (actor instanceof Arrow && actor != arrowActor)
-            this.health -= 5;
+        else if (actor instanceof Arrow && actor != arrowActor) {
+            Arrow arrow = (Arrow) actor;
+            if (usingDefensiveWeapon && arrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
+                if (timeDifference < 0.1f) {
+                    arrow.removeSelf();
+                    Arrow newArrow = new Arrow();
+                    getMyStage().group.addActor(newArrow);
+                    newArrow.setPosition(getX()+0.5f,getY()+0.5f);
+                    newArrow.shoot(currShieldDirection);
+                }
+                else
+                    arrow.removeSelf();
+            }
+            else {
+                this.health -= 5;
+            }
+        }
         if (this.health <= 0)
             Gdx.app.exit();
         Gdx.app.log("HERO", "Health is : " + this.health);

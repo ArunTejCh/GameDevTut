@@ -31,7 +31,6 @@ public class SwordEnemy extends Enemy {
             this.health -= 10;
         if (this.health <= 0)
             this.remove();
-        Gdx.app.log("Sword Enemy", "Health is : " + this.health);
     }
 
     @Override
