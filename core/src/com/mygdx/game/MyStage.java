@@ -46,7 +46,7 @@ public class MyStage extends Stage {
             hero.setHasAura(true);
 
         gameEngine = new GameEngine();
-        hero.setPosition(0, 0);
+
         group.addActor(hero);
 
         addActor(group);
@@ -130,7 +130,7 @@ public class MyStage extends Stage {
                 if (tile == null) continue;
                 String type = (String) tile.getProperties().get("type");
                 if ("hero".equalsIgnoreCase(type)) {
-                    hero.setPosition(0, 0);
+                    hero.setPosition(i, j);
                 }
                 if ("boss".equalsIgnoreCase(type)) {
                     boss = new Boss("test");
