@@ -22,7 +22,7 @@ public class Arrow extends Actor {
     private boolean removeSelf = false;
 
     TextureRegion right, down, up, left;
-    private Direction shootDir;
+    Direction shootDir;
 
     public Arrow() {
 

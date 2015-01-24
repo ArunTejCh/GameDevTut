@@ -10,13 +10,33 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Boss extends Character {
 
 
+<<<<<<< Updated upstream
     float timeDifference = 0;
     private Sword swordActor;
 
+=======
+    private enum BossMode {
+        CHASE_MODE,
+        RAGE_MODE,
+        SUBDUED_MODE
+    };
+
+    private BossMode mode = BossMode.CHASE_MODE;
+
+    private final float MODE_CHANGE_TIMEOUT = 3.0f;
+    private float modeTimer = 0;
+
+    private Sword swordActor;
+
+    private static FireBall[] fireBalls = new FireBall[4];
+
+    Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
+>>>>>>> Stashed changes
 
     public Boss(String fileName) {
         super(fileName);
         this.health = 1000;
+<<<<<<< Updated upstream
         setWidth(2);
         setHeight(2);
 
@@ -38,6 +58,17 @@ public class Boss extends Character {
     @Override
     public void useDefensiveWeapon() {
 
+=======
+        sh_left = new Texture("weapons/shield/sh_left.png");
+        sh_right = new Texture("weapons/shield/sh_right.png");
+        sh_up = new Texture("weapons/shield/sh_up.png");
+        sh_down = new Texture("weapons/shield/sh_down.png");
+
+        fireBalls[0] = new FireBall(Direction.LEFT);
+        fireBalls[1] = new FireBall(Direction.RIGHT);
+        fireBalls[2] = new FireBall(Direction.UP);
+        fireBalls[3] = new FireBall(Direction.DOWN);
+>>>>>>> Stashed changes
     }
 
     @Override
@@ -93,10 +124,35 @@ public class Boss extends Character {
             takeXDir(x, y, heroX, heroY);
     }
 
+    private void flipMode() {
+        if (mode == BossMode.CHASE_MODE)
+            mode = BossMode.RAGE_MODE;
+        else if (mode == BossMode.RAGE_MODE)
+            mode = BossMode.CHASE_MODE;
+    }
+
     @Override
     public void act(float delta) {
-        feedMovement();
-        super.act(delta);
+
+        if (modeTimer == 0)
+            modeTimer += delta;
+
+        if (modeTimer > MODE_CHANGE_TIMEOUT) {
+            reset();
+            flipMode();
+        }
+        if (mode == BossMode.CHASE_MODE) {
+            feedMovement();
+            super.act(delta);
+        }
+        else if (mode == BossMode.RAGE_MODE) {
+            for (FireBall ball : fireBalls) {
+                ball.shoot(ball.getShootDir());
+            }
+        }
+        else if (mode == BossMode.SUBDUED_MODE) {
+
+        }
     }
 
     @Override
@@ -113,9 +169,41 @@ public class Boss extends Character {
     }
 
     private void reset() {
+<<<<<<< Updated upstream
         timeDifference = 0;
     }
 
+=======
+        modeTimer = 0;
+    }
+
+    private void drawAura(Batch batch, float parentAlpha){
+        //Draw Aura around
+    }
+
+    public void useOffensiveWeapon() {
+    }
+
+    public void useDefensiveWeapon() {
+    }
+
+    public void setHasAura(boolean hasAura) {
+    }
+
+    public void setHasArrow(boolean hasArrow) {
+    }
+
+    public void setHasSword(boolean hasSword) {
+    }
+
+    public void useOffWeapon(){
+    }
+
+    @Override
+    public void setX(float x) {
+        super.setX(x);
+    }
+>>>>>>> Stashed changes
     @Override
     public boolean isDirFeasible(Direction dir) {
         return isFeasibleFrom(dir, getX(), getY())
