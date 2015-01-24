@@ -46,18 +46,28 @@ public class Boss extends Character {
         float xDiff = x - heroX;
         float yDiff = y - heroY;
 
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {
-            if (x > heroX)
-                currDirection = Direction.LEFT;
-            else
-                currDirection = Direction.RIGHT;
-        }
-        else {
-            if (y > heroY)
-                currDirection = Direction.DOWN;
-            else
-                currDirection = Direction.UP;
-        }
+        if (Math.abs(xDiff) > Math.abs(yDiff))
+            takeXDir(x, y, heroX, heroY);
+        else
+            takeYDir(x, y, heroX, heroY);
+    }
+
+    private void takeXDir(float x, float y, float heroX, float heroY) {
+        if (x > heroX)
+            currDirection = Direction.LEFT;
+        else
+            currDirection = Direction.RIGHT;
+        if (!isDirFeasible(currDirection))
+            takeYDir(x, y, heroX, heroY);
+    }
+
+    private void takeYDir(float x, float y, float heroX, float heroY){
+        if (y > heroY)
+            currDirection = Direction.DOWN;
+        else
+            currDirection = Direction.UP;
+        if (!isDirFeasible(currDirection))
+            takeXDir(x, y, heroX, heroY);
     }
 
     @Override
