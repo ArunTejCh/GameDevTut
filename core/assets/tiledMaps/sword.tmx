@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Exterior_Castle_TileD" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Castle_TileD.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="Interior_Castle_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Interior_Castle_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="385" name="Exterior_Castle_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Castle_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="Exterior_Town_TileD" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Town_TileD.png" width="512" height="512"/>
+ </tileset>
+ <layer name="backgrounds" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzrYWRg6BnFo3gUj+JRPIqHGAYAGhvt8Q==
+  </data>
+ </layer>
+ <layer name="collides" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJy9VEEOgCAMG59XLxpO4HP14JLGrLCJ2mQhcaPMriDSxpZEcrJzK/kegYd/OtcZYgmc6+HXmnrFbtTfe9CI8LdQ4HyMt/gZPHu/4mea4nx7+Rb/RjTF+fbyym/1EfUi6zGTPuuA7qptTx/MWfPAHP4r+tW6Lxa/5XFW60Fkzx/8zCM973o8xd6H1lvBvMXmFdWjDHBZeMJ3AOzdXeA=
+  </data>
+ </layer>
+ <layer name="backgrounds2" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJyTZGJgkAJiaSBGBy+RxAIZGRg6kTCIDwLCjPixJtCMlUCsjcV8ZBCJZn4k1HxORuzqYeZb4jH3JpIcyBxHIHYCYmdGhLmEzMcHXqKZj47RzccWPsSCgTAf2R5auR8XGGzmE2MWJeFDbfMj0fjcjJgYXY4UkEll89mBmIMIM/GZj0+NOBBLIJkdSWXz1YFYA0/4YPMXPkBOnAyU+cSEDznmE4MBwF4T4A==
+  </data>
+ </layer>
+</map>

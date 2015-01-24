@@ -32,7 +32,7 @@ door
   orig: 32, 32
   offset: 0, 0
   index: -1
-door copy
+door copy 2
   rotate: false
   xy: 96, 0
   size: 32, 32
@@ -46,7 +46,7 @@ hero
   orig: 32, 32
   offset: 0, 0
   index: -1
-door copy 2
+door copy
   rotate: false
   xy: 96, 0
   size: 32, 32
