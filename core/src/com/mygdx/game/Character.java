@@ -30,6 +30,9 @@ public abstract class Character extends Actor implements Collides {
     float health;
     float maxHealth;
 
+    Texture backRect;
+    Texture healthRect;
+
     TextureRegion[] walkLeft = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkRight = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkUp = new TextureRegion[FRAME_COLS];
@@ -46,6 +49,9 @@ public abstract class Character extends Actor implements Collides {
 
         Texture walkSheet = new Texture(Gdx.files.internal("sprites/" + fileName + ".png")); // #9
         TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);              // #10
+
+        backRect = new Texture("misc/back_health.png");
+        healthRect = new Texture("misc/fore_health.png");
 
         for (int i = 0; i < FRAME_COLS; i++) {
             walkDown[i] = tmp[0][i];
@@ -166,8 +172,6 @@ public abstract class Character extends Actor implements Collides {
     }
 
     public void drawHealthBar(Batch batch){
-        Texture backRect = new Texture("misc/back_health.png");
-        Texture healthRect = new Texture("misc/fore_health.png");
         float x = getX() - 0.3f;
         float y = getY() + 1f;
 
