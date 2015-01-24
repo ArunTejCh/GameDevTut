@@ -17,8 +17,6 @@ public class Hero extends Character {
     boolean usingOffensiveWeapon;
     float timeDifference = 0;
 
-    Batch batch;
-
     public static float xOffset = 0.3f;
     public static float yOffset = 0.3f;
     public static float widthOffset = 0.8f;
@@ -39,7 +37,6 @@ public class Hero extends Character {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        this.batch = batch;
         super.draw(batch, parentAlpha);
         if (usingDefensiveWeapon) {
             if (hasShield)
