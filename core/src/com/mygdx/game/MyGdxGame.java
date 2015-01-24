@@ -54,7 +54,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 	}
 
-    public void setScreen(MyScreen screen) {
+    public void setScreen(Screen screen) {
         this.screen = screen;
         screen.show();
         screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

@@ -15,6 +15,8 @@ public class Hero extends Character {
     boolean hasArrow;
     boolean hasAura;
 
+    boolean removeSelf = false;
+
     boolean usingDefensiveWeapon;
     boolean usingOffensiveWeapon;
     float timeDifference = 0;
@@ -30,25 +32,29 @@ public class Hero extends Character {
     private Sword swordActor;
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
-    private Arrow arrowActor;
+    Arrow arrowActor;
     Sword hitSword;
     private float nextSwordUse = -1;
     private float SWORD_TIMEOUT = 2f;
     private float ARROW_TIMEOUT = 1.5f;
-    private float nextArrowUse = -1;
+    protected float nextArrowUse = -1;
     Arrow hitArrow;
 
     public Hero(String fileName) {
         super(fileName);
-        this.health = 100000;
-        this.maxHealth = 100000;
+        this.health = 100;
+        this.maxHealth = 100;
         hasShield = false;
-        hasAura = true;
+        hasAura = false;
         aura = new Texture("weapons/aura.png");
         sh_left = new Texture("weapons/shield/sh_left.png");
         sh_right = new Texture("weapons/shield/sh_right.png");
         sh_up = new Texture("weapons/shield/sh_up.png");
         sh_down = new Texture("weapons/shield/sh_down.png");
+    }
+
+    public void removeSelf(){
+        removeSelf = true;
     }
 
     @Override
@@ -65,27 +71,38 @@ public class Hero extends Character {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (hasShield) {
+        if (hasShield && usingDefensiveWeapon) {
             timeDifference += delta;
             if (timeDifference > SHIELD_TIME)
                 reset();
         }
-        if (hasAura) {
+        if (hasAura && usingDefensiveWeapon) {
             timeDifference += delta;
             if (timeDifference > AURA_TIME)
                 reset();
         }
+
         if(nextSwordUse >= 0){
             nextSwordUse -= delta;
         }
         if(nextArrowUse >= 0){
             nextArrowUse -= delta;
         }
+
+        if (removeSelf)
+            this.remove();
     }
 
     @Override
     public void collideWith(Actor actor) {
         super.collideWith(actor);
+        if (actor instanceof TexActor) {
+            TexActor texActor = (TexActor) actor;
+            ActorType type = texActor.type;
+            if (type == ActorType.LAVA) {
+                getMyStage().gameOver();
+            }
+        }
         if (actor instanceof Sword && actor != swordActor && actor != hitSword) {
             this.hitSword = (Sword)actor;
             if (usingDefensiveWeapon) {
@@ -93,15 +110,7 @@ public class Hero extends Character {
                     //Nothing happens
                 }
                 if (hasShield && hitSword.getJabDirection().vector.isCollinearOpposite(currShieldDirection.vector)) {
-                    if (timeDifference < 0.1f) {
-                        hitArrow.removeSelf();
-                        Arrow newArrow = new Arrow();
-                        getMyStage().group.addActor(newArrow);
-                        newArrow.setPosition(getX()+0.5f,getY()+0.5f);
-                        newArrow.shoot(currShieldDirection);
-                    }
-                    else
-                        hitArrow.removeSelf();
+
                 }
             }
             this.health -= 10;
@@ -136,7 +145,7 @@ public class Hero extends Character {
         }
 
         if (this.health <= 0)
-            Gdx.app.exit();
+            getMyStage().gameOver();
         Gdx.app.log("HERO", "Health is : " + this.health);
     }
 
