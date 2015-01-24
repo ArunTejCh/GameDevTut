@@ -1,16 +1,25 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.SnapshotArray;
 
 /**
  * Created by durga.p on 1/24/15.
  */
 public class MyStage extends Stage {
+    private final Table table;
+    private final Skin skin;
+    private final Label label;
     Group group;
     GameEngine gameEngine;
     int ppy;
@@ -37,11 +46,24 @@ public class MyStage extends Stage {
         //group.addActor(boss);
         group.addActor(se1);
         group.addActor(ae1);
+
+        group.addActor(new OldMan(4,4));
         addActor(group);
         addCaptureListener(new MyListener(hero));
         hero.setHasShield(true);
 //        hero.setHasSword(true);
         hero.setHasArrow(true);
+
+        skin = new Skin(Gdx.files.internal("newskin.json"), new TextureAtlas("packed/skin.atlas"));
+
+        table = new Table();
+        String msg = "sample";
+        label = new Label(msg, skin);
+        label.setAlignment(Align.center);
+        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+
+        table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-20);
+        addActor(table);
     }
 
     public void resize(int width, int height) {
@@ -116,5 +138,21 @@ public class MyStage extends Stage {
 
             }
         }
+    }
+
+    public void showMessage(String message) {
+        label.setText(message);
+       new Thread(){
+           @Override
+           public void run() {
+               super.run();
+               try {
+                   sleep(2000);
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+               label.setText("");
+           }
+       }.start();
     }
 }
