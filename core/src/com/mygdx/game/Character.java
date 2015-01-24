@@ -131,10 +131,10 @@ public class Character extends Actor implements Collides {
         int x = (int) (getX() + 0.5f + dir.vector.x);
         int y = (int) (getY() + 0.5f + dir.vector.y);
         boolean[][] collides = getMyStage().gameEngine.collides;
-        if(x < 0 || x >= collides.length){
+        if(x < 0 || x >= GameDisplayEngine.GRIDX){
             return false;
         }
-        if(y < 0 || y >= collides[0].length){
+        if(y < 0 || y >= GameDisplayEngine.GRIDY){
             return false;
         }
         return !getMyStage().gameEngine.collides[x][y];
