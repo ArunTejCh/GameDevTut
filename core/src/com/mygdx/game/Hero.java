@@ -19,6 +19,9 @@ public class Hero extends Character {
     boolean usingOffensiveWeapon;
     float timeDifference = 0;
 
+    public static float AURA_TIME = 3.0f;
+    public static float SHIELD_TIME = 0.8f;
+
     public static float xOffset = 0.3f;
     public static float yOffset = 0.3f;
     public static float widthOffset = 0.8f;
@@ -28,12 +31,20 @@ public class Hero extends Character {
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
     private Arrow arrowActor;
-     Sword hitSword;
+    Sword hitSword;
+    private float nextSwordUse = -1;
+    private float SWORD_TIMEOUT = 2f;
+    private float ARROW_TIMEOUT = 1.5f;
+    private float nextArrowUse = -1;
+    Arrow hitArrow;
 
     public Hero(String fileName) {
         super(fileName);
         this.health = 100000;
-        hasShield = true;
+        this.maxHealth = 100000;
+        hasShield = false;
+        hasAura = true;
+        aura = new Texture("weapons/aura.png");
         sh_left = new Texture("weapons/shield/sh_left.png");
         sh_right = new Texture("weapons/shield/sh_right.png");
         sh_up = new Texture("weapons/shield/sh_up.png");
@@ -54,18 +65,45 @@ public class Hero extends Character {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (usingDefensiveWeapon) {
+        if (hasShield) {
             timeDifference += delta;
-            if (timeDifference > 0.8f)
+            if (timeDifference > SHIELD_TIME)
                 reset();
+        }
+        if (hasAura) {
+            timeDifference += delta;
+            if (timeDifference > AURA_TIME)
+                reset();
+        }
+        if(nextSwordUse >= 0){
+            nextSwordUse -= delta;
+        }
+        if(nextArrowUse >= 0){
+            nextArrowUse -= delta;
         }
     }
 
     @Override
     public void collideWith(Actor actor) {
         super.collideWith(actor);
-        if (actor instanceof Sword && actor != swordActor) {
+        if (actor instanceof Sword && actor != swordActor && actor != hitSword) {
             this.hitSword = (Sword)actor;
+            if (usingDefensiveWeapon) {
+                if (hasAura) {
+                    //Nothing happens
+                }
+                if (hasShield && hitSword.getJabDirection().vector.isCollinearOpposite(currShieldDirection.vector)) {
+                    if (timeDifference < 0.1f) {
+                        hitArrow.removeSelf();
+                        Arrow newArrow = new Arrow();
+                        getMyStage().group.addActor(newArrow);
+                        newArrow.setPosition(getX()+0.5f,getY()+0.5f);
+                        newArrow.shoot(currShieldDirection);
+                    }
+                    else
+                        hitArrow.removeSelf();
+                }
+            }
             this.health -= 10;
         }
         else if (actor instanceof Boss) {
@@ -73,21 +111,27 @@ public class Hero extends Character {
             this.setX((getX() + 8) % 16);
             this.setY((getY() + 4) % 9);
         }
-        else if (actor instanceof Arrow && actor != arrowActor) {
-            Arrow arrow = (Arrow) actor;
-            if (usingDefensiveWeapon && arrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
-                if (timeDifference < 0.1f) {
-                    arrow.removeSelf();
-                    Arrow newArrow = new Arrow();
-                    getMyStage().group.addActor(newArrow);
-                    newArrow.setPosition(getX()+0.5f,getY()+0.5f);
-                    newArrow.shoot(currShieldDirection);
-                }
-                else
-                    arrow.removeSelf();
+        else if (actor instanceof Arrow && actor != arrowActor && actor != hitArrow) {
+            this.hitArrow = (Arrow) actor;
+            if (usingDefensiveWeapon) {
+                    if (hasAura) {
+                        hitArrow.removeSelf();
+                    }
+                    if (hasShield && hitArrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
+                        if (timeDifference < 0.1f) {
+                            hitArrow.removeSelf();
+                            Arrow newArrow = new Arrow();
+                            getMyStage().group.addActor(newArrow);
+                            newArrow.setPosition(getX()+0.5f,getY()+0.5f);
+                            newArrow.shoot(currShieldDirection);
+                        }
+                        else
+                            hitArrow.removeSelf();
+                    }
             }
             else {
                 this.health -= 5;
+                hitArrow.removeSelf();
             }
         }
 
@@ -120,16 +164,21 @@ public class Hero extends Character {
     }
 
     private void drawAura(Batch batch, float parentAlpha){
-        //Draw Aura around
+        float x = getX() - 0.2f;
+        float y = getY() - 0.1f;
+        float width = 1.4f;
+        float height = 1.4f;
+        batch.draw(aura, x, y, width, height);
     }
 
     public void useOffensiveWeapon() {
-        if(hasSword && (swordActor == null || swordActor.getParent() == null)){
+        if(hasSword && (swordActor == null || swordActor.getParent() == null) && nextSwordUse < 0){
             swordActor = new Sword(this, getX(), getY());
             getMyStage().group.addActor(swordActor);
             swordActor.jab(currShieldDirection);
+            nextSwordUse = SWORD_TIMEOUT;
         }
-        if(hasArrow){
+        if(hasArrow && nextArrowUse < 0){
             if(arrowActor != null && arrowActor.getParent() != null){
                 return;
             }
@@ -137,6 +186,7 @@ public class Hero extends Character {
             getMyStage().group.addActor(arrowActor);
             arrowActor.setPosition(getX()+0.5f,getY()+0.5f);
             arrowActor.shoot(currShieldDirection);
+            nextArrowUse = ARROW_TIMEOUT;
         }
     }
 

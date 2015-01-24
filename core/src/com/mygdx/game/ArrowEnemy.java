@@ -11,6 +11,7 @@ public class ArrowEnemy extends Enemy{
     public ArrowEnemy(String fileName, boolean isXDir){
         super(fileName, isXDir);
         this.health = 20;
+        this.maxHealth = 20;
     }
 
     @Override

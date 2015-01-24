@@ -16,6 +16,11 @@
    <property name="type" value="boss"/>
   </properties>
  </tile>
+ <tile id="2">
+  <properties>
+   <property name="type" value="bow"/>
+  </properties>
+ </tile>
  <tile id="3">
   <properties>
    <property name="type" value="bow"/>

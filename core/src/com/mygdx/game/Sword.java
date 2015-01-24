@@ -39,6 +39,10 @@ public class Sword extends Actor {
         setHeight(size);
     }
 
+    public Direction getJabDirection() {
+        return jabDirection;
+    }
+
 
     public void jab(Direction dir){
         jabbing = true;
