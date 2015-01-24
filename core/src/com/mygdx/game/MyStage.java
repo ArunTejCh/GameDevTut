@@ -31,9 +31,9 @@ public class MyStage extends Stage {
         group.addActor(boss);
         addActor(group);
         addCaptureListener(new MyListener(hero));
-        hero.hasShield = true;
-        hero.setHasSword(true);
-
+        hero.setHasShield(true);
+//        hero.setHasSword(true);
+        hero.setHasArrow(true);
     }
 
     public void resize(int width, int height) {
