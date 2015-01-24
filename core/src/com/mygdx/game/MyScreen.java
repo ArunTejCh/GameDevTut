@@ -9,11 +9,16 @@ import com.badlogic.gdx.graphics.FPSLogger;
  */
 public class MyScreen implements Screen {
 
+    private final String mapName;
     private MyStage stage;
     protected float ppy;
     protected float ppx;
     private TiledActor tiledActor;
     private FPSLogger fpsLogger;
+
+    public MyScreen(String fName) {
+        this.mapName = fName;
+    }
 
     @Override
     public void show() {
@@ -23,7 +28,7 @@ public class MyScreen implements Screen {
 
 
 
-        tiledActor = new TiledActor("tiledMaps/sheild_2_1.tmx");
+        tiledActor = new TiledActor("tiledMaps/"+mapName);
 
 
         tiledActor.setCamera((com.badlogic.gdx.graphics.OrthographicCamera) stage.getCamera());

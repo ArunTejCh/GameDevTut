@@ -34,7 +34,7 @@ public abstract class Character extends Actor implements Collides {
     private TextureRegion currentFrame;
     public Direction currShieldDirection;
     Direction currDirection;
-    private boolean processDirection = true;
+    protected boolean processDirection = true;
 
     public Character(String fileName) {
         this.fileName = fileName;
@@ -86,7 +86,37 @@ public abstract class Character extends Actor implements Collides {
     }
 
     public void move(Direction direction) {
-        currDirection = direction;
+        if(direction == null) {
+            currDirection = null;
+            return;
+        }
+        if(currShieldDirection == direction){
+            currDirection = direction;
+        }
+        else {
+
+            setCurrShieldDir(direction);
+        }
+
+    }
+
+    void setCurrShieldDir(Direction direction) {
+        currShieldDirection = direction;
+        switch (currShieldDirection){
+            case UP:
+                currentFrame = wUpAni.getKeyFrame(0);
+                break;
+            case DOWN:
+                currentFrame = wDownAni.getKeyFrame(0);
+                break;
+            case LEFT:
+                currentFrame = wLeftAni.getKeyFrame(0);
+                break;
+            case RIGHT:
+                currentFrame = wRightAni.getKeyFrame(0);
+                break;
+        }
+        move(currShieldDirection);
     }
 
     public abstract void useOffensiveWeapon();
@@ -104,6 +134,8 @@ public abstract class Character extends Actor implements Collides {
         if (currAnimation != null) {
             animateTime += delta;
         }
+
+
         if (processDirection && currDirection != null && isDirFeasible(currDirection)) {
             Action action = Actions.moveBy(currDirection.vector.x, currDirection.vector.y, MOVE_TIME);
             Action runAction = sequence(action, new RunnableAction() {

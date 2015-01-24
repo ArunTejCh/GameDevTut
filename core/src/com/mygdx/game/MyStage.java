@@ -21,14 +21,13 @@ public class MyStage extends Stage {
 
     public MyStage() {
         group = new Group();
-        hero = new Hero("test");
+        hero = new Protagonist("test");
         boss = new Boss("test");
         gameEngine = new GameEngine();
         hero.setPosition(3, 0);
         boss.setPosition(15,8);
 
         group.addActor(hero);
-        //group.addActor(boss);
         addActor(group);
         addCaptureListener(new MyListener(hero));
         hero.setHasShield(true);

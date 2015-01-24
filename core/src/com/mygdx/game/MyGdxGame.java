@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,16 +11,16 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	MyScreen screen;
+	Screen screen;
 
 	TextureAtlas atlas;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		//packTextures();
+//		packTextures();
 		atlas = new TextureAtlas("packed/buildings.atlas");
-		screen = new MyScreen();
+		screen = new MenuScreen();//new MyScreen();
 		screen.show();
 	}
 
@@ -50,4 +51,9 @@ public class MyGdxGame extends ApplicationAdapter {
 			TexturePacker.processIfModified(settings,packDir.file().getAbsolutePath(), outputDir.file().getAbsolutePath(), packDir.file().getName());
 		}
 	}
+
+    public void setScreen(MyScreen screen) {
+        this.screen = screen;
+        screen.show();
+    }
 }
