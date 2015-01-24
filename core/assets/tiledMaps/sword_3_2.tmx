@@ -12,6 +12,12 @@
  <tileset firstgid="513" name="Exterior_Town_TileD" tilewidth="32" tileheight="32">
   <image source="../packed/Exterior_Town_TileD.png" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="769" source="place.tsx"/>
+ <layer name="actors" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAMcDBjF+fEIY4M+IlQMwoQgJsZgSkF6PGDKx4JAa7ROAQDbOkdFqbE5IVRgBvQOo0RMp/cvDEUwGDxGw8Z7gC5HQBO4wDl
+  </data>
+ </layer>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
    eJzrYWRg6BnFo3gUj+JRPIqHGAYAGhvt8Q==
