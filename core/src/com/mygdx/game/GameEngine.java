@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * Created by durga.p on 1/24/15.
@@ -23,4 +24,14 @@ public class GameEngine {
         }
     }
    }
+
+
+    public boolean meets(Actor actorA, Actor actorB) {
+        if(actorA.getX() >= actorB.getX() && actorA.getX() <= actorB.getX()+actorB.getWidth()){
+            if(actorA.getY() >= actorB.getY() && actorA.getY() <= actorB.getY()+actorB.getHeight()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

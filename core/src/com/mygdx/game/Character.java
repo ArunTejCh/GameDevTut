@@ -15,7 +15,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by durga.p on 1/24/15.
  */
-public class Character extends Actor {
+public class Character extends Actor implements Collides {
     private static final int FRAME_COLS = 8;
     private static final int FRAME_ROWS = 4;
     private static final float ANIMATE_TIME = 0.1f;
@@ -96,7 +96,7 @@ public class Character extends Actor {
         if (currAnimation != null) {
             animateTime += delta;
         }
-        if(processDirection && currDirection != null){
+        if(processDirection && currDirection != null && isDirFeasible(currDirection)){
             Action action = Actions.moveBy(currDirection.vector.x, currDirection.vector.y, MOVE_TIME);
             Action runAction = sequence(action, new RunnableAction() {
                 @Override
@@ -119,4 +119,19 @@ public class Character extends Actor {
     }
 
     private String fileName;
+
+    @Override
+    public void collideWith(Actor actor) {
+
+    }
+
+    public boolean isDirFeasible(Direction dir){
+        int x = (int) (getX() + 0.5f + dir.vector.x);
+        int y = (int) (getY() + 0.5f + dir.vector.y);
+        return !getMyStage().gameEngine.collides[x][y];
+    }
+
+    private MyStage getMyStage() {
+        return (MyStage) getStage();
+    }
 }

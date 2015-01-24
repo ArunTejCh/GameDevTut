@@ -30,7 +30,6 @@
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-linux" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-windows" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-osx" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: lombok-1.14.8" level="project" />
   </component>
   <component name="sonarModuleSettings">
     <option name="localAnalysisScripName" value="&lt;PROJECT&gt;" />

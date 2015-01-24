@@ -2,46 +2,35 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 /**
  * Created by Durga on 21-01-2015.
  */
 public class MyScreen implements Screen {
 
-    private Stage stage;
+    private MyStage stage;
     protected float ppy;
     protected float ppx;
-    private Group group;
     private TiledActor tiledActor;
 
     @Override
     public void show() {
-        stage = new Stage();
-        group = new Group();
+        stage = new MyStage();
+
 //        group.addActor(new MyActor());
 
 
-        Character character = new Character("test");
-        GameEngine gameEngine = new GameEngine();
+
         tiledActor = new TiledActor("tiledMaps/sample.tmx");
         tiledActor.setCamera((com.badlogic.gdx.graphics.OrthographicCamera) stage.getCamera());
-        gameEngine.setCollides(tiledActor.getCollidesLayer());
+        stage.gameEngine.setCollides(tiledActor.getCollidesLayer());
 
 
-        character.setAnimation(Direction.UP);
-        character.setPosition(2,2);
-
-
-//        stage.addActor(tiledActor);
-        group.addActor(character);
-        stage.addActor(group);
 
 
 
         Gdx.input.setInputProcessor(stage);
-        stage.addCaptureListener(new MyListener(character));
+
     }
 
     @Override
@@ -56,9 +45,8 @@ public class MyScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        ppx = width/GameDisplayEngine.GRIDX;
-        ppy = height/GameDisplayEngine.GRIDY;
-        group.setScale(ppx,ppy);
+
+        stage.resize(width,height);
     }
 
     @Override
