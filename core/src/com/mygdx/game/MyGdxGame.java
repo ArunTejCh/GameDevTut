@@ -18,7 +18,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-//		packTextures();
+		packTextures();
 		atlas = new TextureAtlas("packed/buildings.atlas");
 		screen = new MenuScreen();//new MyScreen();
 //        screen = new MyScreen("sample.tmx");
@@ -49,6 +49,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 
 		for(FileHandle packDir : allPacksDir.list()){
+            if(packDir.isDirectory())
 			TexturePacker.processIfModified(settings,packDir.file().getAbsolutePath(), outputDir.file().getAbsolutePath(), packDir.file().getName());
 		}
 	}

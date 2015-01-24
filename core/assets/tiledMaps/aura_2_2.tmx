@@ -6,9 +6,10 @@
  <tileset firstgid="129" name="Dungeon_TileA1" tilewidth="32" tileheight="32">
   <image source="../packed/Dungeon_TileA1.png" width="512" height="384"/>
  </tileset>
+ <tileset firstgid="321" source="place.tsx"/>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJwTZGRgsGegDfajkbkwHEZj85UGiflGWMSMaey2oW7+KB7Fo3j4YwBSbmnf
+   eJwTZGRgsGegDfajkbkwHEZj85WgtDeNwkiJSHVGWMSMaez3oW7+KB7Fo3j4YwCbWWns
   </data>
  </layer>
  <layer name="collides" width="24" height="18">
