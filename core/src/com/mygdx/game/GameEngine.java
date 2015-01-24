@@ -6,8 +6,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
  * Created by durga.p on 1/24/15.
  */
 public class GameEngine {
-   public int sizeX = 16;
-   public int sizeY = 9;
+   public int sizeX = GameDisplayEngine.GRIDX;
+   public int sizeY = GameDisplayEngine.GRIDY;
    public boolean[][] collides = new boolean[sizeX][sizeY];
 
    public void setCollides(TiledMapTileLayer layer){
