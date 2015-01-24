@@ -16,10 +16,12 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
  * Created by durga.p on 1/24/15.
  */
 public class Character extends Actor implements Collides {
+
     private static final int FRAME_COLS = 8;
     private static final int FRAME_ROWS = 4;
     private static final float ANIMATE_TIME = 0.1f;
     private static final float MOVE_TIME = 0.5f;
+
     private final Animation wDownAni;
     private final Animation wLeftAni;
     private final Animation wRightAni;
@@ -29,6 +31,8 @@ public class Character extends Actor implements Collides {
     TextureRegion[] walkRight = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkUp = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkDown = new TextureRegion[FRAME_COLS];
+
+
     private Animation currAnimation;
     private float animateTime;
     private TextureRegion currentFrame;
@@ -131,8 +135,8 @@ public class Character extends Actor implements Collides {
     }
 
     public boolean isDirFeasible(Direction dir){
-        int x = (int) (getX() + 0.5f + dir.vector.x);
-        int y = (int) (getY() + 0.5f + dir.vector.y);
+        float x = (getX() + 0.5f + dir.vector.x);
+        float y = (getY() + 0.5f + dir.vector.y);
         boolean[][] collides = getMyStage().gameEngine.collides;
         if(x < 0 || x >= GameDisplayEngine.GRIDX){
             return false;
@@ -140,7 +144,7 @@ public class Character extends Actor implements Collides {
         if(y < 0 || y >= GameDisplayEngine.GRIDY){
             return false;
         }
-        return !getMyStage().gameEngine.collides[x][y];
+        return !getMyStage().gameEngine.collides[(int)x][(int)y];
     }
 
     private MyStage getMyStage() {
