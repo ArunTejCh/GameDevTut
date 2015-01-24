@@ -31,7 +31,8 @@ public class Hero extends Character {
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
     private Arrow arrowActor;
-     Sword hitSword;
+    Sword hitSword;
+    Arrow hitArrow;
 
     public Hero(String fileName) {
         super(fileName);
@@ -75,8 +76,24 @@ public class Hero extends Character {
     @Override
     public void collideWith(Actor actor) {
         super.collideWith(actor);
-        if (actor instanceof Sword && actor != swordActor) {
+        if (actor instanceof Sword && actor != swordActor && actor != hitSword) {
             this.hitSword = (Sword)actor;
+            if (usingDefensiveWeapon) {
+                if (hasAura) {
+                    //Nothing happens
+                }
+                if (hasShield && hitSword.getJabDirection().vector.isCollinearOpposite(currShieldDirection.vector)) {
+                    if (timeDifference < 0.1f) {
+                        hitArrow.removeSelf();
+                        Arrow newArrow = new Arrow();
+                        getMyStage().group.addActor(newArrow);
+                        newArrow.setPosition(getX()+0.5f,getY()+0.5f);
+                        newArrow.shoot(currShieldDirection);
+                    }
+                    else
+                        hitArrow.removeSelf();
+                }
+            }
             this.health -= 10;
         }
         else if (actor instanceof Boss) {
@@ -84,27 +101,27 @@ public class Hero extends Character {
             this.setX((getX() + 8) % 16);
             this.setY((getY() + 4) % 9);
         }
-        else if (actor instanceof Arrow && actor != arrowActor) {
-            Arrow arrow = (Arrow) actor;
+        else if (actor instanceof Arrow && actor != arrowActor && actor != hitArrow) {
+            this.hitArrow = (Arrow) actor;
             if (usingDefensiveWeapon) {
                     if (hasAura) {
-                        arrow.removeSelf();
+                        hitArrow.removeSelf();
                     }
-                    if (hasShield && arrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
+                    if (hasShield && hitArrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
                         if (timeDifference < 0.1f) {
-                            arrow.removeSelf();
+                            hitArrow.removeSelf();
                             Arrow newArrow = new Arrow();
                             getMyStage().group.addActor(newArrow);
                             newArrow.setPosition(getX()+0.5f,getY()+0.5f);
                             newArrow.shoot(currShieldDirection);
                         }
                         else
-                            arrow.removeSelf();
+                            hitArrow.removeSelf();
                     }
             }
             else {
                 this.health -= 5;
-                arrow.removeSelf();
+                hitArrow.removeSelf();
             }
         }
 
