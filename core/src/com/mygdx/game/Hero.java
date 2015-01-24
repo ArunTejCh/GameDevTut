@@ -31,7 +31,11 @@ public class Hero extends Character {
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
     private Arrow arrowActor;
-     Sword hitSword;
+    Sword hitSword;
+    private float nextSwordUse = -1;
+    private float SWORD_TIMEOUT = 2f;
+    private float ARROW_TIMEOUT = 1.5f;
+    private float nextArrowUse = -1;
 
     public Hero(String fileName) {
         super(fileName);
@@ -69,6 +73,12 @@ public class Hero extends Character {
             timeDifference += delta;
             if (timeDifference > AURA_TIME)
                 reset();
+        }
+        if(nextSwordUse >= 0){
+            nextSwordUse -= delta;
+        }
+        if(nextArrowUse >= 0){
+            nextArrowUse -= delta;
         }
     }
 
@@ -145,12 +155,13 @@ public class Hero extends Character {
     }
 
     public void useOffensiveWeapon() {
-        if(hasSword && (swordActor == null || swordActor.getParent() == null)){
+        if(hasSword && (swordActor == null || swordActor.getParent() == null) && nextSwordUse < 0){
             swordActor = new Sword(this, getX(), getY());
             getMyStage().group.addActor(swordActor);
             swordActor.jab(currShieldDirection);
+            nextSwordUse = SWORD_TIMEOUT;
         }
-        if(hasArrow){
+        if(hasArrow && nextArrowUse < 0){
             if(arrowActor != null && arrowActor.getParent() != null){
                 return;
             }
@@ -158,6 +169,7 @@ public class Hero extends Character {
             getMyStage().group.addActor(arrowActor);
             arrowActor.setPosition(getX()+0.5f,getY()+0.5f);
             arrowActor.shoot(currShieldDirection);
+            nextArrowUse = ARROW_TIMEOUT;
         }
     }
 
