@@ -36,6 +36,7 @@
   </tile>
   <tile id="4">
    <properties>
+    <property name="path" value="boss_level_5.tmx"/>
     <property name="type" value="door"/>
    </properties>
   </tile>
@@ -107,7 +108,7 @@
  </layer>
  <layer name="actors" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYCAesDIjMAxwMGNXy4lDHBnwo6nBZv4oQABuZgSmFBATP8QArtG4AgNs4QnLG9QK65EKaJ3GCJmPq4wbDmCw+I2HDHeA3A4ATPsBCg==
+   eJxjYCAesDIjMAxwMGNXy4lDHBnwo6nBZv4oQABuZgSmFBATP8QArtG4AgN84UmtsEYHuPLecAO0TmOEzB8p4QwCsLRKqzSLC/CQYB8HUjkIAFGyATM=
   </data>
  </layer>
 </map>

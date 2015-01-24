@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="Interior_Home_TileA5" tilewidth="32" tileheight="32">
-  <image source="../packed/Interior_Home_TileA5.png" width="256" height="512"/>
- </tileset>
- <tileset firstgid="129" name="Exterior_Town_TileD" tilewidth="32" tileheight="32">
-  <image source="../packed/Exterior_Town_TileD.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="385" name="Dungeon_Sewer_TileA5" tilewidth="32" tileheight="32">
-  <image source="../packed/Dungeon_Sewer_TileA5.png" width="256" height="512"/>
- </tileset>
- <tileset firstgid="513" name="Interior_Home_TileC" tilewidth="32" tileheight="32">
-  <image source="../packed/Interior_Home_TileC.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="769" name="place" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="place" tilewidth="32" tileheight="32">
   <image source="../packed/place.png" width="512" height="32"/>
   <tile id="0">
    <properties>
@@ -36,7 +24,6 @@
   </tile>
   <tile id="4">
    <properties>
-    <property name="path" value="boss_level_5.tmx"/>
     <property name="type" value="door"/>
    </properties>
   </tile>
@@ -91,24 +78,25 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="17" name="Dungeon_TileA1" tilewidth="32" tileheight="32">
+  <image source="../packed/Dungeon_TileA1.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="209" name="Dungeon_Ice_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Dungeon_Ice_TileA5.png" width="256" height="512"/>
+ </tileset>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYBrFo3gUj+JRPIqHGAYAciUDYQ==
+   eJzjZ2Rg4B/Fo3gUj+JRPIqHGAYAYGUbAQ==
   </data>
  </layer>
  <layer name="collides" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJy9VNEKgDAIdP//IfVWT6un6Gn1WS1CELlNM+hAmJo3tWNED7ZEtCcy4f0uWvc3f67nRdkKeKL8tz9XO4SdgKc04h7+t/tCM7MN1UblMz+qQ/EBzNwznruAHIpPQY14EdUgAtJUVIMISFOWBnl/LQ1Yd1saZN/631/5rToG0qeXP4t9tPgtffb4W+ce9Fuh62Re5rxvjEavL6tnj650X56dMy4bQYkg
-  </data>
- </layer>
- <layer name="backgrounds2" width="24" height="18">
-  <data encoding="base64" compression="zlib">
-   eJzbyMTAsAmIYYAXyg5lZGAIA+JwRlRxGJBkgmBC4CBQzSEkdbJQdirQ3DQgTmdEFacWiAaa68wIoSkB7jjclc2ISg8EyKVymA1HYEbjMNIaonGwgsbpdgMW89czYhcnFtjQOKyth2hcjmQAAIMpC+E=
+   eJxjYBhZgJ8RgYkB4oy0xcMNsAH9xI4Dc+DxLxsBeRgQwxOWEnj08wHlBKgY3ujupbb56OaRaj4bgTCn1HwxAmEuhiaHzh8uAFdapxYeBfgBAC+MBdE=
   </data>
  </layer>
  <layer name="actors" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYMAE3Mz4+dQCrHjM5SDBTk4auW+wA5YR6m8Y4KKC//GlM2qYTwkgJQ/QC9DaTeSaT8+wonW6GOh0Ry2AK05A9QmuOoWHRL8DAM0hAOQ=
+   eJxjYBgFgxUwIeGhaP5QATwU6KV1+A1186kNmAfaAaNgUAEAmmgAKA==
   </data>
  </layer>
 </map>
