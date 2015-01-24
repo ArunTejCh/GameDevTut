@@ -28,7 +28,7 @@ public class MyStage extends Stage {
         addActor(group);
         addCaptureListener(new MyListener(hero));
 
-        hero.setHasShield(true);
+        hero.hasShield = true;
         hero.setHasSword(true);
 
     }

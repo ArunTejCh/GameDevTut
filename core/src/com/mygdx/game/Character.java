@@ -15,7 +15,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by durga.p on 1/24/15.
  */
-public class Character extends Actor implements Collides {
+public abstract class Character extends Actor implements Collides {
     private static final int FRAME_COLS = 8;
     private static final int FRAME_ROWS = 4;
     private static final float ANIMATE_TIME = 0.1f;
