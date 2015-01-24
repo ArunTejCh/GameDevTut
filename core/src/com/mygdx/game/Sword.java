@@ -22,7 +22,8 @@ public class Sword extends Actor {
     float size = 0.7f;
 
     TextureRegion swordRight, swordDown, swordUp, swordLeft;
-    private float jabDist = 0.6f;
+    private float jabDist = 0.2f;
+    private Direction jabDirection;
 
     public Sword(Hero hero) {
 
@@ -40,18 +41,23 @@ public class Sword extends Actor {
 
     public void jab(Direction dir){
         jabbing = true;
+        jabDirection = dir;
         switch (dir){
             case UP:
                 drawTexture = swordUp;
+                setPosition(0.2f,0.7f);
                 break;
             case DOWN:
                 drawTexture = swordDown;
+                setPosition(0.2f,0f);
                 break;
             case LEFT:
                 drawTexture = swordLeft;
+                setPosition(0.0f,0.35f);
                 break;
             case RIGHT:
                 drawTexture = swordRight;
+                setPosition(0.35f,0.3f);
                 break;
         }
         Action forward = Actions.moveBy(dir.vector.x*jabDist, dir.vector.y*jabDist, jabTime);
@@ -60,12 +66,12 @@ public class Sword extends Actor {
                 Actions.moveBy(-dir.vector.x * miniJabDist, -dir.vector.y * miniJabDist, miniJabTime)
         );
 
-        Action back = Actions.moveBy(-dir.vector.x, -dir.vector.y, jabTime);
+        Action back = Actions.moveBy(-dir.vector.x*jabDist, -dir.vector.y*jabDist, jabTime);
         Action done = new RunnableAction(){
             @Override
             public void run() {
                 jabbing = false;
-                setPosition(0,0);
+
             }
         };
 
@@ -82,7 +88,7 @@ public class Sword extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         if(jabbing == true && drawTexture != null){
-            batch.draw(drawTexture, hero.getX() + 0.25f + getX(), hero.getY()+0.25f + getY(), getWidth(), getHeight());
+            batch.draw(drawTexture, hero.getX()  + getX(), hero.getY() + getY(), getWidth(), getHeight());
         }
 
 

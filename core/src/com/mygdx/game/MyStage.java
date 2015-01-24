@@ -23,11 +23,8 @@ public class MyStage extends Stage {
         hero.setPosition(0, 0);
 
         group.addActor(hero);
-
-//        group.addActor(new Sword(hero));
         addActor(group);
         addCaptureListener(new MyListener(hero));
-
         hero.hasShield = true;
         hero.setHasSword(true);
 
