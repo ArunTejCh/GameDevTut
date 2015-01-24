@@ -31,7 +31,17 @@ public class MyStage extends Stage {
 
     public MyStage(Hero initHero) {
         group = new Group();
-        hero = initHero;
+        hero = new Protagonist("test");
+
+        if(initHero.hasArrow)
+            hero.setHasArrow(true);
+        if(initHero.hasShield)
+            hero.setHasShield(true);
+        if(initHero.hasSword)
+            hero.setHasSword(true);
+        if(initHero.hasAura)
+            hero.setHasAura(true);
+
         gameEngine = new GameEngine();
         hero.setPosition(0, 0);
         group.addActor(hero);
