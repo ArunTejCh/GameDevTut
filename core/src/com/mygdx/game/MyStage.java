@@ -45,14 +45,25 @@ public class MyStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        SnapshotArray<Actor> children = group.getChildren();
-//        for(Actor actorA : children){
-//            for(Actor actorB : children){
-//                if(actorA != actorB){
-//                    gameEngine.meets(actorA, actorB);
-//                }
-//            }
-//        }
+
+
+        SnapshotArray<Actor> childrenA = group.getChildren();
+        SnapshotArray<Actor> childrenB = group.getChildren();
+        for(int i=0; i<childrenA.size; i++){
+            for(int j=0; j<childrenB.size; j++){
+                Actor actorA = childrenA.get(i);
+                Actor actorB = childrenA.get(j);
+                if(actorA != actorB) {
+                    gameEngine.meets(actorA, actorB);
+                    if(actorA instanceof Collides){
+                        ((Collides) actorA).collideWith(actorB);
+                    }
+                    if(actorB instanceof Collides){
+                        ((Collides) actorB).collideWith(actorA);
+                    }
+                }
+            }
+        }
     }
 
     public void loadActors(TiledMapTileLayer layer){
