@@ -9,12 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 public class Boss extends Character {
 
-
-<<<<<<< Updated upstream
-    float timeDifference = 0;
-    private Sword swordActor;
-
-=======
     private enum BossMode {
         CHASE_MODE,
         RAGE_MODE,
@@ -30,17 +24,15 @@ public class Boss extends Character {
 
     private static FireBall[] fireBalls = new FireBall[4];
 
-    Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
->>>>>>> Stashed changes
-
     public Boss(String fileName) {
         super(fileName);
         this.health = 1000;
-<<<<<<< Updated upstream
         setWidth(2);
         setHeight(2);
-
-
+        fireBalls[0] = new FireBall(Direction.LEFT);
+        fireBalls[1] = new FireBall(Direction.RIGHT);
+        fireBalls[2] = new FireBall(Direction.UP);
+        fireBalls[3] = new FireBall(Direction.DOWN);
     }
 
     @Override
@@ -48,27 +40,6 @@ public class Boss extends Character {
         super.init();
         MOVE_TIME = 0.3f;
         ANIMATE_TIME = 0.21f;
-    }
-
-    @Override
-    public void useOffensiveWeapon() {
-
-    }
-
-    @Override
-    public void useDefensiveWeapon() {
-
-=======
-        sh_left = new Texture("weapons/shield/sh_left.png");
-        sh_right = new Texture("weapons/shield/sh_right.png");
-        sh_up = new Texture("weapons/shield/sh_up.png");
-        sh_down = new Texture("weapons/shield/sh_down.png");
-
-        fireBalls[0] = new FireBall(Direction.LEFT);
-        fireBalls[1] = new FireBall(Direction.RIGHT);
-        fireBalls[2] = new FireBall(Direction.UP);
-        fireBalls[3] = new FireBall(Direction.DOWN);
->>>>>>> Stashed changes
     }
 
     @Override
@@ -169,11 +140,6 @@ public class Boss extends Character {
     }
 
     private void reset() {
-<<<<<<< Updated upstream
-        timeDifference = 0;
-    }
-
-=======
         modeTimer = 0;
     }
 
@@ -203,7 +169,6 @@ public class Boss extends Character {
     public void setX(float x) {
         super.setX(x);
     }
->>>>>>> Stashed changes
     @Override
     public boolean isDirFeasible(Direction dir) {
         return isFeasibleFrom(dir, getX(), getY())
