@@ -28,6 +28,8 @@ public class MyStage extends Stage {
         boss.setPosition(15,8);
 
         group.addActor(hero);
+
+        group.addActor(new TexActor(ActorType.OLD_MAN, 4,4));
         addActor(group);
         addCaptureListener(new MyListener(hero));
         hero.setHasShield(true);
