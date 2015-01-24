@@ -6,11 +6,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.SnapshotArray;
 
 /**
@@ -19,7 +22,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 public class MyStage extends Stage {
     private final Table table;
     private final Skin skin;
-    private final Label label;
+    private Label label;
     Group group;
     GameEngine gameEngine;
     int ppy;
@@ -58,6 +61,25 @@ public class MyStage extends Stage {
 
         table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-20);
         addActor(table);
+    }
+
+    public void gameOver() {
+        hero.removeSelf();
+        String msg = "Game Over";
+        label = new Label(msg, skin);
+        label.setAlignment(Align.center);
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
+        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.1f).row();
+        TextButton textButton = new TextButton("Main Menu", skin);
+        textButton.addCaptureListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                MyGdxGame game = (MyGdxGame)Gdx.app.getApplicationListener();
+                game.setScreen(new MenuScreen());
+            }
+        });
+        table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
     }
 
     public void resize(int width, int height) {
@@ -108,7 +130,7 @@ public class MyStage extends Stage {
                 if (tile == null) continue;
                 String type = (String) tile.getProperties().get("type");
                 if ("hero".equalsIgnoreCase(type)) {
-                    hero.setPosition(i, j);
+                    hero.setPosition(0, 0);
                 }
                 if ("boss".equalsIgnoreCase(type)) {
                     boss = new Boss("test");

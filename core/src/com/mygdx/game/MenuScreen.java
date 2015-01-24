@@ -4,12 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * Created by durga.p on 1/24/15.
@@ -67,22 +65,5 @@ public class MenuScreen implements Screen{
     @Override
     public void dispose() {
 
-    }
-
-    public class MyTextButton extends TextButton{
-
-        private final String fName;
-
-        public MyTextButton(final String text, Skin skin) {
-            super(text, skin);
-            this.fName = text;
-            addCaptureListener(new ClickListener(){
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    MyGdxGame game = (MyGdxGame) Gdx.app.getApplicationListener();
-                    game.setScreen(new MyScreen(fName, null));
-                }
-            });
-        }
     }
 }
