@@ -23,7 +23,7 @@ public class MyScreen implements Screen {
 
 
 
-        tiledActor = new TiledActor("tiledMaps/aura_2_2.tmx");
+        tiledActor = new TiledActor("tiledMaps/arrow_3_1.tmx");
 
 
         tiledActor.setCamera((com.badlogic.gdx.graphics.OrthographicCamera) stage.getCamera());
