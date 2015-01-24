@@ -28,7 +28,7 @@ public class MyScreen implements Screen {
 
 
 
-        tiledActor = new TiledActor("tiledMaps/"+mapName);
+        tiledActor = new TiledActor("tiledMaps/shield_level.tmx"/*+mapName*/);
 
         tiledActor.setCamera((com.badlogic.gdx.graphics.OrthographicCamera) stage.getCamera());
         stage.gameEngine.setCollides(tiledActor.getCollidesLayer());
@@ -44,7 +44,7 @@ public class MyScreen implements Screen {
     public void render(float delta) {
 
         stage.getBatch().begin();
-        tiledActor.draw(stage.getBatch(),1);
+        tiledActor.draw(stage.getBatch(),1f);
         stage.getBatch().end();
         stage.act(delta);
         stage.draw();
@@ -54,7 +54,6 @@ public class MyScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
         stage.resize(width,height);
     }
 

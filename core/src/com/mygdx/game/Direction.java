@@ -16,4 +16,23 @@ public enum Direction {
     Direction(Vector2 vector2) {
         this.vector = vector2;
     }
+
+    public static Direction reverse(Direction dir) {
+        Direction reverseDir = LEFT;
+        switch(dir){
+            case LEFT:
+                reverseDir = RIGHT;
+                break;
+            case RIGHT:
+                reverseDir = LEFT;
+                break;
+            case UP:
+                reverseDir = DOWN;
+                break;
+            case DOWN:
+                reverseDir = UP;
+                break;
+        }
+        return reverseDir;
+    }
 }

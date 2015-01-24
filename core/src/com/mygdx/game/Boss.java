@@ -1,7 +1,9 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * Created by Sudheer on 1/24/15.
@@ -23,6 +25,7 @@ public class Boss extends Character {
 
     public Boss(String fileName) {
         super(fileName);
+        this.health = 1000;
         sh_left = new Texture("weapons/shield/sh_left.png");
         sh_right = new Texture("weapons/shield/sh_right.png");
         sh_up = new Texture("weapons/shield/sh_up.png");
@@ -53,6 +56,8 @@ public class Boss extends Character {
     }
 
     private void takeXDir(float x, float y, float heroX, float heroY) {
+        if (!(isDirFeasible(Direction.LEFT) || isDirFeasible(Direction.RIGHT)))
+            return;
         if (x > heroX)
             currDirection = Direction.LEFT;
         else
@@ -62,6 +67,8 @@ public class Boss extends Character {
     }
 
     private void takeYDir(float x, float y, float heroX, float heroY){
+        if (!(isDirFeasible(Direction.DOWN) || isDirFeasible(Direction.UP)))
+            return;
         if (y > heroY)
             currDirection = Direction.DOWN;
         else
@@ -74,6 +81,18 @@ public class Boss extends Character {
     public void act(float delta) {
         feedMovement();
         super.act(delta);
+    }
+
+    @Override
+    public void collideWith(Actor actor) {
+        super.collideWith(actor);
+        if (actor instanceof Sword && actor != swordActor)
+            this.health -= 5;
+        else if (actor instanceof Arrow)
+            this.health -= 1;
+        if (this.health <= 0)
+            Gdx.app.exit();
+        Gdx.app.log("BOSS", "Health is : " + this.health);
     }
 
     private void reset() {

@@ -1,16 +1,25 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.SnapshotArray;
 
 /**
  * Created by durga.p on 1/24/15.
  */
 public class MyStage extends Stage {
+    private final Table table;
+    private final Skin skin;
+    private final Label label;
     Group group;
     GameEngine gameEngine;
     int ppy;
@@ -22,17 +31,39 @@ public class MyStage extends Stage {
     public MyStage() {
         group = new Group();
         hero = new Protagonist("test");
-        boss = new Boss("test");
+        SwordEnemy se1 = new SwordEnemy("test", false);
+        ArrowEnemy ae1 = new ArrowEnemy("test", true);
         gameEngine = new GameEngine();
-        hero.setPosition(11, 0);
-        boss.setPosition(15,8);
+
+        hero.setPosition(0, 0);
+        //boss.setPosition(14, 7);
+
+        se1.setPosition(10, 0);
+        ae1.setPosition(4, 0);
 
         group.addActor(hero);
+        group.addActor(new TexActor(ActorType.OLD_MAN, 4,4));
+        //group.addActor(boss);
+        group.addActor(se1);
+        group.addActor(ae1);
+
+        group.addActor(new OldMan(4,4));
         addActor(group);
         addCaptureListener(new MyListener(hero));
         hero.setHasShield(true);
 //        hero.setHasSword(true);
         hero.setHasArrow(true);
+
+        skin = new Skin(Gdx.files.internal("newskin.json"), new TextureAtlas("packed/skin.atlas"));
+
+        table = new Table();
+        String msg = "sample";
+        label = new Label(msg, skin);
+        label.setAlignment(Align.center);
+        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+
+        table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-20);
+        addActor(table);
     }
 
     public void resize(int width, int height) {
@@ -51,9 +82,10 @@ public class MyStage extends Stage {
         for(int i=0; i<childrenA.size; i++){
             for(int j=0; j<childrenB.size; j++){
                 Actor actorA = childrenA.get(i);
-                Actor actorB = childrenA.get(j);
+                Actor actorB = childrenB.get(j);
                 if(actorA != actorB) {
-                    gameEngine.meets(actorA, actorB);
+                    if(!gameEngine.meets(actorA, actorB))
+                        continue;
                     if(actorA instanceof Collides){
                         ((Collides) actorA).collideWith(actorB);
                     }
@@ -77,13 +109,50 @@ public class MyStage extends Stage {
                 if(tile == null) continue;
                 String type = (String) tile.getProperties().get("type");
                 if("hero".equalsIgnoreCase(type)){
-                    hero.setPosition(i, Math.abs(j));
+                    hero.setPosition(i, j);
                 }
                 if("boss".equalsIgnoreCase(type)){
-                    boss.setPosition(i, Math.abs(j));
+                    boss = new Boss("test");
+                    boss.setPosition(i, j);
+                }
+                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
+                    Enemy enemy = new ArrowEnemy("test", true);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-arrow-y".equalsIgnoreCase(type)) {
+                    Enemy enemy = new ArrowEnemy("test", false);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-sword".equalsIgnoreCase(type)) {
+                    Enemy enemy = new SwordEnemy("test", true);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-sword-y".equalsIgnoreCase(type)) {
+                    Enemy enemy = new SwordEnemy("test", false);
+                    enemy.setPosition(i, j);
+                }
+                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
+                    Enemy enemy = new ArrowEnemy("test", true);
+                    enemy.setPosition(i, j);
                 }
 
             }
         }
+    }
+
+    public void showMessage(String message) {
+        label.setText(message);
+       new Thread(){
+           @Override
+           public void run() {
+               super.run();
+               try {
+                   sleep(2000);
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+               label.setText("");
+           }
+       }.start();
     }
 }
