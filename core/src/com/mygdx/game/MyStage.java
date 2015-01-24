@@ -130,7 +130,7 @@ public class MyStage extends Stage {
                 }
 
                 if("bow".equalsIgnoreCase(type)){
-                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                    group.addActor(new TexActor(ActorType.BOW, i, j));
                 }
                 if("door".equalsIgnoreCase(type)){
                     Door door = new Door(i,j);
@@ -138,13 +138,16 @@ public class MyStage extends Stage {
                     group.addActor(door);
                 }
                 if("lava".equalsIgnoreCase(type)){
-                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                    group.addActor(new TexActor(ActorType.LAVA, i, j));
                 }
                 if("shield".equalsIgnoreCase(type)){
-                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                    group.addActor(new TexActor(ActorType.SHIELD, i, j));
                 }
                 if("sword".equalsIgnoreCase(type)){
                     group.addActor(new TexActor(ActorType.SWORD, i, j));
+                }
+                if("aura".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.AURA, i, j));
                 }
 
 
