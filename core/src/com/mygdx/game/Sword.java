@@ -25,7 +25,7 @@ public class Sword extends Actor {
     private float jabDist = 0.2f;
     private Direction jabDirection;
 
-    public Sword(Hero hero) {
+    public Sword(Hero hero, float x, float y) {
 
         swordRight = new TextureRegion( new Texture(Gdx.files.internal("weapons/sword_right.png")));
         swordLeft  = new TextureRegion( new Texture(Gdx.files.internal("weapons/sword_right.png")));
@@ -34,6 +34,7 @@ public class Sword extends Actor {
         swordUp  = new TextureRegion( new Texture(Gdx.files.internal("weapons/sword_down.png")));
         swordUp.flip(false, true);
         this.hero = hero;
+        this.setPosition(x, y);
         setWidth(size);
         setHeight(size);
     }

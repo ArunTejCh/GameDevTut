@@ -23,14 +23,22 @@ public class MyStage extends Stage {
         group = new Group();
         hero = new Protagonist("test");
         boss = new Boss("test");
+        SwordEnemy se1 = new SwordEnemy("test", false);
+        ArrowEnemy ae1 = new ArrowEnemy("test", true);
         gameEngine = new GameEngine();
 
         hero.setPosition(0, 0);
         boss.setPosition(14,7);
 
+        se1.setPosition(3, 5);
+        ae1.setPosition(6, 8);
+
         group.addActor(hero);
 
         group.addActor(new TexActor(ActorType.OLD_MAN, 4,4));
+        group.addActor(boss);
+        group.addActor(se1);
+        group.addActor(ae1);
         addActor(group);
         addCaptureListener(new MyListener(hero));
         hero.setHasShield(true);
@@ -56,7 +64,8 @@ public class MyStage extends Stage {
                 Actor actorA = childrenA.get(i);
                 Actor actorB = childrenA.get(j);
                 if(actorA != actorB) {
-                    gameEngine.meets(actorA, actorB);
+                    if(!gameEngine.meets(actorA, actorB))
+                        continue;
                     if(actorA instanceof Collides){
                         ((Collides) actorA).collideWith(actorB);
                     }
