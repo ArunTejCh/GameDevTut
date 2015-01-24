@@ -21,7 +21,6 @@ public class MyStage extends Stage {
 
 
         hero.setPosition(3, 3);
-        hero.setHasShield(true);
 
 //        stage.addActor(tiledActor);
         group.addActor(hero);

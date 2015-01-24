@@ -15,7 +15,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by durga.p on 1/24/15.
  */
-public class Character extends Actor implements Collides {
+public abstract class Character extends Actor implements Collides {
 
     private static final int FRAME_COLS = 8;
     private static final int FRAME_ROWS = 4;
@@ -93,6 +93,10 @@ public class Character extends Actor implements Collides {
         currDirection = direction;
     }
 
+    public abstract void useOffensiveWeapon();
+
+    public abstract void useDefensiveWeapon();
+
     private void moveDone() {
         processDirection = true;
         setAnimation(null);
@@ -104,7 +108,7 @@ public class Character extends Actor implements Collides {
         if (currAnimation != null) {
             animateTime += delta;
         }
-        if(processDirection && currDirection != null && isDirFeasible(currDirection)){
+        if (processDirection && currDirection != null && isDirFeasible(currDirection)) {
             Action action = Actions.moveBy(currDirection.vector.x, currDirection.vector.y, MOVE_TIME);
             Action runAction = sequence(action, new RunnableAction() {
                 @Override
@@ -134,17 +138,17 @@ public class Character extends Actor implements Collides {
 
     }
 
-    public boolean isDirFeasible(Direction dir){
+    public boolean isDirFeasible(Direction dir) {
         float x = (getX() + 0.5f + dir.vector.x);
         float y = (getY() + 0.5f + dir.vector.y);
         boolean[][] collides = getMyStage().gameEngine.collides;
-        if(x < 0 || x >= GameDisplayEngine.GRIDX){
+        if (x < 0 || x >= GameDisplayEngine.GRIDX) {
             return false;
         }
-        if(y < 0 || y >= GameDisplayEngine.GRIDY){
+        if (y < 0 || y >= GameDisplayEngine.GRIDY) {
             return false;
         }
-        return !getMyStage().gameEngine.collides[(int)x][(int)y];
+        return !getMyStage().gameEngine.collides[(int) x][(int) y];
     }
 
     private MyStage getMyStage() {

@@ -16,18 +16,29 @@ public class MyListener extends InputListener{
 
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
-
-        if(keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
-           character.move(Direction.LEFT);
-        }
-        else if(keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
-            character.move(Direction.RIGHT);
-        }
-        else if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN){
-            character.move(Direction.DOWN);
-        }
-        else if(keycode == Input.Keys.W || keycode == Input.Keys.UP){
-            character.move(Direction.UP);
+        switch(keycode){
+            case Input.Keys.A:
+            case Input.Keys.LEFT:
+                character.move(Direction.LEFT);
+                break;
+            case Input.Keys.D:
+            case Input.Keys.RIGHT:
+                character.move(Direction.RIGHT);
+                break;
+            case Input.Keys.S:
+            case Input.Keys.DOWN:
+                character.move(Direction.DOWN);
+                break;
+            case Input.Keys.W:
+            case Input.Keys.UP:
+                character.move(Direction.UP);
+                break;
+            case Input.Keys.E: //Offensive weapon
+                character.useOffensiveWeapon();
+                break;
+            case Input.Keys.Q: //Defensive weapon
+                character.useDefensiveWeapon();
+                break;
         }
         return super.keyDown(event, keycode);
     }
