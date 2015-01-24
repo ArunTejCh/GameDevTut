@@ -90,16 +90,13 @@ public class Hero extends Character {
                 this.health -= 5;
             }
         }
-        else if(actor instanceof Door){
-            MyGdxGame gdxGame = (MyGdxGame) Gdx.app.getApplicationListener();
-            gdxGame.setScreen(new MyScreen(((Door) actor).nextLevel));
-        }
+
         if (this.health <= 0)
             Gdx.app.exit();
         Gdx.app.log("HERO", "Health is : " + this.health);
     }
 
-    private void reset() {
+    void reset() {
         usingDefensiveWeapon = false;
         usingOffensiveWeapon = false;
         timeDifference = 0;

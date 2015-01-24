@@ -29,34 +29,16 @@ public class MyStage extends Stage {
     public Boss boss;
     private float labelTimer;
 
-    public MyStage() {
+    public MyStage(Hero initHero) {
         group = new Group();
-        hero = new Protagonist("test");
-        SwordEnemy se1 = new SwordEnemy("test", true);
-        ArrowEnemy ae1 = new ArrowEnemy("test", true);
+        hero = initHero;
         gameEngine = new GameEngine();
-
         hero.setPosition(0, 0);
-        //boss.setPosition(14, 7);
-
-        se1.setPosition(4, 0);
-        ae1.setPosition(10, 2);
-
         group.addActor(hero);
-        group.addActor(new TexActor(ActorType.OLD_MAN, 4,4));
-        //group.addActor(boss);
-//        group.addActor(se1);
-//        group.addActor(ae1);
 
-        group.addActor(new OldMan(4,4));
         addActor(group);
         addCaptureListener(new MyListener(hero));
-        hero.setHasShield(true);
-//        hero.setHasSword(true);
-        hero.setHasArrow(true);
-
         skin = new Skin(Gdx.files.internal("newskin.json"), new TextureAtlas("packed/skin.atlas"));
-
         table = new Table();
         String msg = "sample";
         label = new Label(msg, skin);
@@ -79,7 +61,7 @@ public class MyStage extends Stage {
         if(labelTimer > 0){
             labelTimer -= delta;
             if(labelTimer <0){
-
+                label.setText("");
             }
         }
 
@@ -152,8 +134,8 @@ public class MyStage extends Stage {
                 }
                 if("door".equalsIgnoreCase(type)){
                     Door door = new Door(i,j);
-                    door.nextLevel = (String) tile.getProperties().get("pathß");
-                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                    door.nextLevel = (String) tile.getProperties().get("path");
+                    group.addActor(door);
                 }
                 if("lava".equalsIgnoreCase(type)){
                     group.addActor(new TexActor(ActorType.SWORD, i, j));
