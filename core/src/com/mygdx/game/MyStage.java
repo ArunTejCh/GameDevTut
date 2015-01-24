@@ -131,7 +131,7 @@ public class MyStage extends Stage {
                 }
 
                 if("bow".equalsIgnoreCase(type)){
-                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                    group.addActor(new TexActor(ActorType.BOW, i, j));
                 }
                 if("door".equalsIgnoreCase(type)){
                     Door door = new Door(i,j);
