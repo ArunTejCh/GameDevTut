@@ -19,6 +19,9 @@ public class Hero extends Character {
     boolean usingOffensiveWeapon;
     float timeDifference = 0;
 
+    public static float AURA_TIME = 3.0f;
+    public static float SHIELD_TIME = 0.8f;
+
     public static float xOffset = 0.3f;
     public static float yOffset = 0.3f;
     public static float widthOffset = 0.8f;
@@ -32,7 +35,10 @@ public class Hero extends Character {
     public Hero(String fileName) {
         super(fileName);
         this.health = 100000;
-        hasShield = true;
+        this.maxHealth = 100000;
+        hasShield = false;
+        hasAura = true;
+        aura = new Texture("weapons/aura.png");
         sh_left = new Texture("weapons/shield/sh_left.png");
         sh_right = new Texture("weapons/shield/sh_right.png");
         sh_up = new Texture("weapons/shield/sh_up.png");
@@ -53,9 +59,14 @@ public class Hero extends Character {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (usingDefensiveWeapon) {
+        if (hasShield) {
             timeDifference += delta;
-            if (timeDifference > 0.8f)
+            if (timeDifference > SHIELD_TIME)
+                reset();
+        }
+        if (hasAura) {
+            timeDifference += delta;
+            if (timeDifference > AURA_TIME)
                 reset();
         }
     }
@@ -72,19 +83,25 @@ public class Hero extends Character {
         }
         else if (actor instanceof Arrow && actor != arrowActor) {
             Arrow arrow = (Arrow) actor;
-            if (usingDefensiveWeapon && arrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
-                if (timeDifference < 0.1f) {
-                    arrow.removeSelf();
-                    Arrow newArrow = new Arrow();
-                    getMyStage().group.addActor(newArrow);
-                    newArrow.setPosition(getX()+0.5f,getY()+0.5f);
-                    newArrow.shoot(currShieldDirection);
-                }
-                else
-                    arrow.removeSelf();
+            if (usingDefensiveWeapon) {
+                    if (hasAura) {
+                        arrow.removeSelf();
+                    }
+                    if (hasShield && arrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
+                        if (timeDifference < 0.1f) {
+                            arrow.removeSelf();
+                            Arrow newArrow = new Arrow();
+                            getMyStage().group.addActor(newArrow);
+                            newArrow.setPosition(getX()+0.5f,getY()+0.5f);
+                            newArrow.shoot(currShieldDirection);
+                        }
+                        else
+                            arrow.removeSelf();
+                    }
             }
             else {
                 this.health -= 5;
+                arrow.removeSelf();
             }
         }
         if (this.health <= 0)
@@ -116,7 +133,11 @@ public class Hero extends Character {
     }
 
     private void drawAura(Batch batch, float parentAlpha){
-        //Draw Aura around
+        float x = getX() - 0.2f;
+        float y = getY() - 0.1f;
+        float width = 1.4f;
+        float height = 1.4f;
+        batch.draw(aura, x, y, width, height);
     }
 
     public void useOffensiveWeapon() {

@@ -14,6 +14,7 @@ public class SwordEnemy extends Enemy {
     public SwordEnemy(String fileName, boolean isXDir){
         super(fileName, isXDir);
         this.health = 30;
+        this.maxHealth = 30;
     }
 
     @Override

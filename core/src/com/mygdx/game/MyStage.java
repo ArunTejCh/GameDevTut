@@ -42,7 +42,7 @@ public class MyStage extends Stage {
         ae1.setPosition(4, 0);
 
         group.addActor(hero);
-        group.addActor(new TexActor(ActorType.OLD_MAN, 4,4));
+        group.addActor(new TexActor(ActorType.OLD_MAN, 4, 4));
         //group.addActor(boss);
         group.addActor(se1);
         group.addActor(ae1);
@@ -50,7 +50,6 @@ public class MyStage extends Stage {
         group.addActor(new OldMan(4,4));
         addActor(group);
         addCaptureListener(new MyListener(hero));
-        hero.setHasShield(true);
 //        hero.setHasSword(true);
         hero.setHasArrow(true);
 
@@ -67,9 +66,9 @@ public class MyStage extends Stage {
     }
 
     public void resize(int width, int height) {
-        ppx = width/GameDisplayEngine.GRIDX;
-        ppy = height/GameDisplayEngine.GRIDY;
-        group.setScale(ppx,ppy);
+        ppx = width / GameDisplayEngine.GRIDX;
+        ppy = height / GameDisplayEngine.GRIDY;
+        group.setScale(ppx, ppy);
     }
 
     @Override
@@ -79,17 +78,17 @@ public class MyStage extends Stage {
 
         SnapshotArray<Actor> childrenA = group.getChildren();
         SnapshotArray<Actor> childrenB = group.getChildren();
-        for(int i=0; i<childrenA.size; i++){
-            for(int j=0; j<childrenB.size; j++){
+        for (int i = 0; i < childrenA.size; i++) {
+            for (int j = 0; j < childrenB.size; j++) {
                 Actor actorA = childrenA.get(i);
                 Actor actorB = childrenB.get(j);
-                if(actorA != actorB) {
-                    if(!gameEngine.meets(actorA, actorB))
+                if (actorA != actorB) {
+                    if (!gameEngine.meets(actorA, actorB))
                         continue;
-                    if(actorA instanceof Collides){
+                    if (actorA instanceof Collides) {
                         ((Collides) actorA).collideWith(actorB);
                     }
-                    if(actorB instanceof Collides){
+                    if (actorB instanceof Collides) {
                         ((Collides) actorB).collideWith(actorA);
                     }
                 }
@@ -97,21 +96,21 @@ public class MyStage extends Stage {
         }
     }
 
-    public void loadActors(TiledMapTileLayer layer){
-        if(layer == null) return;
+    public void loadActors(TiledMapTileLayer layer) {
+        if (layer == null) return;
         int width = layer.getWidth();
         int height = layer.getHeight();
-        for(int i=0; i<width; i++){
-            for(int j=0; j<height; j++){
-                TiledMapTileLayer.Cell cell = layer.getCell(i,j);
-                if(cell == null) continue;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(i, j);
+                if (cell == null) continue;
                 TiledMapTile tile = cell.getTile();
-                if(tile == null) continue;
+                if (tile == null) continue;
                 String type = (String) tile.getProperties().get("type");
-                if("hero".equalsIgnoreCase(type)){
+                if ("hero".equalsIgnoreCase(type)) {
                     hero.setPosition(i, j);
                 }
-                if("boss".equalsIgnoreCase(type)){
+                if ("boss".equalsIgnoreCase(type)) {
                     boss = new Boss("test");
                     boss.setPosition(i, j);
                 }
@@ -135,7 +134,21 @@ public class MyStage extends Stage {
                     Enemy enemy = new ArrowEnemy("test", true);
                     enemy.setPosition(i, j);
                 }
-
+                if ("aura".equalsIgnoreCase(type)) {
+                    TexActor aura = new TexActor(ActorType.AURA, i, j);
+                }
+                if ("bow".equalsIgnoreCase(type)) {
+                    TexActor bow = new TexActor(ActorType.BOW, i, j);
+                }
+                if ("sword".equalsIgnoreCase(type)) {
+                    TexActor sword = new TexActor(ActorType.SWORD, i, j);
+                }
+                if ("shield".equalsIgnoreCase(type)) {
+                    TexActor shield = new TexActor(ActorType.SHIELD, i, j);
+                }
+                if ("lava".equalsIgnoreCase(type)) {
+                    TexActor lava = new TexActor(ActorType.LAVA, i, j);
+                }
             }
         }
     }

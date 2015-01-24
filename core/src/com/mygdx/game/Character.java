@@ -1,14 +1,17 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
@@ -24,7 +27,8 @@ public abstract class Character extends Actor implements Collides {
     final Animation wLeftAni;
     final Animation wRightAni;
     final Animation wUpAni;
-    protected int health;
+    float health;
+    float maxHealth;
 
     TextureRegion[] walkLeft = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkRight = new TextureRegion[FRAME_COLS];
@@ -158,6 +162,24 @@ public abstract class Character extends Actor implements Collides {
         if (currAnimation != null)
             currentFrame = currAnimation.getKeyFrame(animateTime, true);
         batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
+        drawHealthBar(batch);
+    }
+
+    public void drawHealthBar(Batch batch){
+        Texture backRect = new Texture("misc/back_health.png");
+        Texture healthRect = new Texture("misc/fore_health.png");
+        float x = getX() - 0.3f;
+        float y = getY() + 1f;
+
+        float width = 2f;
+        float height = 0.3f;
+
+        batch.draw(backRect, x, y + 0.15f, width, height);
+
+        float progressWidth = this.health/this.maxHealth * 1;
+
+        batch.draw(healthRect, x + 0.05f, y + 0.15f + 0.05f, 2 * progressWidth, height - 0.05f);
+
     }
 
     private String fileName;

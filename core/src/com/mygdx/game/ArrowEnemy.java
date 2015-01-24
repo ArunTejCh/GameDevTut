@@ -13,6 +13,7 @@ public class ArrowEnemy extends Enemy{
     public ArrowEnemy(String fileName, boolean isXDir){
         super(fileName, isXDir);
         this.health = 20;
+        this.maxHealth = 20;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class ArrowEnemy extends Enemy{
             this.health -= 15;
         else if (actor instanceof Arrow && actor != arrowActor) {
             this.health -= 10;
-            actor.remove();
+            ((Arrow)actor).removeSelf();
         }
         if (this.health <= 0)
             this.remove();
