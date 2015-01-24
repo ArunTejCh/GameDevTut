@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -146,7 +145,6 @@ public class Hero extends Character {
 
         if (this.health <= 0)
             getMyStage().gameOver();
-        Gdx.app.log("HERO", "Health is : " + this.health);
     }
 
     void reset() {

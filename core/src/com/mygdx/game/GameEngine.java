@@ -11,6 +11,8 @@ public class GameEngine {
    public int sizeY = GameDisplayEngine.GRIDY;
    public boolean[][] collides = new boolean[sizeX][sizeY];
 
+
+
    public void setCollides(TiledMapTileLayer layer){
     for(int i=0; i<sizeX; i++){
         for(int j=0; j<sizeY; j++){
