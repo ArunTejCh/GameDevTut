@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Exterior_Castle_TileD" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Castle_TileD.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="Interior_Castle_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Interior_Castle_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="385" name="Dungeon_Ice_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Dungeon_Ice_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <layer name="backgrounds" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxrYmRgaBphWJgETEvzGYe4+bQOH1LMJ8VMSt1PjDsGOo3TG3OTiWlpF7npf7CYT+vwIdf8wYQBAO6jGg==
+  </data>
+ </layer>
+ <layer name="collides" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzNlLENgDAQA5/9dyBUQEXYgNXIF+n/LBlx0rUu3k4iajxLxD5s0Coz/xx2oJLv4K/5tC+aT7pKb9N93KzC9sn+s9tDsMoFe6LvS4XeczPv0/V+E+f/8GW+Y/+JstEX00BqKA==
+  </data>
+ </layer>
+</map>

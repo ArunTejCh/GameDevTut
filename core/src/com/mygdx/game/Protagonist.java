@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * Created by durga.p on 1/24/15.
@@ -42,6 +43,14 @@ public class Protagonist extends Hero {
         }
         if(processDirection){
             move(prevDir);
+        }
+    }
+
+    @Override
+    public void collideWith(Actor actor) {
+        super.collideWith(actor);
+        if(actor instanceof  OldMan){
+            getMyStage().showMessage(((OldMan) actor).message);
         }
     }
 }

@@ -44,7 +44,7 @@ public class MyScreen implements Screen {
     public void render(float delta) {
 
         stage.getBatch().begin();
-        tiledActor.draw(stage.getBatch(),1);
+        tiledActor.draw(stage.getBatch(),1f);
         stage.getBatch().end();
         stage.act(delta);
         stage.draw();
@@ -54,7 +54,6 @@ public class MyScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
         stage.resize(width,height);
     }
 
