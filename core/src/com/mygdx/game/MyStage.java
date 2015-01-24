@@ -27,34 +27,19 @@ public class MyStage extends Stage {
 
     public Hero hero;
     public Boss boss;
+    private float labelTimer;
 
-    public MyStage() {
+    public MyStage(Hero initHero) {
         group = new Group();
-        hero = new Protagonist("test");
-        SwordEnemy se1 = new SwordEnemy("test", false);
-        ArrowEnemy ae1 = new ArrowEnemy("test", true);
+        hero = initHero;
         gameEngine = new GameEngine();
-
         hero.setPosition(0, 0);
-        //boss.setPosition(14, 7);
-
-        se1.setPosition(10, 0);
-        ae1.setPosition(4, 0);
-
         group.addActor(hero);
-        group.addActor(new TexActor(ActorType.OLD_MAN, 4, 4));
-        //group.addActor(boss);
-        group.addActor(se1);
-        group.addActor(ae1);
 
-        group.addActor(new OldMan(4,4));
         addActor(group);
         addCaptureListener(new MyListener(hero));
-//        hero.setHasSword(true);
-        hero.setHasArrow(true);
 
         skin = new Skin(Gdx.files.internal("newskin.json"), new TextureAtlas("packed/skin.atlas"));
-
         table = new Table();
         String msg = "sample";
         label = new Label(msg, skin);
@@ -74,7 +59,12 @@ public class MyStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        if(labelTimer > 0){
+            labelTimer -= delta;
+            if(labelTimer <0){
+                label.setText("");
+            }
+        }
 
         SnapshotArray<Actor> childrenA = group.getChildren();
         SnapshotArray<Actor> childrenB = group.getChildren();
@@ -114,58 +104,61 @@ public class MyStage extends Stage {
                     boss = new Boss("test");
                     boss.setPosition(i, j);
                 }
-                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
+                if ("eax".equalsIgnoreCase(type)) {
                     Enemy enemy = new ArrowEnemy("test", true);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-arrow-y".equalsIgnoreCase(type)) {
+                if ("eay".equalsIgnoreCase(type)) {
                     Enemy enemy = new ArrowEnemy("test", false);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-sword".equalsIgnoreCase(type)) {
+                if ("esx".equalsIgnoreCase(type)) {
                     Enemy enemy = new SwordEnemy("test", true);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-sword-y".equalsIgnoreCase(type)) {
+                if ("esy".equalsIgnoreCase(type)) {
                     Enemy enemy = new SwordEnemy("test", false);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
-                    Enemy enemy = new ArrowEnemy("test", true);
-                    enemy.setPosition(i, j);
+                if("oldman".equalsIgnoreCase(type)){
+                    OldMan oldMan = new OldMan(i,j);
+                    oldMan.setMessage((String) tile.getProperties().get("msg"));
+                    group.addActor(oldMan);
+                }
+
+                if("bow".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                }
+                if("door".equalsIgnoreCase(type)){
+                    Door door = new Door(i,j);
+                    door.nextLevel = (String) tile.getProperties().get("path");
+                    group.addActor(door);
                 }
                 if ("aura".equalsIgnoreCase(type)) {
-                    TexActor aura = new TexActor(ActorType.AURA, i, j);
+                    group.addActor(new TexActor(ActorType.AURA, i, j));
                 }
                 if ("bow".equalsIgnoreCase(type)) {
-                    TexActor bow = new TexActor(ActorType.BOW, i, j);
+                    group.addActor(new TexActor(ActorType.BOW, i, j));
                 }
-                if ("sword".equalsIgnoreCase(type)) {
-                    TexActor sword = new TexActor(ActorType.SWORD, i, j);
+                if("lava".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.LAVA, i, j));
                 }
-                if ("shield".equalsIgnoreCase(type)) {
-                    TexActor shield = new TexActor(ActorType.SHIELD, i, j);
+                if("shield".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SHIELD, i, j));
                 }
-                if ("lava".equalsIgnoreCase(type)) {
-                    TexActor lava = new TexActor(ActorType.LAVA, i, j);
+                if("sword".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SWORD, i, j));
                 }
             }
         }
     }
 
     public void showMessage(String message) {
-        label.setText(message);
-       new Thread(){
-           @Override
-           public void run() {
-               super.run();
-               try {
-                   sleep(2000);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
-               label.setText("");
-           }
-       }.start();
+       label.setText(message);
+       labelTimer = 2;
     }
 }

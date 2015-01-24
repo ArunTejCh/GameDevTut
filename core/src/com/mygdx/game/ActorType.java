@@ -9,7 +9,8 @@ public enum ActorType {
     SHIELD("actors/shield.png"),
     BOW("actors/bow.png"),
     AURA("actors/aura.png"),
-    LAVA("actors/lava.png");
+    LAVA("actors/lava.png"),
+    DOOR("actors/door1.png");
 
     public final String fileName;
 

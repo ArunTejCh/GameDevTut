@@ -31,6 +31,7 @@ public class Hero extends Character {
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
     private Arrow arrowActor;
+     Sword hitSword;
 
     public Hero(String fileName) {
         super(fileName);
@@ -74,8 +75,10 @@ public class Hero extends Character {
     @Override
     public void collideWith(Actor actor) {
         super.collideWith(actor);
-        if (actor instanceof Sword && actor != swordActor)
+        if (actor instanceof Sword && actor != swordActor) {
+            this.hitSword = (Sword)actor;
             this.health -= 10;
+        }
         else if (actor instanceof Boss) {
             this.health -= 30;
             this.setX((getX() + 8) % 16);
@@ -104,12 +107,13 @@ public class Hero extends Character {
                 arrow.removeSelf();
             }
         }
+
         if (this.health <= 0)
             Gdx.app.exit();
         Gdx.app.log("HERO", "Health is : " + this.health);
     }
 
-    private void reset() {
+    void reset() {
         usingDefensiveWeapon = false;
         usingOffensiveWeapon = false;
         timeDifference = 0;
@@ -141,7 +145,9 @@ public class Hero extends Character {
     }
 
     public void useOffensiveWeapon() {
-        if(hasSword){
+        if(hasSword && (swordActor == null || swordActor.getParent() == null)){
+            swordActor = new Sword(this, getX(), getY());
+            getMyStage().group.addActor(swordActor);
             swordActor.jab(currShieldDirection);
         }
         if(hasArrow){
@@ -174,17 +180,9 @@ public class Hero extends Character {
 
     public void setHasSword(boolean hasSword) {
         this.hasSword = hasSword;
-        if(hasSword){
-            swordActor = new Sword(this, getX(), getY());
-            getMyStage().group.addActor(swordActor);
-        }
+
     }
 
-    public void useOffWeapon(){
-        if(hasSword){
-            swordActor.jab(currShieldDirection);
-        }
-    }
 
     @Override
     public void setX(float x) {
