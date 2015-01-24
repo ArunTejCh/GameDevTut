@@ -12,7 +12,84 @@
  <tileset firstgid="513" name="Exterior_Town_TileD" tilewidth="32" tileheight="32">
   <image source="../packed/Exterior_Town_TileD.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="769" source="place.tsx"/>
+ <tileset firstgid="769" name="place" tilewidth="32" tileheight="32">
+  <image source="../packed/place.png" width="512" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="aura"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="type" value="boss"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="type" value="bow"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="type" value="door"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="type" value="door"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="type" value="door"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="type" value="eax"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="type" value="eay"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="type" value="esx"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="type" value="esy"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="type" value="hero"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="type" value="oldman"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="type" value="shield"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="type" value="sword"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="actors" width="24" height="18">
   <data encoding="base64" compression="zlib">
    eJxjYKAMcDBjF+fEIY4M+IlQMwoQgJsZgSkF6PGDKx4JAa7ROAQDbOkdFqbE5IVRgBvQOo0RMp/cvDEUwGDxGw8Z7gC5HQBO4wDl
