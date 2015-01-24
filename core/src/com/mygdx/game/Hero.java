@@ -1,7 +1,9 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * Created by durga.p on 1/24/15.
@@ -29,6 +31,7 @@ public class Hero extends Character {
 
     public Hero(String fileName) {
         super(fileName);
+        this.health = 100000;
         hasShield = true;
         sh_left = new Texture("weapons/shield/sh_left.png");
         sh_right = new Texture("weapons/shield/sh_right.png");
@@ -55,6 +58,23 @@ public class Hero extends Character {
             if (timeDifference > 0.8)
                 reset();
         }
+    }
+
+    @Override
+    public void collideWith(Actor actor) {
+        super.collideWith(actor);
+        if (actor instanceof Sword && actor != swordActor)
+            this.health -= 10;
+        else if (actor instanceof Boss) {
+            this.health -= 30;
+            this.setX((getX() + 8) % 16);
+            this.setY((getY() + 4) % 9);
+        }
+        else if (actor instanceof Arrow && actor != arrowActor)
+            this.health -= 5;
+        if (this.health <= 0)
+            Gdx.app.exit();
+        Gdx.app.log("HERO", "Health is : " + this.health);
     }
 
     private void reset() {
@@ -119,7 +139,7 @@ public class Hero extends Character {
     public void setHasSword(boolean hasSword) {
         this.hasSword = hasSword;
         if(hasSword){
-            swordActor = new Sword(this);
+            swordActor = new Sword(this, getX(), getY());
             getMyStage().group.addActor(swordActor);
         }
     }

@@ -20,18 +20,19 @@ public abstract class Character extends Actor implements Collides {
     private static final int FRAME_ROWS = 4;
     private static final float ANIMATE_TIME = 0.1f;
     private static final float MOVE_TIME = 0.5f;
-    private final Animation wDownAni;
-    private final Animation wLeftAni;
-    private final Animation wRightAni;
-    private final Animation wUpAni;
+    final Animation wDownAni;
+    final Animation wLeftAni;
+    final Animation wRightAni;
+    final Animation wUpAni;
+    protected int health;
 
     TextureRegion[] walkLeft = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkRight = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkUp = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkDown = new TextureRegion[FRAME_COLS];
-    private Animation currAnimation;
+    Animation currAnimation;
     private float animateTime;
-    private TextureRegion currentFrame;
+    TextureRegion currentFrame;
     public Direction currShieldDirection;
     Direction currDirection;
     protected boolean processDirection = true;
