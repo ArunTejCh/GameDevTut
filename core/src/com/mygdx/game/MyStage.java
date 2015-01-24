@@ -21,12 +21,15 @@ public class MyStage extends Stage {
 
 
         hero.setPosition(3, 3);
-        hero.setHasShield(true);
 
-//        stage.addActor(tiledActor);
         group.addActor(hero);
+
+//        group.addActor(new Sword(hero));
         addActor(group);
         addCaptureListener(new MyListener(hero));
+
+        hero.setHasShield(true);
+        hero.setHasSword(true);
 
     }
 
