@@ -85,7 +85,9 @@ public class Hero extends Character {
     }
 
     public void useOffensiveWeapon() {
-
+        if(hasSword){
+            swordActor.jab(currShieldDirection);
+        }
     }
 
     public void useDefensiveWeapon() {

@@ -20,7 +20,7 @@ public class MyStage extends Stage {
         gameEngine = new GameEngine();
 
 
-        hero.setPosition(3, 3);
+        hero.setPosition(0, 0);
 
         group.addActor(hero);
 
@@ -28,7 +28,7 @@ public class MyStage extends Stage {
         addActor(group);
         addCaptureListener(new MyListener(hero));
 
-        hero.setHasShield(true);
+        hero.hasShield = true;
         hero.setHasSword(true);
 
     }
