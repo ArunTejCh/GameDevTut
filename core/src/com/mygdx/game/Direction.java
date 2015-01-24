@@ -35,4 +35,15 @@ public enum Direction {
         }
         return reverseDir;
     }
+
+    public static Direction rand() {
+        double rand = Math.random();
+        if(rand < 0.25f)
+            return UP;
+        if(rand < 0.5f)
+            return DOWN;
+        if(rand < 0.75f)
+            return RIGHT;
+        return LEFT;
+    }
 }

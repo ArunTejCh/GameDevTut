@@ -1,17 +1,14 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
@@ -21,8 +18,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 public abstract class Character extends Actor implements Collides {
     private static final int FRAME_COLS = 8;
     private static final int FRAME_ROWS = 4;
-    private static final float ANIMATE_TIME = 0.1f;
-    private static final float MOVE_TIME = 0.5f;
+    float ANIMATE_TIME = 0.1f;
+    float MOVE_TIME = 0.5f;
     final Animation wDownAni;
     final Animation wLeftAni;
     final Animation wRightAni;
@@ -46,7 +43,7 @@ public abstract class Character extends Actor implements Collides {
 
     public Character(String fileName) {
         this.fileName = fileName;
-
+        init();
         Texture walkSheet = new Texture(Gdx.files.internal("sprites/" + fileName + ".png")); // #9
         TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);              // #10
 
@@ -55,7 +52,7 @@ public abstract class Character extends Actor implements Collides {
 
         for (int i = 0; i < FRAME_COLS; i++) {
             walkDown[i] = tmp[0][i];
-            walkLeft[i] = tmp[1][i];
+            walkLeft[i] = tmp[1][FRAME_COLS-1-i];
             walkRight[i] = tmp[2][i];
             walkUp[i] = tmp[3][i];
         }
@@ -70,6 +67,10 @@ public abstract class Character extends Actor implements Collides {
 
         currentFrame = wDownAni.getKeyFrame(0);
         currShieldDirection = Direction.DOWN;
+
+    }
+
+    void init() {
 
     }
 
@@ -180,9 +181,12 @@ public abstract class Character extends Actor implements Collides {
 
         batch.draw(backRect, x, y + 0.15f, width, height);
 
-        float progressWidth = this.health/this.maxHealth * 1;
 
+        float progressWidth = this.health/this.maxHealth * 1;
         batch.draw(healthRect, x + 0.05f, y + 0.15f + 0.05f, 2 * progressWidth, height - 0.05f);
+
+
+
 
     }
 

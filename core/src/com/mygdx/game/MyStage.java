@@ -36,13 +36,13 @@ public class MyStage extends Stage {
         group = new Group();
         hero = new Protagonist("test");
 
-        if(initHero.hasArrow)
+        if (initHero.hasArrow)
             hero.setHasArrow(true);
-        if(initHero.hasShield)
+        if (initHero.hasShield)
             hero.setHasShield(true);
-        if(initHero.hasSword)
+        if (initHero.hasSword)
             hero.setHasSword(true);
-        if(initHero.hasAura)
+        if (initHero.hasAura)
             hero.setHasAura(true);
 
         gameEngine = new GameEngine();
@@ -59,8 +59,13 @@ public class MyStage extends Stage {
         label.setAlignment(Align.center);
         table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
 
-        table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-20);
+        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() - 20);
         addActor(table);
+
+//        boss = new Boss("boss/run");
+//        boss.setPosition(3, 7);
+//        group.addActor(boss);
+
     }
 
     public void gameOver() {
@@ -72,10 +77,10 @@ public class MyStage extends Stage {
         table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
         table.add().padBottom(Gdx.graphics.getHeight() * 0.1f).row();
         TextButton textButton = new TextButton("Main Menu", skin);
-        textButton.addCaptureListener(new ClickListener(){
+        textButton.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                MyGdxGame game = (MyGdxGame)Gdx.app.getApplicationListener();
+                MyGdxGame game = (MyGdxGame) Gdx.app.getApplicationListener();
                 game.setScreen(new MenuScreen());
             }
         });
@@ -91,9 +96,9 @@ public class MyStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(labelTimer > 0){
+        if (labelTimer > 0) {
             labelTimer -= delta;
-            if(labelTimer <0){
+            if (labelTimer < 0) {
                 label.setText("");
             }
         }
@@ -133,8 +138,9 @@ public class MyStage extends Stage {
                     hero.setPosition(i, j);
                 }
                 if ("boss".equalsIgnoreCase(type)) {
-                    boss = new Boss("test");
+                    boss = new Boss("boss/run");
                     boss.setPosition(i, j);
+                    group.addActor(boss);
                 }
                 if ("eax".equalsIgnoreCase(type)) {
                     Enemy enemy = new ArrowEnemy("test", true);
@@ -156,17 +162,17 @@ public class MyStage extends Stage {
                     enemy.setPosition(i, j);
                     group.addActor(enemy);
                 }
-                if("oldman".equalsIgnoreCase(type)){
-                    OldMan oldMan = new OldMan(i,j);
+                if ("oldman".equalsIgnoreCase(type)) {
+                    OldMan oldMan = new OldMan(i, j);
                     oldMan.setMessage((String) tile.getProperties().get("msg"));
                     group.addActor(oldMan);
                 }
 
-                if("bow".equalsIgnoreCase(type)){
+                if ("bow".equalsIgnoreCase(type)) {
                     group.addActor(new TexActor(ActorType.BOW, i, j));
                 }
-                if("door".equalsIgnoreCase(type)){
-                    Door door = new Door(i,j);
+                if ("door".equalsIgnoreCase(type)) {
+                    Door door = new Door(i, j);
                     door.nextLevel = (String) tile.getProperties().get("path");
                     group.addActor(door);
                 }
@@ -176,13 +182,13 @@ public class MyStage extends Stage {
                 if ("bow".equalsIgnoreCase(type)) {
                     group.addActor(new TexActor(ActorType.BOW, i, j));
                 }
-                if("lava".equalsIgnoreCase(type)){
+                if ("lava".equalsIgnoreCase(type)) {
                     group.addActor(new TexActor(ActorType.LAVA, i, j));
                 }
-                if("shield".equalsIgnoreCase(type)){
+                if ("shield".equalsIgnoreCase(type)) {
                     group.addActor(new TexActor(ActorType.SHIELD, i, j));
                 }
-                if("sword".equalsIgnoreCase(type)){
+                if ("sword".equalsIgnoreCase(type)) {
                     group.addActor(new TexActor(ActorType.SWORD, i, j));
                 }
             }
@@ -190,7 +196,7 @@ public class MyStage extends Stage {
     }
 
     public void showMessage(String message) {
-       label.setText(message);
-       labelTimer = 2;
+        label.setText(message);
+        labelTimer = 2;
     }
 }
