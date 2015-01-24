@@ -33,6 +33,7 @@ public class Character extends Actor implements Collides {
     private float animateTime;
     private TextureRegion currentFrame;
     private Direction currDirection;
+    public Direction currShieldDirection;
     private boolean processDirection = true;
 
     public Character(String fileName) {
@@ -57,6 +58,7 @@ public class Character extends Actor implements Collides {
         setHeight(1);
 
         currentFrame = wDownAni.getKeyFrame(0);
+        currShieldDirection = Direction.DOWN;
 
     }
 
@@ -106,6 +108,7 @@ public class Character extends Actor implements Collides {
                     moveDone();
                 }
             });
+            currShieldDirection = currDirection;
             addAction(runAction);
             setAnimation(currDirection);
             processDirection = false;

@@ -13,24 +13,44 @@ public class Hero extends Character {
     boolean hasArrow;
     boolean hasAura;
 
-    Texture shield,sword,aura;
+    public static float xOffset = 0.3f;
+    public static float yOffset = 0.3f;
+    public static float widthOffset = 0.8f;
+    public static float heightOffset = 0.7f;
+
+    Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
 
 
     public Hero(String fileName) {
         super(fileName);
-        shield = new Texture("weapons/shield.png");
-
+        sh_left = new Texture("weapons/shield/sh_left.png");
+        sh_right = new Texture("weapons/shield/sh_right.png");
+        sh_up = new Texture("weapons/shield/sh_up.png");
+        sh_down = new Texture("weapons/shield/sh_down.png");
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(hasShield){
-            batch.draw(shield,getX()+0.2f, getY()+0.2f, 0.3f, 0.3f);
+        if (hasShield) {
+            switch (currShieldDirection) {
+                case UP:
+                batch.draw(sh_up, getX() + xOffset, getY() + 0.45f, widthOffset, heightOffset);
+                    break;
+                case DOWN:
+                    batch.draw(sh_down, getX() + 0.1f, getY() + 0.2f, widthOffset, heightOffset);
+                    break;
+                case LEFT:
+                    batch.draw(sh_left, getX() - 0.1f, getY() + yOffset, widthOffset, heightOffset);
+                    break;
+                case RIGHT:
+                    batch.draw(sh_right, getX() + xOffset, getY() + yOffset, widthOffset, heightOffset);
+                    break;
+            }
         }
     }
 
-    public void setHasSheild(boolean hasShield) {
+    public void setHasShield(boolean hasShield) {
         this.hasShield = hasShield;
     }
 

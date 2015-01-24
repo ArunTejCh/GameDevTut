@@ -20,8 +20,8 @@ public class MyStage extends Stage {
         gameEngine = new GameEngine();
 
 
-        hero.setPosition(3,3);
-        hero.setHasSheild(true);
+        hero.setPosition(3, 3);
+        hero.setHasShield(true);
 
 //        stage.addActor(tiledActor);
         group.addActor(hero);

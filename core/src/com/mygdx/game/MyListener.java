@@ -17,16 +17,16 @@ public class MyListener extends InputListener{
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
 
-        if(keycode == Input.Keys.A){
+        if(keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
            character.move(Direction.LEFT);
         }
-        else if(keycode == Input.Keys.D){
+        else if(keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
             character.move(Direction.RIGHT);
         }
-        else if(keycode == Input.Keys.S){
+        else if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN){
             character.move(Direction.DOWN);
         }
-        else if(keycode == Input.Keys.W){
+        else if(keycode == Input.Keys.W || keycode == Input.Keys.UP){
             character.move(Direction.UP);
         }
         return super.keyDown(event, keycode);
@@ -34,18 +34,7 @@ public class MyListener extends InputListener{
 
     @Override
     public boolean keyUp(InputEvent event, int keycode) {
-        if(keycode == Input.Keys.A){
-            character.move(null);
-        }
-        else if(keycode == Input.Keys.D){
-            character.move(null);
-        }
-        else if(keycode == Input.Keys.S){
-            character.move(null);
-        }
-        else if(keycode == Input.Keys.W){
-            character.move(null);
-        }
+        character.move(null);
         return super.keyUp(event, keycode);
     }
 }
