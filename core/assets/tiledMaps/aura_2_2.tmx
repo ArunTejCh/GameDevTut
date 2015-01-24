@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Dungeon_Ice_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Dungeon_Ice_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="Dungeon_TileA1" tilewidth="32" tileheight="32">
+  <image source="../packed/Dungeon_TileA1.png" width="512" height="384"/>
+ </tileset>
+ <layer name="backgrounds" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJyzZ2BgsKcR9qOh2SAcRmPzlQaJ+UZYxIxp7Lahbv4oHsWjePhjAII+agw=
+  </data>
+ </layer>
+ <layer name="collides" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJy1lMsOwiAQRXGjbjTd+PgQI1aT+kp8rtT//5cOyZBcRqawgElOKJPhlJIpi5FJRsfjScnLwLoJMOVcS+yJQwE/RsPjmbgQ10r+J/Ei3jy/EXfiIep9HtkI/wpYc+5DfImfso+h6Ab2H4stYZldBb+rP/JzzjrNPzZhL2n4Otdr1vx/m+afZ+wN6xqR986Sfuwb31sp/8yEPSXR9u8j5dfW5dZp/qUJ/4HS/tyQfvw/rOLHnsM55jS/vCNifrkGe0meQ+p83PvkPVXSH4ua/h5/jhj/
+  </data>
+ </layer>
+</map>
