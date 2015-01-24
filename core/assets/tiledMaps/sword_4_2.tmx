@@ -90,12 +90,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="actors" width="24" height="18">
-  <data encoding="base64" compression="zlib">
-   eJxjYCAesDIjMAxwMGNXy4lDHBnwo6nBZv4oQABuZgSmFKDHD654JAS4RuMKDLCld1iYEpMXRgFuQOs0Rsh8cvPGUACDxW88ZLgD5HYAgOABFQ==
-  </data>
- </layer>
- <layer name="backgrounds" width="24" height="18" visible="0">
+ <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
    eJzrYWRg6BnFo3gUj+JRPIqHGAYAGhvt8Q==
   </data>
@@ -105,9 +100,14 @@
    eJy9VEEOgCAMG59XLxpO4HP14JLGrLCJ2mQhcaPMriDSxpZEcrJzK/kegYd/OtcZYgmc6+HXmnrFbtTfe9CI8LdQ4HyMt/gZPHu/4mea4nx7+Rb/RjTF+fbyym/1EfUi6zGTPuuA7qptTx/MWfPAHP4r+tW6Lxa/5XFW60Fkzx/8zCM973o8xd6H1lvBvMXmFdWjDHBZeMJ3AOzdXeA=
   </data>
  </layer>
- <layer name="backgrounds2" width="24" height="18" visible="0">
+ <layer name="backgrounds2" width="24" height="18">
   <data encoding="base64" compression="zlib">
    eJyTZGJgkAJiaSBGBy+RxAIZGRg6kTCIDwLCjPixJtCMlUCsjcV8ZBCJZn4k1HxORuzqYeZb4jH3JpIcyBxHIHYCYmdGhLmEzMcHXqKZj47RzccWPsSCgTAf2R5auR8XGGzmE2MWJeFDbfMj0fjcjJgYXY4UkEll89mBmIMIM/GZj0+NOBBLIJkdSWXz1YFYA0/4YPMXPkBOnAyU+cSEDznmE4MBwF4T4A==
+  </data>
+ </layer>
+ <layer name="actors" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAesDIjMAxwMGNXy4lDHBnwo6nBZv4oQABuZgSmFBATP8QArtG4AgNs4QnLG9QK65EKaJ3GCJmPq4wbDmCw+I2HDHeA3A4ATPsBCg==
   </data>
  </layer>
 </map>
