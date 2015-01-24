@@ -15,13 +15,11 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by durga.p on 1/24/15.
  */
-public abstract class Character extends Actor implements Collides {
-
+public class Character extends Actor implements Collides {
     private static final int FRAME_COLS = 8;
     private static final int FRAME_ROWS = 4;
     private static final float ANIMATE_TIME = 0.1f;
     private static final float MOVE_TIME = 0.5f;
-
     private final Animation wDownAni;
     private final Animation wLeftAni;
     private final Animation wRightAni;
@@ -31,13 +29,11 @@ public abstract class Character extends Actor implements Collides {
     TextureRegion[] walkRight = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkUp = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkDown = new TextureRegion[FRAME_COLS];
-
-
     private Animation currAnimation;
     private float animateTime;
     private TextureRegion currentFrame;
-    private Direction currDirection;
     public Direction currShieldDirection;
+    Direction currDirection;
     private boolean processDirection = true;
 
     public Character(String fileName) {
@@ -151,7 +147,7 @@ public abstract class Character extends Actor implements Collides {
         return !getMyStage().gameEngine.collides[(int) x][(int) y];
     }
 
-    private MyStage getMyStage() {
+     MyStage getMyStage() {
         return (MyStage) getStage();
     }
 }

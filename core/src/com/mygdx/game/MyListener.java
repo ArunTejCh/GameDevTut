@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * Created by durga.p on 1/24/15.
  */
 public class MyListener extends InputListener{
-    private final Character character;
+    private final Hero hero;
 
-    public MyListener(Character character) {
-        this.character = character;
+    public MyListener(Hero hero) {
+        this.hero = hero;
     }
 
     @Override
@@ -19,25 +19,25 @@ public class MyListener extends InputListener{
         switch(keycode){
             case Input.Keys.A:
             case Input.Keys.LEFT:
-                character.move(Direction.LEFT);
+                hero.move(Direction.LEFT);
                 break;
             case Input.Keys.D:
             case Input.Keys.RIGHT:
-                character.move(Direction.RIGHT);
+                hero.move(Direction.RIGHT);
                 break;
             case Input.Keys.S:
             case Input.Keys.DOWN:
-                character.move(Direction.DOWN);
+                hero.move(Direction.DOWN);
                 break;
             case Input.Keys.W:
             case Input.Keys.UP:
-                character.move(Direction.UP);
+                hero.move(Direction.UP);
                 break;
             case Input.Keys.E: //Offensive weapon
-                character.useOffensiveWeapon();
+                hero.useOffensiveWeapon();
                 break;
             case Input.Keys.Q: //Defensive weapon
-                character.useDefensiveWeapon();
+                hero.useDefensiveWeapon();
                 break;
         }
         return super.keyDown(event, keycode);
@@ -45,7 +45,7 @@ public class MyListener extends InputListener{
 
     @Override
     public boolean keyUp(InputEvent event, int keycode) {
-        character.move(null);
+        hero.move(null);
         return super.keyUp(event, keycode);
     }
 }

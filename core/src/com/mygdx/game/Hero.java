@@ -24,8 +24,9 @@ public class Hero extends Character {
     public static float widthOffset = 0.8f;
     public static float heightOffset = 0.7f;
 
-    Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
+    private Sword swordActor;
 
+    Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
 
     public Hero(String fileName) {
         super(fileName);
@@ -101,5 +102,30 @@ public class Hero extends Character {
 
     public void setHasSword(boolean hasSword) {
         this.hasSword = hasSword;
+        if(hasSword){
+            swordActor = new Sword(this);
+            getMyStage().group.addActor(swordActor);
+        }
+    }
+
+    public void useOffWeapon(){
+        if(hasSword){
+            swordActor.jab(currShieldDirection);
+        }
+    }
+
+    @Override
+    public void setX(float x) {
+        super.setX(x);
+        if(hasSword){
+            swordActor.setX(x);
+        }
+    }
+    @Override
+    public void setY(float y) {
+        super.setY(y);
+        if(hasSword){
+            swordActor.setY(y);
+        }
     }
 }
