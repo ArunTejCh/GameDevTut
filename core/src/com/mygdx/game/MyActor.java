@@ -5,12 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import lombok.Data;
 
 /**
  * Created by Durga on 21-01-2015.
  */
-@Data
 public class MyActor extends Actor {
 
     private final MyGdxGame myGdxGame;
