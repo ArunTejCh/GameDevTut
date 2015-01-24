@@ -50,9 +50,11 @@ public class Hero extends Character {
     @Override
     public void act(float delta) {
         super.act(delta);
-        timeDifference += delta;
-        if (timeDifference > 0.8)
-            reset();
+        if (usingDefensiveWeapon) {
+            timeDifference += delta;
+            if (timeDifference > 0.8)
+                reset();
+        }
     }
 
     private void reset() {
