@@ -24,8 +24,9 @@ public class MyStage extends Stage {
         hero = new Protagonist("test");
         boss = new Boss("test");
         gameEngine = new GameEngine();
-        hero.setPosition(11, 0);
-        boss.setPosition(15,8);
+
+        hero.setPosition(0, 0);
+        boss.setPosition(14,7);
 
         group.addActor(hero);
 
