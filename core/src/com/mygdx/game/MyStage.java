@@ -16,17 +16,17 @@ public class MyStage extends Stage {
 
     public MyStage() {
         group = new Group();
-        Character character = new Character("test");
+        Hero hero = new Hero("test");
         gameEngine = new GameEngine();
 
-        character.setAnimation(Direction.UP);
-        character.setPosition(2,2);
 
+        hero.setPosition(3,3);
+        hero.setHasSheild(true);
 
 //        stage.addActor(tiledActor);
-        group.addActor(character);
+        group.addActor(hero);
         addActor(group);
-        addCaptureListener(new MyListener(character));
+        addCaptureListener(new MyListener(hero));
 
     }
 

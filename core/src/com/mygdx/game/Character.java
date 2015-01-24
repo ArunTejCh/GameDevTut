@@ -56,6 +56,8 @@ public class Character extends Actor implements Collides {
         setWidth(1);
         setHeight(1);
 
+        currentFrame = wDownAni.getKeyFrame(0);
+
     }
 
     public void setAnimation(Direction direction) {
