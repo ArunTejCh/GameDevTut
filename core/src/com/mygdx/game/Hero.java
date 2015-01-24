@@ -65,7 +65,7 @@ public class Hero extends Character {
     private void drawShield(Batch batch, float parentAlpha) {
         switch (currShieldDirection) {
             case UP:
-                batch.draw(sh_up, getX() + xOffset, getY() + 0.45f, widthOffset, heightOffset);
+            batch.draw(sh_up, getX() + 0.1f, getY() + 0.6f, widthOffset, heightOffset);
                 break;
             case DOWN:
                 batch.draw(sh_down, getX() + 0.1f, getY() + 0.2f, widthOffset, heightOffset);
