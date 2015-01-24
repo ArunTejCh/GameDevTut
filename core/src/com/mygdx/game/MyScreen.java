@@ -21,7 +21,8 @@ public class MyScreen implements Screen {
 
 
 
-        tiledActor = new TiledActor("tiledMaps/background.tmx");
+        tiledActor = new TiledActor("tiledMaps/arun_sample.tmx");
+
         tiledActor.setCamera((com.badlogic.gdx.graphics.OrthographicCamera) stage.getCamera());
         stage.gameEngine.setCollides(tiledActor.getCollidesLayer());
 
