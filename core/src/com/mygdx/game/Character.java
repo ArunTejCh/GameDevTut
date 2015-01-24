@@ -128,6 +128,13 @@ public class Character extends Actor implements Collides {
     public boolean isDirFeasible(Direction dir){
         int x = (int) (getX() + 0.5f + dir.vector.x);
         int y = (int) (getY() + 0.5f + dir.vector.y);
+        boolean[][] collides = getMyStage().gameEngine.collides;
+        if(x < 0 || x >= collides.length){
+            return false;
+        }
+        if(y < 0 || y >= collides[0].length){
+            return false;
+        }
         return !getMyStage().gameEngine.collides[x][y];
     }
 

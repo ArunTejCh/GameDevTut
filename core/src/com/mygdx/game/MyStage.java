@@ -40,12 +40,12 @@ public class MyStage extends Stage {
     public void act(float delta) {
         super.act(delta);
         SnapshotArray<Actor> children = group.getChildren();
-        for(Actor actorA : children){
-            for(Actor actorB : children){
-                if(actorA != actorB){
-                    gameEngine.meets(actorA, actorB);
-                }
-            }
-        }
+//        for(Actor actorA : children){
+//            for(Actor actorB : children){
+//                if(actorA != actorB){
+//                    gameEngine.meets(actorA, actorB);
+//                }
+//            }
+//        }
     }
 }
