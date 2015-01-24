@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -14,23 +13,29 @@ public class SwordEnemy extends Enemy {
     public SwordEnemy(String fileName, boolean isXDir){
         super(fileName, isXDir);
         this.health = 30;
+        hasSword = true;
+        hasArrow = false;
     }
 
     @Override
     protected void setParent(Group parent) {
         super.setParent(parent);
-        swordActor = new Sword(this, getX(), getY());
-        parent.addActor(swordActor);
+//        swordActor = new Sword(this, getX(), getY());
+//        parent.addActor(swordActor);
     }
 
     @Override
     public void collideWith(Actor actor) {
-        if (actor instanceof Sword && actor != swordActor)
+        if (actor instanceof Sword && actor != swordActor && actor != hitSword) {
+            this.hitSword = (Sword) actor;
             this.health -= 15;
-        else if (actor instanceof Arrow)
+        }
+        else if (actor instanceof Arrow) {
             this.health -= 10;
+            ((Arrow) actor).removeSelf();
+        }
         if (this.health <= 0)
-            this.remove();
+            this.removeSelf = true;
     }
 
     @Override
@@ -97,13 +102,13 @@ public class SwordEnemy extends Enemy {
         }
     }
 
-    public void useOffensiveWeapon() {
-        if (swordActor == null) {
-            swordActor = new Sword(this, getX(), getY());
-            getMyStage().group.addActor(swordActor);
-        }
-        swordActor.jab(currShieldDirection);
-    }
+//    public void useOffensiveWeapon() {
+//        if (swordActor == null) {
+//            swordActor = new Sword(this, getX(), getY());
+//            getMyStage().group.addActor(swordActor);
+//        }
+//        swordActor.jab(currShieldDirection);
+//    }
 
     @Override
     public void setX(float x) {

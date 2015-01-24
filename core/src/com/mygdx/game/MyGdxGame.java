@@ -18,7 +18,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-//		packTextures();
+		packTextures();
 		atlas = new TextureAtlas("packed/buildings.atlas");
 		screen = new MenuScreen();//new MyScreen();
 //        screen = new MyScreen("sample.tmx");

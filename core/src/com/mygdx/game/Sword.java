@@ -72,8 +72,9 @@ public class Sword extends Actor {
             @Override
             public void run() {
                 jabbing = false;
-
+                remove();
             }
+
         };
 
         Action complete = Actions.sequence(

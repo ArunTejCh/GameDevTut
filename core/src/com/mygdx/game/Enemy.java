@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.Gdx;
 
 /**
  * Created by Sudheer on 1/24/2015.
@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Enemy extends Hero{
 
     public boolean isXDir;
+    boolean removeSelf = false;
 
     public Enemy(String fileName, boolean isXDir){
         super(fileName);
@@ -24,4 +25,12 @@ public class Enemy extends Hero{
         }
     }
 
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(removeSelf){
+            remove();
+            Gdx.app.log(this.getClass().getSimpleName(),"dead");
+        }
+    }
 }

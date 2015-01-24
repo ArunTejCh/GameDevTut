@@ -6,15 +6,99 @@
  <tileset firstgid="129" name="Dungeon_TileA1" tilewidth="32" tileheight="32">
   <image source="../packed/Dungeon_TileA1.png" width="512" height="384"/>
  </tileset>
- <tileset firstgid="321" source="place.tsx"/>
+ <tileset firstgid="321" name="place" tilewidth="32" tileheight="32">
+  <image source="../packed/place.png" width="512" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="aura"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="type" value="boss"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="type" value="bow"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="path" value="aura_2.tmx"/>
+    <property name="type" value="door"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="type" value="door"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="type" value="door"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="type" value="eax"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="type" value="eay"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="type" value="esx"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="type" value="esy"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="type" value="hero"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="msg" value="This is the text the people are meant to see, and have fun while at it"/>
+    <property name="type" value="oldman"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="type" value="shield"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="type" value="sword"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJwTZGRgsGegDfajkbkwHEZj85WgtDeNwkiJSHVGWMSMaez3oW7+KB7Fo3j4YwCbWWns
+   eJwTZGRgsGegDfajkbkwHEZj85WgNAONzSeEjbCIGdPY70Pd/FE8ikfx8McA8OxpoA==
   </data>
  </layer>
  <layer name="collides" width="24" height="18">
   <data encoding="base64" compression="zlib">
    eJy1k9sKwjAMhoMXuguVXakPIh5heIB5unK+/7uYQQppTJYK7Q8fpaH76LIMwE9D68moy/BzE0ZFtT1yQI4Z/Dw1rWfkglwL+R/IE3nRvkVuyF2cD3XOWviXjBXV3kiHfIx7DKUZuL+WDbIldgX8vAeyP//4xxDPkkc/a9q7Wf55wt36jGitIZ6f4Mzp13rn+WcQz5RkyvxaPL/1XOo5y7+A+B/I7U+N9MsZ0vxhNiux5zXLL7+x5pfP8FmSffD608Lvf5jTr6Wk/wsLHRlt
+  </data>
+ </layer>
+ <layer name="actors" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFwxl4Mg60C0bBSAFegzit+Q5it40kQO3yCADOhgEu
   </data>
  </layer>
 </map>

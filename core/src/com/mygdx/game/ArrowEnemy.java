@@ -1,8 +1,6 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 
 /**
  * Created by Sudheer on 1/24/2015.
@@ -21,16 +19,19 @@ public class ArrowEnemy extends Enemy{
             this.health -= 15;
         else if (actor instanceof Arrow && actor != arrowActor) {
             this.health -= 10;
-            actor.remove();
+            ((Arrow) actor).removeSelf();
         }
         if (this.health <= 0)
-            this.remove();
-        Gdx.app.log("HERO", "Health is : " + this.health);
+            this.removeSelf = true;
+
     }
 
     @Override
     public void act(float delta) {
         feedMovement();
+        if(removeSelf){
+            remove();
+        }
     }
 
     private void feedMovement() {

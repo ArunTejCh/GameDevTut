@@ -8,47 +8,72 @@
  </tile>
  <tile id="1">
   <properties>
+   <property name="type" value="lava"/>
+  </properties>
+ </tile>
+ <tile id="2">
+  <properties>
    <property name="type" value="boss"/>
   </properties>
  </tile>
  <tile id="3">
   <properties>
-   <property name="type" value="door"/>
+   <property name="type" value="bow"/>
   </properties>
  </tile>
  <tile id="4">
   <properties>
-   <property name="type" value="enemy-arrow-x"/>
+   <property name="type" value="door"/>
   </properties>
  </tile>
  <tile id="5">
   <properties>
-   <property name="type" value="enemy-arrow-y"/>
+   <property name="type" value="door"/>
   </properties>
  </tile>
  <tile id="6">
   <properties>
-   <property name="type" value="enemy-sword"/>
+   <property name="type" value="door"/>
   </properties>
  </tile>
  <tile id="7">
   <properties>
-   <property name="type" value="enemy-sword-y"/>
+   <property name="type" value="eax"/>
   </properties>
  </tile>
  <tile id="8">
   <properties>
-   <property name="type" value="lava"/>
+   <property name="type" value="eay"/>
   </properties>
  </tile>
  <tile id="9">
   <properties>
-   <property name="type" value="sword"/>
+   <property name="type" value="esx"/>
   </properties>
  </tile>
  <tile id="10">
   <properties>
+   <property name="type" value="esy"/>
+  </properties>
+ </tile>
+ <tile id="11">
+  <properties>
+   <property name="type" value="hero"/>
+  </properties>
+ </tile>
+ <tile id="12">
+  <properties>
+   <property name="type" value="oldman"/>
+  </properties>
+ </tile>
+ <tile id="13">
+  <properties>
    <property name="type" value="shield"/>
+  </properties>
+ </tile>
+ <tile id="14">
+  <properties>
+   <property name="type" value="sword"/>
   </properties>
  </tile>
 </tileset>

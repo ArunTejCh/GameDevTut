@@ -31,21 +31,21 @@ public class MyStage extends Stage {
     public MyStage() {
         group = new Group();
         hero = new Protagonist("test");
-        SwordEnemy se1 = new SwordEnemy("test", false);
+        SwordEnemy se1 = new SwordEnemy("test", true);
         ArrowEnemy ae1 = new ArrowEnemy("test", true);
         gameEngine = new GameEngine();
 
         hero.setPosition(0, 0);
         //boss.setPosition(14, 7);
 
-        se1.setPosition(10, 0);
-        ae1.setPosition(4, 0);
+        se1.setPosition(4, 0);
+        ae1.setPosition(10, 2);
 
         group.addActor(hero);
         group.addActor(new TexActor(ActorType.OLD_MAN, 4,4));
         //group.addActor(boss);
-        group.addActor(se1);
-        group.addActor(ae1);
+//        group.addActor(se1);
+//        group.addActor(ae1);
 
         group.addActor(new OldMan(4,4));
         addActor(group);
@@ -115,26 +115,50 @@ public class MyStage extends Stage {
                     boss = new Boss("test");
                     boss.setPosition(i, j);
                 }
-                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
+                if ("eax".equalsIgnoreCase(type)) {
                     Enemy enemy = new ArrowEnemy("test", true);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-arrow-y".equalsIgnoreCase(type)) {
+                if ("eay".equalsIgnoreCase(type)) {
                     Enemy enemy = new ArrowEnemy("test", false);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-sword".equalsIgnoreCase(type)) {
+                if ("esx".equalsIgnoreCase(type)) {
                     Enemy enemy = new SwordEnemy("test", true);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-sword-y".equalsIgnoreCase(type)) {
+                if ("esy".equalsIgnoreCase(type)) {
                     Enemy enemy = new SwordEnemy("test", false);
                     enemy.setPosition(i, j);
+                    group.addActor(enemy);
                 }
-                if ("enemy-arrow-x".equalsIgnoreCase(type)) {
-                    Enemy enemy = new ArrowEnemy("test", true);
-                    enemy.setPosition(i, j);
+                if("oldman".equalsIgnoreCase(type)){
+                    OldMan oldMan = new OldMan(i,j);
+                    oldMan.setMessage((String) tile.getProperties().get("msg"));
+                    group.addActor(oldMan);
                 }
+                if("door".equalsIgnoreCase(type)){
+
+                }
+                if("bow".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                }
+                if("door".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                }
+                if("lava".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                }
+                if("shield".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                }
+                if("sword".equalsIgnoreCase(type)){
+                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                }
+
 
             }
         }
