@@ -27,6 +27,7 @@ public class MyStage extends Stage {
 
     public Hero hero;
     public Boss boss;
+    private float labelTimer;
 
     public MyStage() {
         group = new Group();
@@ -75,7 +76,12 @@ public class MyStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if(labelTimer > 0){
+            labelTimer -= delta;
+            if(labelTimer <0){
 
+            }
+        }
 
         SnapshotArray<Actor> childrenA = group.getChildren();
         SnapshotArray<Actor> childrenB = group.getChildren();
@@ -140,13 +146,13 @@ public class MyStage extends Stage {
                     oldMan.setMessage((String) tile.getProperties().get("msg"));
                     group.addActor(oldMan);
                 }
-                if("door".equalsIgnoreCase(type)){
 
-                }
                 if("bow".equalsIgnoreCase(type)){
                     group.addActor(new TexActor(ActorType.SWORD, i, j));
                 }
                 if("door".equalsIgnoreCase(type)){
+                    Door door = new Door(i,j);
+                    door.nextLevel = (String) tile.getProperties().get("pathß");
                     group.addActor(new TexActor(ActorType.SWORD, i, j));
                 }
                 if("lava".equalsIgnoreCase(type)){
@@ -165,18 +171,7 @@ public class MyStage extends Stage {
     }
 
     public void showMessage(String message) {
-        label.setText(message);
-       new Thread(){
-           @Override
-           public void run() {
-               super.run();
-               try {
-                   sleep(2000);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
-               label.setText("");
-           }
-       }.start();
+       label.setText(message);
+       labelTimer = 2;
     }
 }
