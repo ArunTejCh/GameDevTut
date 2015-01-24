@@ -6,12 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * Created by Sudheer on 1/24/2015.
  */
 public class ArrowEnemy extends Enemy{
-    private Arrow arrowActor;
 
     public ArrowEnemy(String fileName, boolean isXDir){
         super(fileName, isXDir);
         this.health = 20;
         this.maxHealth = 20;
+        hasArrow = true;
     }
 
     @Override
@@ -32,6 +32,9 @@ public class ArrowEnemy extends Enemy{
         feedMovement();
         if(removeSelf){
             remove();
+        }
+        if(nextArrowUse >= 0){
+            nextArrowUse -= delta;
         }
     }
 
@@ -90,15 +93,15 @@ public class ArrowEnemy extends Enemy{
         }
     }
 
-    public void useOffensiveWeapon() {
-        if(arrowActor != null && arrowActor.getParent() != null){
-            return;
-        }
-        arrowActor = new Arrow();
-        getMyStage().group.addActor(arrowActor);
-        arrowActor.setPosition(getX()+0.5f,getY()+0.5f);
-        arrowActor.shoot(currShieldDirection);
-    }
+//    public void useOffensiveWeapon() {
+//        if(arrowActor != null && arrowActor.getParent() != null){
+//            return;
+//        }
+//        arrowActor = new Arrow();
+//        getMyStage().group.addActor(arrowActor);
+//        arrowActor.setPosition(getX()+0.5f,getY()+0.5f);
+//        arrowActor.shoot(currShieldDirection);
+//    }
 
     @Override
     public void setX(float x) {

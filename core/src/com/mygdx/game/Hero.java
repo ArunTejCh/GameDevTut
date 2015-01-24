@@ -30,20 +30,18 @@ public class Hero extends Character {
     private Sword swordActor;
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
-    private Arrow arrowActor;
+    Arrow arrowActor;
     Sword hitSword;
     private float nextSwordUse = -1;
     private float SWORD_TIMEOUT = 2f;
     private float ARROW_TIMEOUT = 1.5f;
-    private float nextArrowUse = -1;
+    protected float nextArrowUse = -1;
     Arrow hitArrow;
 
     public Hero(String fileName) {
         super(fileName);
-        this.health = 100000;
-        this.maxHealth = 100000;
-        hasShield = false;
-        hasAura = true;
+        this.health = 100;
+        this.maxHealth = 100;
         aura = new Texture("weapons/aura.png");
         sh_left = new Texture("weapons/shield/sh_left.png");
         sh_right = new Texture("weapons/shield/sh_right.png");
@@ -65,12 +63,12 @@ public class Hero extends Character {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (hasShield) {
+        if (hasShield && usingDefensiveWeapon) {
             timeDifference += delta;
             if (timeDifference > SHIELD_TIME)
                 reset();
         }
-        if (hasAura) {
+        if (hasAura && usingDefensiveWeapon) {
             timeDifference += delta;
             if (timeDifference > AURA_TIME)
                 reset();
@@ -93,15 +91,7 @@ public class Hero extends Character {
                     //Nothing happens
                 }
                 if (hasShield && hitSword.getJabDirection().vector.isCollinearOpposite(currShieldDirection.vector)) {
-                    if (timeDifference < 0.1f) {
-                        hitArrow.removeSelf();
-                        Arrow newArrow = new Arrow();
-                        getMyStage().group.addActor(newArrow);
-                        newArrow.setPosition(getX()+0.5f,getY()+0.5f);
-                        newArrow.shoot(currShieldDirection);
-                    }
-                    else
-                        hitArrow.removeSelf();
+
                 }
             }
             this.health -= 10;
