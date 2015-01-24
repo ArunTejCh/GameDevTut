@@ -53,6 +53,8 @@ public class Boss extends Character {
     }
 
     private void takeXDir(float x, float y, float heroX, float heroY) {
+        if (!(isDirFeasible(Direction.LEFT) || isDirFeasible(Direction.RIGHT)))
+            return;
         if (x > heroX)
             currDirection = Direction.LEFT;
         else
@@ -62,6 +64,8 @@ public class Boss extends Character {
     }
 
     private void takeYDir(float x, float y, float heroX, float heroY){
+        if (!(isDirFeasible(Direction.DOWN) || isDirFeasible(Direction.UP)))
+            return;
         if (y > heroY)
             currDirection = Direction.DOWN;
         else
