@@ -92,7 +92,7 @@
  </tileset>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYBrFo3gUj+JRPIoHGPMwk6YeAHSSA24=
+   eJxjYmBgYBrFo3gUj+JRPIqHGAYAciUDYQ==
   </data>
  </layer>
  <layer name="collides" width="24" height="18">
@@ -103,6 +103,11 @@
  <layer name="backgrounds2" width="24" height="18">
   <data encoding="base64" compression="zlib">
    eJzbyMTAsAmIYYAXyg5lZGAIA+JwRlRxGJBkgmBC4CBQzSEkdbJQdirQ3DQgTmdEFacWiAaa68wIoSkB7jjclc2ISg8EyKZymA1HYEbjMNIaonGwgsbpdgMW89czYhcnFtjQOKyth2hcjmQAAHkhC98=
+  </data>
+ </layer>
+ <layer name="actors" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4wMo8gJaPglEwCkbBKBhUgIfEOgEAO6oAGA==
   </data>
  </layer>
 </map>
