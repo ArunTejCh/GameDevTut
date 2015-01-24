@@ -60,6 +60,8 @@ public class Character extends Actor implements Collides {
         setWidth(1);
         setHeight(1);
 
+        currentFrame = wDownAni.getKeyFrame(0);
+
     }
 
     public void setAnimation(Direction direction) {
@@ -133,10 +135,10 @@ public class Character extends Actor implements Collides {
         float x = (getX() + 0.5f + dir.vector.x);
         float y = (getY() + 0.5f + dir.vector.y);
         boolean[][] collides = getMyStage().gameEngine.collides;
-        if(x < 0 || x >= collides.length){
+        if(x < 0 || x >= GameDisplayEngine.GRIDX){
             return false;
         }
-        if(y < 0 || y >= collides[0].length){
+        if(y < 0 || y >= GameDisplayEngine.GRIDY){
             return false;
         }
         return !getMyStage().gameEngine.collides[(int)x][(int)y];
