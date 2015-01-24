@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.FPSLogger;
 
 /**
  * Created by Durga on 21-01-2015.
@@ -12,6 +13,7 @@ public class MyScreen implements Screen {
     protected float ppy;
     protected float ppx;
     private TiledActor tiledActor;
+    private FPSLogger fpsLogger;
 
     @Override
     public void show() {
@@ -30,6 +32,8 @@ public class MyScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+        fpsLogger = new FPSLogger();
+
     }
 
     @Override
@@ -40,6 +44,8 @@ public class MyScreen implements Screen {
         stage.getBatch().end();
         stage.act(delta);
         stage.draw();
+
+        fpsLogger.log();
     }
 
     @Override

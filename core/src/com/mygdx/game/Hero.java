@@ -25,6 +25,7 @@ public class Hero extends Character {
     private Sword swordActor;
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
+    private Arrow arrowActor;
 
     public Hero(String fileName) {
         super(fileName);
@@ -85,6 +86,15 @@ public class Hero extends Character {
         if(hasSword){
             swordActor.jab(currShieldDirection);
         }
+        if(hasArrow){
+            if(arrowActor != null && arrowActor.getParent() != null){
+                return;
+            }
+            arrowActor = new Arrow();
+            getMyStage().group.addActor(arrowActor);
+            arrowActor.setPosition(getX()+0.5f,getY()+0.5f);
+            arrowActor.shoot(currShieldDirection);
+        }
     }
 
     public void useDefensiveWeapon() {
@@ -97,6 +107,11 @@ public class Hero extends Character {
 
     public void setHasArrow(boolean hasArrow) {
         this.hasArrow = hasArrow;
+
+    }
+
+    public void setHasShield(boolean hasShield) {
+        this.hasShield = hasShield;
     }
 
     public void setHasSword(boolean hasSword) {
