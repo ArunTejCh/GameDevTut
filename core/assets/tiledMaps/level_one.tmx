@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Dungeon_Ice_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Dungeon_Ice_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="Exterior_Forest_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Forest_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="Interior_Home_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Interior_Home_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <layer name="backgrounds" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztzaEBAAAIA6Ddb/ZgP7BpIpCpJAUAAE964b83ofCe4g==
+  </data>
+ </layer>
+ <layer name="collides" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztzcENABAUBNHff3eoACc0YY+/go3EvGTOEwEAAICfFFVTzfzvaqSm+f+apbY6pt8Fw8ELQw==
+  </data>
+ </layer>
+</map>

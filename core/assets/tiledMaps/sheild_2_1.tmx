@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Exterior_Forest_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Forest_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <layer name="backgrounds" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjZWBgcKIi5kHCslQ2G918VRqYj25HEo3sgNkTBcQiNLQjCoppbT6t7IjCgmltPjXtwGU+tewhZD6ldhBjPiV2EGs+uXaQYj459gxG80mxg1zzibWDEvOJsQMAool4iA==
+  </data>
+ </layer>
+ <layer name="collides" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJy1k7EOwjAMRD33j4CJIobSLoSpZGro/38DtZRTLWM3pIKTToIoeXUuNpGtUfyOi8/OPujirIfsx5/4z+z4A/4texDrKftV4HfivOVe7C/VYvFrdFh82sHnc8cNg8n16/e40/rWweFzRgP5AtPiT7S+RXL4OLuHr1XDb7MtflDGHDC/MfhWHyEzi5+U0afgN1TuH9wJTK6hd/ZCmu/1isWXKuUDfmmeOP8rffa9lw/300x1+Xh38IQ7gK9n5Btb53RGUf1vK2pkydmaBQ/rVk/VfgMayc9b8+EtvQGEvTmW
+  </data>
+ </layer>
+</map>

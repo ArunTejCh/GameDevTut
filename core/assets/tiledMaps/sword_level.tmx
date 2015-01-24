@@ -3,20 +3,17 @@
  <tileset firstgid="1" name="buildings" tilewidth="70" tileheight="70">
   <image source="../packed/buildings.png" width="1024" height="512"/>
  </tileset>
- <tileset firstgid="99" source="actors.tsx"/>
+ <tileset firstgid="99" name="grass" tilewidth="70" tileheight="70">
+  <image source="../packed/grass.png" width="512" height="256"/>
+ </tileset>
  <layer name="backgrounds" width="16" height="9">
   <data encoding="base64" compression="zlib">
-   eJzzZmBg8CYTy1KgF4SZKNQ/igceAwDxtim6
+   eJxjYBgFo4B8AAACQAAB
   </data>
  </layer>
  <layer name="collides" width="16" height="9">
   <data encoding="base64" compression="zlib">
-   eJxjYCAeiGHBIBBIBGZAokkF2PSJobFxYWzuw6YfG0DWT8h+dHeg64dhdDlcZuJzFy47cYnhUoMPECPvCcQA2vgJ6Q==
-  </data>
- </layer>
- <layer name="actors" width="16" height="9">
-  <data encoding="base64" compression="zlib">
-   eJxjYBg4kDqAdo8CCEihUD8AzZQAyg==
+   eJxjYBgFo4B8AAACQAAB
   </data>
  </layer>
 </map>

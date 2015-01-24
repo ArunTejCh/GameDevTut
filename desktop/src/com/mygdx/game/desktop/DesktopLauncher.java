@@ -8,8 +8,8 @@ import com.mygdx.game.MyGdxGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = GameDisplayEngine.GRIDX*50;
-		config.height = GameDisplayEngine.GRIDY*50;
+		config.width = GameDisplayEngine.GRIDX*32;
+		config.height = GameDisplayEngine.GRIDY*32;
 		new LwjglApplication(new MyGdxGame(), config);
 	}
 }

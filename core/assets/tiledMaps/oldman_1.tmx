@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Exterior_Forest_TileA5" tilewidth="32" tileheight="32">
+  <image source="../packed/Exterior_Forest_TileA5.png" width="256" height="512"/>
+ </tileset>
+ <layer name="backgrounds" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxzYmBgcBqimIfGZtPKfJjZMjQ0G4RVaGy+Po3Dh5bxO4qJiwdamk3r/EUL85HNHor5F9kOsSEav8gYAD05aEY=
+  </data>
+ </layer>
+ <layer name="collides" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAe+AKxFwnYmwSzQcCZRPWkgpFoPi3ja7ABSyC2IhGTAhyp5lLswJOBtPjyorF7QICUsLSmsVsGY/4aNZ96wJWB9PQGAPZxFkU=
+  </data>
+ </layer>
+ <layer name="actors" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqGHgAABsAAAQ==
+  </data>
+ </layer>
+</map>

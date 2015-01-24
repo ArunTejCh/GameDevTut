@@ -22,7 +22,7 @@ public class TiledActor {
         this.tiledMapName = tiledMapName;
         tiledMap = new TmxMapLoader().load(tiledMapName);
         float width = Gdx.graphics.getWidth()/(float)GameDisplayEngine.GRIDX;
-        float unitScale = width*(1/70f);
+        float unitScale = width*(1/32f);
 //        unitScale = 2;
         renderer = new OrthogonalTiledMapRenderer(tiledMap, unitScale);
         actorLayer = tiledMap.getLayers().get("actors");
