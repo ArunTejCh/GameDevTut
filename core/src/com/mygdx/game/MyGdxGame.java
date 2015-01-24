@@ -21,6 +21,7 @@ public class MyGdxGame extends ApplicationAdapter {
 //		packTextures();
 		atlas = new TextureAtlas("packed/buildings.atlas");
 		screen = new MenuScreen();//new MyScreen();
+//        screen = new MyScreen("sample.tmx");
 		screen.show();
 	}
 
@@ -55,5 +56,6 @@ public class MyGdxGame extends ApplicationAdapter {
     public void setScreen(MyScreen screen) {
         this.screen = screen;
         screen.show();
+        screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 }
