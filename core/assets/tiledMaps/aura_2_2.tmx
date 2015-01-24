@@ -30,7 +30,7 @@
   </tile>
   <tile id="4">
    <properties>
-    <property name="path" value="aura_2.tmx"/>
+    <property name="path" value="oldman_4.tmx"/>
     <property name="type" value="door"/>
    </properties>
   </tile>
@@ -98,7 +98,7 @@
  </layer>
  <layer name="actors" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwxl4Mg60C0bBSAFegzit+Q5it40kQO3yCADOhgEu
+   eJxjYBi6wJVxoF0w+IHnaBgNGPAZYWHvNYj96zuI3TaSALXLIwB43QHB
   </data>
  </layer>
 </map>

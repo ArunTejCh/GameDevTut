@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -10,9 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Protagonist extends Hero {
 
     private Direction prevDir;
+    private String nextLevel;
 
     public Protagonist(String fileName) {
         super(fileName);
+        reset();
     }
 
     @Override
@@ -23,34 +24,46 @@ public class Protagonist extends Hero {
 //            move(prevDir);
 //        }
 
+        if(nextLevel != null) {
+            MyGdxGame gdxGame = (MyGdxGame) Gdx.app.getApplicationListener();
+            gdxGame.setScreen(new MyScreen(nextLevel,this));
+        }
+
     }
 
-    private void pollKeys() {
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            prevDir = Direction.UP;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            prevDir = Direction.DOWN;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            prevDir = Direction.RIGHT;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            prevDir = Direction.LEFT;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            if(processDirection)
-                useOffensiveWeapon();
-        } else if (Gdx.input.isKeyPressed(Input.Keys.E)) {
-            if(processDirection)
-                useDefensiveWeapon();
-        }
-        if(processDirection){
-            move(prevDir);
-        }
-    }
+
 
     @Override
     public void collideWith(Actor actor) {
         super.collideWith(actor);
         if(actor instanceof  OldMan){
             getMyStage().showMessage(((OldMan) actor).message);
+        }
+        else if(actor instanceof Door) {
+            this.nextLevel = ((Door) actor).nextLevel;
+        }
+        else if(actor instanceof TexActor){
+            ActorType type = ((TexActor) actor).type;
+            switch (type){
+                case OLD_MAN:
+                    break;
+                case SWORD:
+                    setHasSword(true);
+                    break;
+                case SHIELD:
+                    setHasShield(true);
+                    break;
+                case BOW:
+                    setHasArrow(true);
+                    break;
+                case AURA:
+                    setHasAura(true);
+                    break;
+                case LAVA:
+                    break;
+                case DOOR:
+                    break;
+            }
         }
     }
 }

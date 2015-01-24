@@ -10,19 +10,24 @@ import com.badlogic.gdx.graphics.FPSLogger;
 public class MyScreen implements Screen {
 
     private final String mapName;
+    private Protagonist protagonist;
     private MyStage stage;
     protected float ppy;
     protected float ppx;
     private TiledActor tiledActor;
     private FPSLogger fpsLogger;
 
-    public MyScreen(String fName) {
+    public MyScreen(String fName, Protagonist protagonist) {
+        this.protagonist = protagonist;
+        if(protagonist == null){
+            this.protagonist = new Protagonist("test");
+        }
         this.mapName = fName;
     }
 
     @Override
     public void show() {
-        stage = new MyStage();
+        stage = new MyStage(protagonist);
 
 //        group.addActor(new MyActor());
 
