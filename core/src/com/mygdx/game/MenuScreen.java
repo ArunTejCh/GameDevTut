@@ -30,21 +30,21 @@ public class MenuScreen implements Screen{
         table.setWidth(Gdx.graphics.getWidth());
         table.setHeight(Gdx.graphics.getHeight());
 
-        /*TextButton textButton1 = new MyTextButton(STARTING_LEVEL,"START GAME", skin);
+        TextButton textButton1 = new MyTextButton(STARTING_LEVEL,"START GAME", skin);
         table.add(textButton1).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
 
-        TextButton textButton2 = new MyTextButton(INSTRUCTIONS,"INSTRUCTIONS", skin);
-        table.add(textButton2).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
+//        TextButton textButton2 = new MyTextButton(INSTRUCTIONS,"INSTRUCTIONS", skin);
+//        table.add(textButton2).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
 
         TextButton textButton3 = new MyTextButton(EXIT,"QUIT", skin);
-        table.add(textButton3).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();*/
-
-        FileHandle maps = Gdx.files.internal("tiledMaps");
-        for(FileHandle map : maps.list(".tmx")){
-            TextButton textButton = new MyTextButton(map.name(),map.name(), skin);
-            table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
-
-        }
+        table.add(textButton3).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
+//
+//        FileHandle maps = Gdx.files.internal("tiledMaps");
+//        for(FileHandle map : maps.list(".tmx")){
+//            TextButton textButton = new MyTextButton(map.name(),map.name(), skin);
+//            table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
+//
+//        }
 
         stage.addActor(table);
 
