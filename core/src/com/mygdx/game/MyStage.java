@@ -74,11 +74,36 @@ public class MyStage extends Stage {
 
     }
 
+    public void gameCompleted() {
+        hero.removeSelf();
+        String msg = "CONGRATULATIONS";
+        label = new Label(msg, skin);
+        label.setAlignment(Align.center);
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
+        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
+        label = new Label("You have completed the game!", skin);
+        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.1f).row();
+        TextButton textButton = new TextButton("Main Menu", skin);
+        textButton.addCaptureListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                MyGdxGame game = (MyGdxGame) Gdx.app.getApplicationListener();
+                game.setScreen(new MenuScreen());
+            }
+        });
+        repeatSound.stop();
+        table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
+    }
+
     public void gameOver() {
         hero.removeSelf();
         String msg = "Game Over";
         label = new Label(msg, skin);
         label.setAlignment(Align.center);
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
         table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
         table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
         table.add().padBottom(Gdx.graphics.getHeight() * 0.1f).row();

@@ -256,7 +256,7 @@ public class Boss extends Character {
             }
         }
         if (this.health <= 0)
-            Gdx.app.exit();
+            getMyStage().gameCompleted();
 
 //        Gdx.app.log("BOSS", "Health is : " + this.health);
     }
