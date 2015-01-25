@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import javafx.util.Pair;
+//import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class Boss extends Character {
     private Sword swordActor;
 
     private static FireBall[] fireBalls = new FireBall[4];
-    private static Pair<Integer, Integer>[] safeZones = new Pair[5];
+  //  private static Pair<Integer, Integer>[] safeZones = new Pair[5];
 
     int lX = 1, hX = 21;
 
@@ -52,11 +52,11 @@ public class Boss extends Character {
         setHeight(2);
         resetFireBalls();
 
-        safeZones[0] = new Pair<Integer, Integer>(0, 0);
-        safeZones[1] = new Pair<Integer, Integer>(0, 0);
-        safeZones[2] = new Pair<Integer, Integer>(0, 0);
-        safeZones[3] = new Pair<Integer, Integer>(0, 0);
-        safeZones[4] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[0] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[1] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[2] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[3] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[4] = new Pair<Integer, Integer>(0, 0);
 
         setMode(BossMode.CHASE_MODE);
     }
@@ -257,7 +257,7 @@ public class Boss extends Character {
             }
         }
         if (this.health <= 0)
-            Gdx.app.exit();
+            getMyStage().gameCompleted();
 
 //        Gdx.app.log("BOSS", "Health is : " + this.health);
     }

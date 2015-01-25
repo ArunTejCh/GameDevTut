@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -32,6 +33,8 @@ public class MyStage extends Stage {
     public Boss boss;
     private float labelTimer;
 
+    Sound repeatSound;
+
     public MyStage(Hero initHero) {
         group = new Group();
         hero = new Protagonist("test");
@@ -62,10 +65,37 @@ public class MyStage extends Stage {
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() - 20);
         addActor(table);
 
+        repeatSound = Gdx.audio.newSound(Gdx.files.internal("sounds/repeat.mp3"));
+        repeatSound.loop(1f, 1f, 0);
+
 //        boss = new Boss("boss/run");
 //        boss.setPosition(3, 7);
 //        group.addActor(boss);
 
+    }
+
+    public void gameCompleted() {
+        hero.removeSelf();
+        String msg = "CONGRATULATIONS";
+        label = new Label(msg, skin);
+        label.setAlignment(Align.center);
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
+        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
+        label = new Label("You have completed the game!", skin);
+        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.1f).row();
+        TextButton textButton = new TextButton("Main Menu", skin);
+        textButton.addCaptureListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                MyGdxGame game = (MyGdxGame) Gdx.app.getApplicationListener();
+                game.setScreen(new MenuScreen());
+            }
+        });
+        repeatSound.stop();
+        table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
     }
 
     public void gameOver() {
@@ -73,6 +103,7 @@ public class MyStage extends Stage {
         String msg = "Game Over";
         label = new Label(msg, skin);
         label.setAlignment(Align.center);
+        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
         table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
         table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
         table.add().padBottom(Gdx.graphics.getHeight() * 0.1f).row();
@@ -84,6 +115,7 @@ public class MyStage extends Stage {
                 game.setScreen(new MenuScreen());
             }
         });
+        repeatSound.stop();
         table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
     }
 

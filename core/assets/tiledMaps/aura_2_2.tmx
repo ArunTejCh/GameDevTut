@@ -9,7 +9,7 @@
  <tileset firstgid="321" source="place.tsx"/>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxzZGRgsGegDXalodkgHEZDs0FYCUoz0Nh8QtgIi5gxjf0+1M0fxaN4FA9/DAAB6WnI
+   eJyzZ2BgsKcR9qOh2SAcRmPzlQaJ+UZYxIxp7Lahbv4oHsWjePhjAII+agw=
   </data>
  </layer>
  <layer name="collides" width="24" height="18">
@@ -19,7 +19,7 @@
  </layer>
  <layer name="actors" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxzZGTACpwYIXgwA9dB7j56Aw8c4eFJpXDCZT4lAJbOBntaG47Ai0phDkpf2NIYtczHBWht/iggHuDKx+jpAl9Z5INHDt18b0YIBgCQ9Ac0
+   eJxzZGTACpwYIZgS4Eqh/oE2f6gBDxzh4UmlcMJlPiUAls4oTWujgHTgRaUwB6UvbGmMWubjArQ2fxQQD3DlY/R0ga8s8sEjh26+NyMEAwBQaQd6
   </data>
  </layer>
 </map>
