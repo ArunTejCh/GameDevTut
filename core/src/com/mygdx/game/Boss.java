@@ -2,12 +2,18 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.math.MathUtils;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import javafx.util.Pair;
 
 import javax.swing.text.Position;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sudheer on 1/24/15.
@@ -17,13 +23,17 @@ public class Boss extends Character {
     private Direction UP;
     private float nextArrowUse;
     private float ARROW_TIMEOUT = 2f;
+    private boolean onLava = false;
+    private float onLavaTime;
 
     private enum BossMode {
         CHASE_MODE,
         RAGE_MODE,
         SUBDUED_MODE,
         LAVA_SUBDUED_MODE
-    };
+    }
+
+    ;
 
     private BossMode mode = BossMode.CHASE_MODE;
 
@@ -48,6 +58,8 @@ public class Boss extends Character {
         safeZones[2] = new Pair<Integer, Integer>(0, 0);
         safeZones[3] = new Pair<Integer, Integer>(0, 0);
         safeZones[4] = new Pair<Integer, Integer>(0, 0);
+
+        setMode(BossMode.LAVA_SUBDUED_MODE);
 
     }
 
@@ -84,6 +96,7 @@ public class Boss extends Character {
         float xDiff = x - heroX;
         float yDiff = y - heroY;
 
+
         Direction possibleYDirection = takeYDir(x, y, heroX, heroY);
         Direction possibleXDirection = takeXDir(x, y, heroX, heroY);
         boolean isXPoss = isDirFeasible(possibleXDirection);
@@ -98,9 +111,35 @@ public class Boss extends Character {
                 currDirection = possibleYDirection;
             else if (isXPoss)
                 currDirection = possibleXDirection;
-        }
-        else
+        } else
             currDirection = Direction.reverse(currDirection);
+
+
+        if (Math.abs(xDiff) > Math.abs(yDiff))
+            takeXDir(x, y, heroX, heroY);
+        else
+            takeYDir(x, y, heroX, heroY);
+
+
+//        if(!isDirFeasible(currDirection)){
+//            Direction walkedFrom = Direction.reverse(currShieldDirection);
+//            List<Direction> canGoIn = new ArrayList<Direction>();
+//            for(Direction tryDir : Direction.values()){
+//                if(tryDir != currDirection && tryDir != walkedFrom){
+//                    if(isDirFeasible(tryDir)){
+//                        canGoIn.add(tryDir);
+//                    }
+//                }
+//            }
+//            if(canGoIn.size() > 0){
+//                Direction goIn = canGoIn.get(MathUtils.random(0, canGoIn.size()-1));
+//                currDirection = goIn;
+//            } else {
+//                currDirection = walkedFrom;
+//            }
+//
+//        }
+
     }
 
     private Direction takeXDir(float x, float y, float heroX, float heroY) {
@@ -130,19 +169,25 @@ public class Boss extends Character {
 
     @Override
     public void act(float delta) {
-
-        if(nextArrowUse >= 0){
+        if (nextArrowUse >= 0) {
             nextArrowUse -= delta;
         }
+        if (onLava) {
+            onLavaTime += delta;
+            if (onLavaTime >= MOVE_TIME) {
+                setMode(BossMode.LAVA_SUBDUED_MODE);
+            }
+        }
+
 
         if (modeTimer < MODE_CHANGE_TIMEOUT)
             modeTimer += delta;
 
-        if (mode == BossMode.SUBDUED_MODE && modeTimer > MODE_SUBDUED_TIMEOUT) {
+        if ((mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) && modeTimer > MODE_SUBDUED_TIMEOUT) {
             removeAction(getActions().first());
             setMode(BossMode.CHASE_MODE);
         }
-        if (mode != BossMode.SUBDUED_MODE && modeTimer > MODE_CHANGE_TIMEOUT) {
+        if (mode != BossMode.SUBDUED_MODE && mode != BossMode.LAVA_SUBDUED_MODE && modeTimer > MODE_CHANGE_TIMEOUT) {
             reset();
             flipMode();
         }
@@ -150,16 +195,14 @@ public class Boss extends Character {
             feedMovement();
             super.act(delta);
             makeItMove(delta);
-        }
-        else if (mode == BossMode.RAGE_MODE && nextArrowUse < 0 ) {
+        } else if (mode == BossMode.RAGE_MODE && nextArrowUse < 0) {
             for (FireBall ball : fireBalls) {
                 ball.shoot(ball.getShootDir());
                 getMyStage().group.addActor(ball);
-                ball.setPosition(getX() + 0.5f,getY() + 0.5f);
+                ball.setPosition(getX() + 0.5f, getY() + 0.5f);
             }
             resetFireBalls();
-        }
-        else if (mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) {
+        } else if (mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) {
             super.act(delta);
         }
     }
@@ -174,7 +217,7 @@ public class Boss extends Character {
         }
     }
 
-    private void resetFireBalls(){
+    private void resetFireBalls() {
         fireBalls[0] = new FireBall(Direction.LEFT);
         fireBalls[1] = new FireBall(Direction.RIGHT);
         fireBalls[2] = new FireBall(Direction.UP);
@@ -191,29 +234,45 @@ public class Boss extends Character {
             else
                 this.health -= 5;
             swordActor = (Sword) actor;
-        }
-        else if (actor instanceof FireBall) {
+        } else if (actor instanceof FireBall) {
             if (((FireBall) actor).isReflected) {
                 setMode(BossMode.SUBDUED_MODE);
                 reset();
             }
-        }
-        else if (actor instanceof Arrow) {
+        } else if (actor instanceof Arrow) {
             if (mode == BossMode.LAVA_SUBDUED_MODE)
                 this.health -= 50;
             else
                 this.health -= 1;
+        } else if (actor instanceof Arrow && !(actor instanceof FireBall))
+            this.health -= 1;
+        if (actor instanceof TexActor) {
+            ActorType type = ((TexActor) actor).type;
+            switch (type) {
+                case LAVA:
+                    if (onLava) {
+
+                    }
+                    if (getMyStage().hero.onLava) {
+                        onLava = true;
+                        onLavaTime = 0;
+                    } else {
+                        setPosition(3, 4);
+                    }
+                    break;
+            }
         }
         if (this.health <= 0)
             Gdx.app.exit();
-        Gdx.app.log("BOSS", "Health is : " + this.health);
+
+//        Gdx.app.log("BOSS", "Health is : " + this.health);
     }
 
     private void reset() {
         modeTimer = 0;
     }
 
-    private void drawAura(Batch batch, float parentAlpha){
+    private void drawAura(Batch batch, float parentAlpha) {
         //Draw Aura around
     }
 
@@ -232,32 +291,39 @@ public class Boss extends Character {
     public void setHasSword(boolean hasSword) {
     }
 
-    public void useOffWeapon(){
+    public void useOffWeapon() {
     }
 
     @Override
     public void setX(float x) {
         super.setX(x);
     }
+
     @Override
     public boolean isDirFeasible(Direction dir) {
         return isFeasibleFrom(dir, getX(), getY())
-                && isFeasibleFrom(dir, getX(), getY() + getHeight()/2f)
-                && isFeasibleFrom(dir, getX() + getWidth()/2f, getY())
-                && isFeasibleFrom(dir, getX() + getWidth()/2f, getY() + getHeight()/2f);
+                && isFeasibleFrom(dir, getX(), getY() + getHeight() / 2f)
+                && isFeasibleFrom(dir, getX() + getWidth() / 2f, getY())
+                && isFeasibleFrom(dir, getX() + getWidth() / 2f, getY() + getHeight() / 2f);
 
     }
+
 
     private boolean isFeasibleFrom(Direction dir, float px, float py) {
         float x = (px + dir.vector.x);
         float y = (py + dir.vector.y);
         boolean[][] collides = getMyStage().gameEngine.collides;
+        boolean isHeroOnLava = getMyStage().hero.onLava;
         if (x < 0 || x >= GameDisplayEngine.GRIDX) {
             return false;
         }
         if (y < 0 || y >= GameDisplayEngine.GRIDY) {
             return false;
         }
-        return !collides[(int) x][(int) y];
+        if (isHeroOnLava) {
+            return !collides[(int) x][(int) y];
+        } else {
+            return !collides[(int) x][(int) y] && getMyStage().gameEngine.lava[(int) x][(int) y];
+        }
     }
 }

@@ -10,7 +10,7 @@ public class GameEngine {
    public int sizeX = GameDisplayEngine.GRIDX;
    public int sizeY = GameDisplayEngine.GRIDY;
    public boolean[][] collides = new boolean[sizeX][sizeY];
-
+    public boolean[][] lava = new boolean[sizeX][sizeY];
 
 
    public void setCollides(TiledMapTileLayer layer){
@@ -23,6 +23,7 @@ public class GameEngine {
             else {
                 collides[i][j] = false;
             }
+            lava[i][j] = true;
         }
     }
    }

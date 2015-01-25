@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -36,9 +37,10 @@ public class Hero extends Character {
     Sword hitSword;
     private float nextSwordUse = -1;
     private float SWORD_TIMEOUT = 2f;
-    private float ARROW_TIMEOUT = 1.5f;
+    private float ARROW_TIMEOUT = 0.8f;
     protected float nextArrowUse = -1;
     Arrow hitArrow;
+    boolean onLava = false;
 
     public Hero(String fileName) {
         super(fileName);
@@ -71,7 +73,9 @@ public class Hero extends Character {
     @Override
     public void act(float delta) {
         super.act(delta);
+
         makeItMove(delta);
+
         if (hasShield && usingDefensiveWeapon) {
             timeDifference += delta;
             if (timeDifference > SHIELD_TIME)
@@ -103,7 +107,8 @@ public class Hero extends Character {
             if (type == ActorType.LAVA) {
                 if(hasAura){
                     if(usingDefensiveWeapon){
-                          timeDifference = 0;
+                        onLava = true;
+                        timeDifference = 0;
                     }
                     else {
                         getMyStage().gameOver();
@@ -136,7 +141,13 @@ public class Hero extends Character {
             this.health -= 30;
             float x = (getX() + 8) % 16;
             float y = (getY() + 4) % 9;
-            addAction(Actions.moveTo(x, y, 0.4f));
+            if(Math.random() > 0.5){
+                addAction(Actions.moveTo(5, 2, 0.4f));
+            }
+            else {
+                addAction(Actions.moveTo(10, 4, 0.4f));
+            }
+
         }
         else if (actor instanceof Arrow && actor != arrowActor && actor != hitArrow) {
             this.hitArrow = (Arrow) actor;
@@ -179,6 +190,7 @@ public class Hero extends Character {
         usingDefensiveWeapon = false;
         usingOffensiveWeapon = false;
         timeDifference = 0;
+        onLava = false;
     }
 
     private void drawShield(Batch batch, float parentAlpha) {
@@ -214,9 +226,10 @@ public class Hero extends Character {
             swordActor.jab(currShieldDirection);
             nextSwordUse = SWORD_TIMEOUT;
         }
+        Gdx.app.log("arrow",hasArrow+"x"+nextArrowUse);
         if(hasArrow && nextArrowUse < 0){
             if(arrowActor != null && arrowActor.getParent() != null){
-                return;
+//                return;
             }
             arrowActor = new Arrow();
             getMyStage().group.addActor(arrowActor);

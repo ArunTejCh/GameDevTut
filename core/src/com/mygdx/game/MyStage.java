@@ -183,6 +183,7 @@ public class MyStage extends Stage {
                     group.addActor(new TexActor(ActorType.BOW, i, j));
                 }
                 if ("lava".equalsIgnoreCase(type)) {
+                    gameEngine.lava[i][j] = true;
                     group.addActor(new TexActor(ActorType.LAVA, i, j));
                 }
                 if ("shield".equalsIgnoreCase(type)) {
