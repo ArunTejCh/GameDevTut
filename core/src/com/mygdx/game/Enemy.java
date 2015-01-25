@@ -33,4 +33,18 @@ public class Enemy extends Hero{
             Gdx.app.log(this.getClass().getSimpleName(),"dead");
         }
     }
+
+//    @Override
+//    public boolean remove() {
+//        if(getMyStage() != null)
+//            getMyStage().gameEngine.enemyDying.play(0.4f);
+//        return super.remove();
+//
+//    }
+
+//    @Override
+//    public void removeSelf() {
+//        super.removeSelf();
+//
+//    }
 }

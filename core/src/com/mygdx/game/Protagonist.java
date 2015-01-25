@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -10,11 +12,20 @@ public class Protagonist extends Hero {
 
     private Direction prevDir;
     private String nextLevel;
+    private Sound defSound;
+    private Music shieldBLock;
 
     public Protagonist(String fileName) {
         super(fileName);
         reset();
+        hasAura = false;
+        hasShield = false;
+
+        hasSword = false;
+        hasArrow = false;
+
         arrowTime = 0.2f;
+        SWORD_TIMEOUT = 1f;
     }
 
     @Override
@@ -30,9 +41,56 @@ public class Protagonist extends Hero {
             gdxGame.setScreen(new MyScreen(nextLevel,this));
         }
 
+        if(!usingDefensiveWeapon && hasAura && defSound != null){
+            defSound.stop();
+        }
     }
 
+    @Override
+    public void useDefensiveWeapon() {
+        super.useDefensiveWeapon();
+        if(hasAura && usingDefensiveWeapon){
+            defSound = getMyStage().gameEngine.auraBubble;
+            defSound.loop(0.4f);
+        }
+    }
 
+    @Override
+    void playBlocked() {
+        super.playBlocked();
+        getMyStage().gameEngine.wayBlocked.setVolume(0.4f);
+        getMyStage().gameEngine.wayBlocked.play();
+    }
+
+    @Override
+    void firedArrow() {
+        super.firedArrow();
+        getMyStage().gameEngine.arrow.play(0.4f);
+    }
+
+    @Override
+    void usedSword() {
+        super.usedSword();
+        getMyStage().gameEngine.swordSwing.play(0.4f);
+    }
+
+    @Override
+    public void useOffensiveWeapon() {
+        super.useOffensiveWeapon();
+
+    }
+
+    @Override
+    void shieldBlocked() {
+        super.shieldBlocked();
+        getMyStage().gameEngine.shieldBlock.play(0.4f);
+    }
+
+    @Override
+    void recochet() {
+        super.recochet();
+        getMyStage().gameEngine.shieldReflect.play(0.4f);
+    }
 
     @Override
     public void collideWith(Actor actor) {
