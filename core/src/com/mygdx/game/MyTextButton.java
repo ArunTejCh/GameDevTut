@@ -9,10 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 public class MyTextButton extends TextButton{
 
         private final String fName;
+        private final String vName;
 
-        public MyTextButton(final String text, Skin skin) {
-            super(text, skin);
+        public MyTextButton(final String text,final String vName, Skin skin) {
+            super(vName, skin);
             this.fName = text;
+            this.vName = vName;
             addCaptureListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {

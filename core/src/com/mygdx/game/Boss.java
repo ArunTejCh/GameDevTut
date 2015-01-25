@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import javafx.util.Pair;
+//import javafx.util.Pair;
 
 /**
  * Created by Sudheer on 1/24/15.
@@ -36,7 +36,7 @@ public class Boss extends Character {
     private Sword swordActor;
 
     private static FireBall[] fireBalls = new FireBall[4];
-    private static Pair<Integer, Integer>[] safeZones = new Pair[5];
+  //  private static Pair<Integer, Integer>[] safeZones = new Pair[5];
 
     public Boss(String fileName) {
         super(fileName);
@@ -46,11 +46,11 @@ public class Boss extends Character {
         setHeight(2);
         resetFireBalls();
 
-        safeZones[0] = new Pair<Integer, Integer>(0, 0);
-        safeZones[1] = new Pair<Integer, Integer>(0, 0);
-        safeZones[2] = new Pair<Integer, Integer>(0, 0);
-        safeZones[3] = new Pair<Integer, Integer>(0, 0);
-        safeZones[4] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[0] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[1] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[2] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[3] = new Pair<Integer, Integer>(0, 0);
+    //    safeZones[4] = new Pair<Integer, Integer>(0, 0);
 
         setMode(BossMode.CHASE_MODE);
     }
