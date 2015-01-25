@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 /**
  * Created by durga.p on 1/24/15.
@@ -99,8 +100,16 @@ public class Hero extends Character {
         if (actor instanceof TexActor) {
             TexActor texActor = (TexActor) actor;
             ActorType type = texActor.type;
-            if (type == ActorType.LAVA && !(this.hasAura && this.usingDefensiveWeapon)) {
-                getMyStage().gameOver();
+            if (type == ActorType.LAVA) {
+                if(hasAura){
+                    if(usingDefensiveWeapon){
+                          timeDifference = 0;
+                    }
+                    else {
+                        getMyStage().gameOver();
+                    }
+
+                }
             }
             if (type == ActorType.AURA)
                 this.hasAura = true;
@@ -125,8 +134,9 @@ public class Hero extends Character {
         }
         else if (actor instanceof Boss) {
             this.health -= 30;
-            this.setX((getX() + 8) % 16);
-            this.setY((getY() + 4) % 9);
+            float x = (getX() + 8) % 16;
+            float y = (getY() + 4) % 9;
+            addAction(Actions.moveTo(x, y, 0.4f));
         }
         else if (actor instanceof Arrow && actor != arrowActor && actor != hitArrow) {
             this.hitArrow = (Arrow) actor;
@@ -197,7 +207,8 @@ public class Hero extends Character {
     }
 
     public void useOffensiveWeapon() {
-        if(hasSword && (swordActor == null || swordActor.getParent() == null) && nextSwordUse < 0){
+        //(swordActor == null || swordActor.getParent() == null) &&
+        if(hasSword && ( nextSwordUse < 0)){
             swordActor = new Sword(this, getX(), getY());
             getMyStage().group.addActor(swordActor);
             swordActor.jab(currShieldDirection);

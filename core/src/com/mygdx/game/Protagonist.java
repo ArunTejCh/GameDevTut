@@ -14,6 +14,8 @@ public class Protagonist extends Hero {
     public Protagonist(String fileName) {
         super(fileName);
         reset();
+        hasAura = true;
+        hasArrow = true;
     }
 
     @Override
