@@ -28,8 +28,10 @@ public class ArrowEnemy extends Enemy{
             this.health -= 10;
             ((Arrow) actor).removeSelf();
         }
-        if (this.health <= 0)
+        if (this.health <= 0) {
             this.removeSelf = true;
+            getMyStage().gameEngine.enemyDying.play(0.4f);
+        }
 
     }
 

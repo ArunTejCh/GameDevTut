@@ -152,6 +152,9 @@ public abstract class Character extends Actor implements Collides {
             animateTime += delta;
         }
 
+        if(processDirection && currDirection!=null &&!isDirFeasible(currDirection)){
+            playBlocked();
+        }
 
         if (processDirection && currDirection != null && isDirFeasible(currDirection)) {
             Action action = Actions.moveBy(currDirection.vector.x, currDirection.vector.y, MOVE_TIME);
@@ -166,6 +169,10 @@ public abstract class Character extends Actor implements Collides {
             setAnimation(currDirection);
             processDirection = false;
         }
+    }
+
+    void playBlocked() {
+
     }
 
     @Override

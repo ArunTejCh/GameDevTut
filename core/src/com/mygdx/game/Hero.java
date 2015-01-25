@@ -138,7 +138,7 @@ public class Hero extends Character {
                     //Nothing happens
                 }
                 if (hasShield && hitSword.getJabDirection().vector.isCollinearOpposite(currShieldDirection.vector)) {
-
+                    shieldBlocked();
                 }
             }
             this.health -= 10;
@@ -174,9 +174,12 @@ public class Hero extends Character {
                             getMyStage().group.addActor(newArrow);
                             newArrow.setPosition(getX()+0.5f,getY()+0.5f);
                             newArrow.shoot(currShieldDirection);
+                            recochet();
                         }
-                        else
+                        else {
                             hitArrow.removeSelf();
+                            shieldBlocked();
+                        }
                     }
             }
             else {
@@ -190,6 +193,14 @@ public class Hero extends Character {
 
         if (this.health <= 0)
             getMyStage().gameOver();
+    }
+
+    void recochet() {
+
+    }
+
+    void shieldBlocked() {
+
     }
 
     void reset() {
@@ -231,6 +242,7 @@ public class Hero extends Character {
             getMyStage().group.addActor(swordActor);
             swordActor.jab(currShieldDirection);
             nextSwordUse = SWORD_TIMEOUT;
+            usedSword();
         }
 //        Gdx.app.log("arrow",hasArrow+"x"+nextArrowUse);
         if(hasArrow && nextArrowUse < 0){
@@ -242,7 +254,15 @@ public class Hero extends Character {
             arrowActor.setPosition(getX() + 0.5f, getY() + 0.5f);
             arrowActor.shoot(currShieldDirection);
             nextArrowUse = ARROW_TIMEOUT;
+            firedArrow();
         }
+    }
+
+    void usedSword() {
+    }
+
+    void firedArrow() {
+
     }
 
     public void useDefensiveWeapon() {
