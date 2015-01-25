@@ -93,7 +93,7 @@
  </tileset>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYBrFo3gUj+JRPIqHGAYAciUDYQ==
+   eJxjYmBgYBqkmIsApob55MgNRvNpET7Udu9Am0/L8BmO4TXYzccXn7TIX5Saj+7OoWo+tjCnRv4iRx8AxXAFOQ==
   </data>
  </layer>
  <layer name="collides" width="24" height="18">

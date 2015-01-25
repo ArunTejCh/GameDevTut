@@ -93,7 +93,7 @@
  </tileset>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJzrYWRg6BnFo3gUj+JRPIqHGAYAGhvt8Q==
+   eJzrYWRg6KETNkLDTDQwF12cWuaTIk4t82kR7vSMX1rbNdTMp0X40DrMh2I4j5o/eMynNQYAS7jhcw==
   </data>
  </layer>
  <layer name="collides" width="24" height="18">
@@ -103,7 +103,7 @@
  </layer>
  <layer name="backgrounds2" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJyTZGJgkAJiaSBGBy+RxAIZGRg6kTCIDwLCjPixJtCMlUCsjcV8ZBCJZn4k1HxORuzqYeZb4jH3JpIcyBxHIHYCYmdGhLmEzMcHXqKZj47RzccWPsSCgTAf2R5auR8XGGzmE2MWJeFDbfMj0fjcjJgYXY4UkEll89mBmIMIM/GZj0+NOBBLIJkdSWXz1YFYA0/4YPMXPkBOnAyU+cSEDznmE4MBwF4T4A==
+   eJyTZGJgkAJiaSBGBy+RxAIZGRg6kTCIDwLCjPixJtCMlUCsjcV8ZBCJZn4k1HxORuzqYeZbEjAXBkDmOAKxExA7MyLMJWQ+sYCTEROjm48tfAaz+cj20Mr9uMBgM58YsygJH2qbH4nG52bExOhypIBMKpvPDsQcRJiJz3x8asSBWALJ7Egqm68OxBp4wgebv/ABcuJkoMwnJnzIMZ8YDACllBIa
   </data>
  </layer>
  <layer name="actors" width="24" height="18">
