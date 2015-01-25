@@ -29,10 +29,7 @@ public class Boss extends Character {
         this.health = 1000;
         setWidth(2);
         setHeight(2);
-        fireBalls[0] = new FireBall(Direction.LEFT);
-        fireBalls[1] = new FireBall(Direction.RIGHT);
-        fireBalls[2] = new FireBall(Direction.UP);
-        fireBalls[3] = new FireBall(Direction.DOWN);
+        resetFireBalls();
     }
 
     @Override
@@ -80,8 +77,8 @@ public class Boss extends Character {
             currDirection = Direction.LEFT;
         else
             currDirection = Direction.RIGHT;
-        if (!isDirFeasible(currDirection))
-            takeYDir(x, y, heroX, heroY);
+        //if (!isDirFeasible(currDirection))
+            //takeYDir(x, y, heroX, heroY);
     }
 
     private void takeYDir(float x, float y, float heroX, float heroY) {
@@ -91,8 +88,8 @@ public class Boss extends Character {
             currDirection = Direction.DOWN;
         else
             currDirection = Direction.UP;
-        if (!isDirFeasible(currDirection))
-            takeXDir(x, y, heroX, heroY);
+        //if (!isDirFeasible(currDirection))
+            //takeXDir(x, y, heroX, heroY);
     }
 
     private void flipMode() {
@@ -105,7 +102,7 @@ public class Boss extends Character {
     @Override
     public void act(float delta) {
 
-        if (modeTimer == 0)
+        if (modeTimer < MODE_CHANGE_TIMEOUT)
             modeTimer += delta;
 
         if (modeTimer > MODE_CHANGE_TIMEOUT) {
@@ -119,11 +116,21 @@ public class Boss extends Character {
         else if (mode == BossMode.RAGE_MODE) {
             for (FireBall ball : fireBalls) {
                 ball.shoot(ball.getShootDir());
+                getMyStage().group.addActor(ball);
+                ball.setPosition(getX() + 0.5f,getY() + 0.5f);
             }
+            resetFireBalls();
         }
         else if (mode == BossMode.SUBDUED_MODE) {
 
         }
+    }
+
+    private void resetFireBalls(){
+        fireBalls[0] = new FireBall(Direction.LEFT);
+        fireBalls[1] = new FireBall(Direction.RIGHT);
+        fireBalls[2] = new FireBall(Direction.UP);
+        fireBalls[3] = new FireBall(Direction.DOWN);
     }
 
     @Override
@@ -132,7 +139,7 @@ public class Boss extends Character {
         if (actor instanceof Sword && actor != swordActor) {
             this.health -= 5;
             swordActor = (Sword) actor;
-        } else if (actor instanceof Arrow)
+        } else if (actor instanceof Arrow && ! (actor instanceof FireBall))
             this.health -= 1;
         if (this.health <= 0)
             Gdx.app.exit();
