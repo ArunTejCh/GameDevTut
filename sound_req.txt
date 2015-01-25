@@ -1,0 +1,7 @@
+1. enemy dying
+2. blocked by path
+3. shield block
+4. shield richochet
+5. aura 
+6. sword slash
+7. arrow release
