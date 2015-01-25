@@ -180,16 +180,18 @@ public abstract class Character extends Actor implements Collides {
         float y = getY() + 1f;
 
         float width = 2f;
-        float height = 0.3f;
+        float height = 0.1f;
 
-        batch.draw(backRect, x, y + 0.15f, width, height);
-
-
+        float yOffset = 0;
+        float xOffset = 0;
         float progressWidth = this.health/this.maxHealth * 1;
-        batch.draw(healthRect, x + 0.05f, y + 0.15f + 0.05f, 2 * progressWidth, height - 0.05f);
+        if (this instanceof Boss) {
+            xOffset = 0.2f;
+            yOffset = 1f;
+        }
 
-
-
+        batch.draw(backRect, x + xOffset, y + yOffset + 0.15f, width, height);
+        batch.draw(healthRect, x + xOffset+ 0.05f, y + yOffset + 0.15f + 0.05f, 2 * progressWidth, height - 0.05f);
 
     }
 

@@ -49,6 +49,7 @@ public class Boss extends Character {
     public Boss(String fileName) {
         super(fileName);
         this.health = 1000;
+        this.maxHealth = 1000;
         setWidth(2);
         setHeight(2);
         resetFireBalls();
@@ -185,6 +186,7 @@ public class Boss extends Character {
 
         if ((mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) && modeTimer > MODE_SUBDUED_TIMEOUT) {
             removeAction(getActions().first());
+            reset();
             setMode(BossMode.CHASE_MODE);
         }
         if (mode != BossMode.SUBDUED_MODE && mode != BossMode.LAVA_SUBDUED_MODE && modeTimer > MODE_CHANGE_TIMEOUT) {
