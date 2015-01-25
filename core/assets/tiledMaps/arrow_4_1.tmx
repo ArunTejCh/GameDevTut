@@ -31,6 +31,7 @@
   </tile>
   <tile id="3">
    <properties>
+    <property name="msg" value="Press E to shoot arrows"/>
     <property name="type" value="bow"/>
    </properties>
   </tile>

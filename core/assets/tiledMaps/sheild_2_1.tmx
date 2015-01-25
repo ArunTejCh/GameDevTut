@@ -73,6 +73,7 @@
   </tile>
   <tile id="13">
    <properties>
+    <property name="msg" value="Press q to block. Press just before being hit to reflect arrows"/>
     <property name="type" value="shield"/>
    </properties>
   </tile>

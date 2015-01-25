@@ -87,6 +87,7 @@
   </tile>
   <tile id="14">
    <properties>
+    <property name="msg" value="Press E to attack"/>
     <property name="type" value="sword"/>
    </properties>
   </tile>
