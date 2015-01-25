@@ -14,10 +14,6 @@ public class Protagonist extends Hero {
     public Protagonist(String fileName) {
         super(fileName);
         reset();
-//        hasAura = true;
-//        hasArrow = true;
-        hasShield = true;
-        hasSword = true;
         arrowTime = 0.2f;
     }
 

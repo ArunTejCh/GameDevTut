@@ -1,6 +1,6 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: { 
-	default: { file: fonts/default.fnt }
+	default: { file: fonts/calibri.fnt }
 },
 com.badlogic.gdx.graphics.Color: {
 	green: { a: 1, b: 0, g: 1, r: 0 },
@@ -17,6 +17,6 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {font:default, down: yellowBtn, up: yellowBtn, fontColor: white, pressedOffsetX:3, pressedOffsetY:3 },
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-	default: { font: default, fontColor: black },
+	default: { font: default, fontColor: black, background: blank },
 }
 }

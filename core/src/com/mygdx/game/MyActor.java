@@ -30,8 +30,8 @@ public class MyActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        region = myGdxGame.atlas.findRegion("chimney");
-        batch.draw(region,getX(),getY(),getWidth(),getHeight());
+//        region = myGdxGame.atlas.findRegion("chimney");
+//        batch.draw(region,getX(),getY(),getWidth(),getHeight());
     }
 
 

@@ -34,6 +34,13 @@ backBtnDown
   orig: 69, 71
   offset: 0, 0
   index: -1
+blank
+  rotate: false
+  xy: 599, 123
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 centerDark
   rotate: false
   xy: 857, 729
@@ -174,6 +181,8 @@ scrollBack
   rotate: false
   xy: 0, 583
   size: 635, 428
+  split: 156, 161, 104, 69
+  pad: 0, 0, 0, 0
   orig: 635, 428
   offset: 0, 0
   index: -1
@@ -181,8 +190,6 @@ scrollBack
   rotate: false
   xy: 0, 583
   size: 635, 428
-  split: 156, 161, 104, 69
-  pad: 0, 0, 0, 0
   orig: 635, 428
   offset: 0, 0
   index: -1
