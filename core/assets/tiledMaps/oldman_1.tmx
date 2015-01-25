@@ -64,6 +64,7 @@
   </tile>
   <tile id="11">
    <properties>
+    <property name="msg" value="I was living happily with my dog tommy. The dark lord sauron did not like this, so he killed tommy. Thus began my journey of vengeance. But how will i kill the evil one for i have no weapons or magic. how ....."/>
     <property name="type" value="hero"/>
    </properties>
   </tile>
