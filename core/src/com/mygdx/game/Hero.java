@@ -77,6 +77,10 @@ public class Hero extends Character {
 
         makeItMove(delta);
 
+        if(onLava){
+            onLava = getMyStage().gameEngine.lava[(int) getX()][(int)getY()];
+        }
+
         if (hasShield && usingDefensiveWeapon) {
             timeDifference += delta;
             if (timeDifference > SHIELD_TIME)
@@ -110,11 +114,12 @@ public class Hero extends Character {
                     if(usingDefensiveWeapon){
                         onLava = true;
                         timeDifference = 0;
-                    }
-                    else {
+                    } else {
                         getMyStage().gameOver();
                     }
-
+                }
+                else {
+                    getMyStage().gameOver();
                 }
             }
             if (type == ActorType.AURA)
@@ -191,7 +196,7 @@ public class Hero extends Character {
         usingDefensiveWeapon = false;
         usingOffensiveWeapon = false;
         timeDifference = 0;
-        onLava = false;
+//        onLava = false;
     }
 
     private void drawShield(Batch batch, float parentAlpha) {
