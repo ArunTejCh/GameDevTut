@@ -12,6 +12,7 @@ public class TexActor extends Actor{
     final ActorType type;
     private final Texture texture;
 
+    public String message;
     public TexActor(ActorType type,int x ,int y){
         this.type = type;
         setPosition(x,y);

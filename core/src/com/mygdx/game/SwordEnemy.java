@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
  */
 public class SwordEnemy extends Enemy {
 
-    private Sword swordActor;
 
     public SwordEnemy(String fileName, boolean isXDir){
         super(fileName, isXDir);

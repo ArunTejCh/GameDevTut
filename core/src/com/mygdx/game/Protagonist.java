@@ -123,6 +123,9 @@ public class Protagonist extends Hero {
                 case DOOR:
                     break;
             }
+            if(((TexActor) actor).message != null){
+                getMyStage().showMessage(((TexActor) actor).message);
+            }
         }
     }
 }

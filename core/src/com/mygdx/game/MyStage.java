@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -169,6 +168,7 @@ public class MyStage extends Stage {
                 String type = (String) tile.getProperties().get("type");
                 if ("hero".equalsIgnoreCase(type)) {
                     hero.setPosition(i, j);
+                    showMessage((String) tile.getProperties().get("msg"));
                 }
                 if ("boss".equalsIgnoreCase(type)) {
                     boss = new Boss("boss/run");
@@ -202,7 +202,9 @@ public class MyStage extends Stage {
                 }
 
                 if ("bow".equalsIgnoreCase(type)) {
-                    group.addActor(new TexActor(ActorType.BOW, i, j));
+                    TexActor actor = new TexActor(ActorType.BOW, i, j);
+                    actor.message = (String) tile.getProperties().get("msg");
+                    group.addActor(actor);
                 }
                 if ("door".equalsIgnoreCase(type)) {
                     Door door = new Door(i, j);
@@ -210,11 +212,11 @@ public class MyStage extends Stage {
                     group.addActor(door);
                 }
                 if ("aura".equalsIgnoreCase(type)) {
-                    group.addActor(new TexActor(ActorType.AURA, i, j));
+                    TexActor actor = new TexActor(ActorType.AURA, i, j);
+                    actor.message = (String) tile.getProperties().get("msg");
+                    group.addActor(actor);
                 }
-                if ("bow".equalsIgnoreCase(type)) {
-                    group.addActor(new TexActor(ActorType.BOW, i, j));
-                }
+
                 if ("lava".equalsIgnoreCase(type)) {
                     gameEngine.lava[i][j] = true;
                     TexActor lava = new TexActor(ActorType.LAVA, i, j);
@@ -222,10 +224,14 @@ public class MyStage extends Stage {
                     lava.toBack();
                 }
                 if ("shield".equalsIgnoreCase(type)) {
-                    group.addActor(new TexActor(ActorType.SHIELD, i, j));
+                    TexActor actor = new TexActor(ActorType.SHIELD, i, j);
+                    actor.message = (String) tile.getProperties().get("msg");
+                    group.addActor(actor);
                 }
                 if ("sword".equalsIgnoreCase(type)) {
-                    group.addActor(new TexActor(ActorType.SWORD, i, j));
+                    TexActor actor = new TexActor(ActorType.SWORD, i, j);
+                    actor.message = (String) tile.getProperties().get("msg");
+                    group.addActor(actor);
                 }
             }
         }

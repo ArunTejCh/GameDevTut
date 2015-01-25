@@ -2,8 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 
 /**
  * Created by durga.p on 1/24/15.
@@ -147,14 +149,24 @@ public class Hero extends Character {
         else if (actor instanceof Boss && ((Boss)actor).mode != Boss.BossMode.SUBDUED_MODE) {
             if (!usingDefensiveWeapon || (!hasShield && !hasAura))
                 this.health -= 10;
+
             float x = (getX() + 8) % 16;
             float y = (getY() + 4) % 9;
+            final Action hAction = new RunnableAction(){
+                @Override
+                public void run() {
+                    if (!usingDefensiveWeapon)
+                        health -= 30;
+                }
+            };
+            Action move;
             if(Math.random() > 0.5){
-                addAction(Actions.moveTo(2, 9, 0.4f));
+                move = Actions.moveTo(2, 9, 0.4f);
             }
             else {
-                addAction(Actions.moveTo(20, 9, 0.4f));
+                move = Actions.moveTo(20, 9, 0.4f);
             }
+            addAction(Actions.sequence(move,hAction));
 
         }
         else if (actor instanceof Arrow && actor != arrowActor && actor != hitArrow) {
