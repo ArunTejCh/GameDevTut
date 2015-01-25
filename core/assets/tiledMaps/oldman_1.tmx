@@ -69,6 +69,7 @@
   </tile>
   <tile id="12">
    <properties>
+    <property name="msg" value="fuck uuuuuuuuu"/>
     <property name="type" value="oldman"/>
    </properties>
   </tile>
