@@ -91,12 +91,12 @@
  </layer>
  <layer name="collides" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBhZgJ8RgUcB9QEbMFzZcWAOPGHORkAeBsSAasRxYAk8+vmAcgJUjHN091LbfHTzSDWfjUCYU2q+GIEwF0OTQ+ePglFADQAA8OoC0Q==
+   eJyTZGRgkKIRlgZiRSBWohFWBuJRQBpgA4YZOxmYg8iwFgOqEycDS4zGJVXAaPyOAlIAJzBeuGiEuYFYEIiFaISFgRgA/QIMYQ==
   </data>
  </layer>
  <layer name="actors" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgxUwIeGhaP5QATwU6KV1+A1186kNmAfaAaNgUAEAmmgAKA==
+   eJxjYBgFo2BkAx4qmcNMJXNGASpgwoKHkvmjgHYAAGO8ACQ=
   </data>
  </layer>
 </map>

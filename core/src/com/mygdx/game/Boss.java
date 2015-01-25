@@ -2,18 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.math.MathUtils;
-
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import javafx.util.Pair;
-
-import javax.swing.text.Position;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Sudheer on 1/24/15.
@@ -60,7 +52,7 @@ public class Boss extends Character {
         safeZones[3] = new Pair<Integer, Integer>(0, 0);
         safeZones[4] = new Pair<Integer, Integer>(0, 0);
 
-        setMode(BossMode.LAVA_SUBDUED_MODE);
+        setMode(BossMode.CHASE_MODE);
 
     }
 

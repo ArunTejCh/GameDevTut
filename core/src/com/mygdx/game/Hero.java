@@ -142,10 +142,10 @@ public class Hero extends Character {
             float x = (getX() + 8) % 16;
             float y = (getY() + 4) % 9;
             if(Math.random() > 0.5){
-                addAction(Actions.moveTo(5, 2, 0.4f));
+                addAction(Actions.moveTo(2, 9, 0.4f));
             }
             else {
-                addAction(Actions.moveTo(10, 4, 0.4f));
+                addAction(Actions.moveTo(20, 9, 0.4f));
             }
 
         }
