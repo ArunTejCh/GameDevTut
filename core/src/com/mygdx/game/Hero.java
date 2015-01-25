@@ -111,10 +111,9 @@ public class Hero extends Character {
                         onLava = true;
                         timeDifference = 0;
                     }
-                    else {
-                        getMyStage().gameOver();
-                    }
-
+                }
+                else {
+                    getMyStage().gameOver();
                 }
             }
             if (type == ActorType.AURA)

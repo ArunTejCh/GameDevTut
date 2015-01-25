@@ -2,10 +2,14 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sudheer on 1/24/15.
@@ -37,6 +41,8 @@ public class Boss extends Character {
 
     private static FireBall[] fireBalls = new FireBall[4];
     private static Pair<Integer, Integer>[] safeZones = new Pair[5];
+
+    int lX = 1, hX = 21;
 
     public Boss(String fileName) {
         super(fileName);
@@ -71,10 +77,6 @@ public class Boss extends Character {
     }
 
     private void feedMovement() {
-//        currDirection = Direction.rand();
-//        while (! isDirFeasible(currDirection)) {
-//            currDirection = Direction.rand();
-//        }
 
 
         Hero hero = getMyStage().hero;
@@ -85,76 +87,75 @@ public class Boss extends Character {
         float heroX = hero.getX();
         float heroY = hero.getY();
 
-        float xDiff = x - heroX;
-        float yDiff = y - heroY;
+        if(inSameBlock(heroX, heroY, x, y)){
+            float diffX = x - heroX;
+            float diffY = y - heroY;
+            if(Math.abs(diffX) < Math.abs(diffY)){
+                if(diffY > 0)
+                    currDirection = Direction.DOWN;
+                else
+                    currDirection = UP;
+            } else {
+                if(diffX > 0)
+                    currDirection = Direction.LEFT;
+                else
+                    currDirection = Direction.RIGHT;
+            }
+        } else {
+            if(heroX < 12 ){
+                if((x -lX) >1 )
+                    currDirection = Direction.LEFT;
+                else {
+                    if(heroY > y)    currDirection = UP;
+                    else currDirection = Direction.DOWN;
+                }
+            } else {
+                if((hX - x) >1 )
+                    currDirection = Direction.RIGHT;
+                else {
+                    if(heroY > y)    currDirection = UP;
+                    else currDirection = Direction.DOWN;
+                }
+            }
+
+        }
 
 
-        Direction possibleYDirection = takeYDir(x, y, heroX, heroY);
-        Direction possibleXDirection = takeXDir(x, y, heroX, heroY);
-        boolean isXPoss = isDirFeasible(possibleXDirection);
-        boolean isYPoss = isDirFeasible(possibleYDirection);
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {
-            if (isXPoss)
-                currDirection = possibleXDirection;
-            else if (isYPoss)
-                currDirection = possibleYDirection;
-        } else if (isDirFeasible(possibleYDirection)) {
-            if (isYPoss)
-                currDirection = possibleYDirection;
-            else if (isXPoss)
-                currDirection = possibleXDirection;
-        } else
-            currDirection = Direction.reverse(currDirection);
 
+        if(!isDirFeasible(currDirection)){
+            Direction walkedFrom = Direction.reverse(currShieldDirection);
+            List<Direction> canGoIn = new ArrayList<Direction>();
+            for(Direction tryDir : Direction.values()){
+                if(tryDir != currDirection && tryDir != walkedFrom){
+                    if(isDirFeasible(tryDir)){
+                        canGoIn.add(tryDir);
+                    }
+                }
+            }
+            if(canGoIn.size() > 0){
+                Direction goIn = canGoIn.get(MathUtils.random(0, canGoIn.size() - 1));
+                currDirection = goIn;
+            } else {
+                currDirection = walkedFrom;
+            }
 
-        if (Math.abs(xDiff) > Math.abs(yDiff))
-            takeXDir(x, y, heroX, heroY);
-        else
-            takeYDir(x, y, heroX, heroY);
-
-
-//        if(!isDirFeasible(currDirection)){
-//            Direction walkedFrom = Direction.reverse(currShieldDirection);
-//            List<Direction> canGoIn = new ArrayList<Direction>();
-//            for(Direction tryDir : Direction.values()){
-//                if(tryDir != currDirection && tryDir != walkedFrom){
-//                    if(isDirFeasible(tryDir)){
-//                        canGoIn.add(tryDir);
-//                    }
-//                }
-//            }
-//            if(canGoIn.size() > 0){
-//                Direction goIn = canGoIn.get(MathUtils.random(0, canGoIn.size()-1));
-//                currDirection = goIn;
-//            } else {
-//                currDirection = walkedFrom;
-//            }
-//
-//        }
+        }
 
     }
 
-    private Direction takeXDir(float x, float y, float heroX, float heroY) {
-        Direction possibleDir;
-        if (x > heroX)
-            possibleDir = Direction.LEFT;
-        else
-            possibleDir = Direction.RIGHT;
-        return possibleDir;
+    private boolean inSameBlock(float heroX, float heroY, float x, float y) {
+        if( (heroY <= 6 && y <= 6) ||
+                (heroY >= 7 && heroY <= 11 && y <= 11 && heroY >= 7) ||
+                (heroY >= 12 && y >= 12)){
+            return true;
+        }
+        return false;
     }
 
-    private Direction takeYDir(float x, float y, float heroX, float heroY) {
-        Direction possibleDir;
-        if (y > heroY)
-            possibleDir = Direction.DOWN;
-        else
-            possibleDir = Direction.UP;
-        return possibleDir;
-    }
 
     private void flipMode() {
         if (mode == BossMode.CHASE_MODE)
-            setMode(BossMode.RAGE_MODE);
+            setMode(BossMode.CHASE_MODE);
         else if (mode == BossMode.RAGE_MODE)
             setMode(BossMode.CHASE_MODE);
     }
@@ -303,6 +304,7 @@ public class Boss extends Character {
 
 
     private boolean isFeasibleFrom(Direction dir, float px, float py) {
+        if(dir == null) return false;
         float x = (px + dir.vector.x);
         float y = (py + dir.vector.y);
         boolean[][] collides = getMyStage().gameEngine.collides;
