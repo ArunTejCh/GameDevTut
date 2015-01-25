@@ -168,7 +168,7 @@ public class MyStage extends Stage {
                 String type = (String) tile.getProperties().get("type");
                 if ("hero".equalsIgnoreCase(type)) {
                     hero.setPosition(i, j);
-                    showMessage((String) tile.getProperties().get("msg"));
+                    showMessage((String) tile.getProperties().get("msg"),10);
                 }
                 if ("boss".equalsIgnoreCase(type)) {
                     boss = new Boss("boss/run");
@@ -237,9 +237,13 @@ public class MyStage extends Stage {
         }
     }
 
-    public void showMessage(String message) {
+    public void showMessage(String message){
+        showMessage(message,2);
+    }
+
+    public void showMessage(String message, float sec) {
         label.setText(message);
-        labelTimer = 2;
+        labelTimer = sec;
         label.setVisible(true);
     }
 }
