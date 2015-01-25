@@ -64,13 +64,15 @@
   </tile>
   <tile id="11">
    <properties>
-    <property name="msg" value="I was living happily with my dog tommy. The dark lord sauron did not like this, so he killed tommy. Thus began my journey of vengeance. But how will i kill the evil one for i have no weapons or magic. how ....."/>
     <property name="type" value="hero"/>
    </properties>
   </tile>
   <tile id="12">
    <properties>
-    <property name="msg" value="The next level determines your defense. Go above for shield, below for a barrier spell"/>
+    <property name="msg">The minions of Dorgoroth the DogSlayer guard precious relics ahead.
+One door leads you to a scorcerous protection while in the other, you can find
+the invincible Shield of King Levieten.
+Find them and return and I will guide you to the DogSlayer</property>
     <property name="type" value="oldman"/>
    </properties>
   </tile>
