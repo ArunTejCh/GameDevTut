@@ -42,7 +42,7 @@ public class Hero extends Character {
     protected float nextArrowUse = -1;
     Arrow hitArrow;
     boolean onLava = false;
-    float RECOCHET_TIME = 0.4f;
+    float RECOCHET_TIME = 0.25f;
     float arrowTime = 0.3f;
 
     public Hero(String fileName) {
