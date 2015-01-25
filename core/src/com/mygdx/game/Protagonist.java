@@ -24,7 +24,6 @@ public class Protagonist extends Hero {
         hasSword = false;
         hasArrow = false;
 
-
         arrowTime = 0.2f;
         SWORD_TIMEOUT = 1f;
     }

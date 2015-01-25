@@ -40,7 +40,7 @@ public class Hero extends Character {
     protected float nextArrowUse = -1;
     Arrow hitArrow;
     boolean onLava = false;
-    float RECOCHET_TIME = 0.13f;
+    float RECOCHET_TIME = 0.4f;
     float arrowTime = 0.3f;
 
     public Hero(String fileName) {
@@ -143,8 +143,9 @@ public class Hero extends Character {
             }
             this.health -= 10;
         }
-        else if (actor instanceof Boss) {
-            this.health -= 30;
+        else if (actor instanceof Boss && ((Boss)actor).mode != Boss.BossMode.SUBDUED_MODE) {
+            if (!usingDefensiveWeapon)
+                this.health -= 30;
             float x = (getX() + 8) % 16;
             float y = (getY() + 4) % 9;
             if(Math.random() > 0.5){
