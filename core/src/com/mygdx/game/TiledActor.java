@@ -38,7 +38,7 @@ public class TiledActor {
         renderer.getBatch().begin();
         for(MapLayer layer : tiledMap.getLayers()){
             if(layer != actorLayer){
-                renderer.renderTileLayer((TiledMapTileLayer) layer);
+//                renderer.renderTileLayer((TiledMapTileLayer) layer);
             }
         }
         renderer.getBatch().end();
