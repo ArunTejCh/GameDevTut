@@ -23,7 +23,7 @@ public class GameEngine {
             else {
                 collides[i][j] = false;
             }
-            lava[i][j] = true;
+            lava[i][j] = false;
         }
     }
    }

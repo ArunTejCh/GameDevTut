@@ -57,12 +57,13 @@ public class MyStage extends Stage {
 
         skin = new Skin(Gdx.files.internal("newskin.json"), new TextureAtlas("packed/skin.atlas"));
         table = new Table();
-        String msg = "sample";
+        String msg = "sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample";
         label = new Label(msg, skin);
         label.setAlignment(Align.center);
-        table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
+        label.setWrap(true);
+        table.add(label).fillX().width(Gdx.graphics.getWidth()*0.85f).row();
 
-        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() - 20);
+        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() - 60);
         addActor(table);
 
         repeatSound = Gdx.audio.newSound(Gdx.files.internal("sounds/repeat.mp3"));
@@ -216,7 +217,9 @@ public class MyStage extends Stage {
                 }
                 if ("lava".equalsIgnoreCase(type)) {
                     gameEngine.lava[i][j] = true;
-                    group.addActor(new TexActor(ActorType.LAVA, i, j));
+                    TexActor lava = new TexActor(ActorType.LAVA, i, j);
+                    group.addActor(lava);
+                    lava.toBack();
                 }
                 if ("shield".equalsIgnoreCase(type)) {
                     group.addActor(new TexActor(ActorType.SHIELD, i, j));
