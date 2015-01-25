@@ -69,7 +69,7 @@
   </tile>
   <tile id="12">
    <properties>
-    <property name="msg" value="Players could choose to race in an event with SUVs only, or in a mix of cars and SUVs. Like cars, users are able to add on parts to SUVs to increase their performance and handling. However, the added weight of SUVs make them much harder to maneuver, especially at higher speeds. SUVs were not featured in any later editions of the Need For Speed series (except as non-playable police vehicles) until 2012 with the remake of Most Wanted."/>
+    <property name="msg" value="The next level determines your defense. Go above for shield, below for a barrier spell"/>
     <property name="type" value="oldman"/>
    </properties>
   </tile>
