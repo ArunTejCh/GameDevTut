@@ -77,14 +77,15 @@ public class MyStage extends Stage {
 
     public void gameCompleted() {
         hero.removeSelf();
+        boss.remove();
         String msg = "CONGRATULATIONS";
         label = new Label(msg, skin);
         label.setAlignment(Align.center);
         table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
-        table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
         table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
         table.add().padBottom(Gdx.graphics.getHeight() * 0.3f).row();
         label = new Label("You have completed the game!", skin);
+        label.setAlignment(Align.center);
         table.add(label).fillX().width(Gdx.graphics.getWidth()).row();
         table.add().padBottom(Gdx.graphics.getHeight() * 0.1f).row();
         TextButton textButton = new TextButton("Main Menu", skin);

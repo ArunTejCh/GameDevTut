@@ -24,7 +24,10 @@ public class Boss extends Character {
     private Arrow arrowActor;
     private boolean switching = false;
 
-    private enum BossMode {
+    private int chaseCount = 0;
+    private static final int MIN_CHASE_COUNTS = 2;
+
+    public enum BossMode {
         CHASE_MODE,
         RAGE_MODE,
         SUBDUED_MODE,
@@ -33,16 +36,15 @@ public class Boss extends Character {
 
     ;
 
-    private BossMode mode = BossMode.CHASE_MODE;
+    public BossMode mode = BossMode.CHASE_MODE;
 
     private final float MODE_CHANGE_TIMEOUT = 3.0f;
-    private final float MODE_SUBDUED_TIMEOUT = 3.0f;
+    private final float MODE_SUBDUED_TIMEOUT = 8.0f;
     private float modeTimer = 0;
 
     private Sword swordActor;
 
     private static FireBall[] fireBalls = new FireBall[4];
-  //  private static Pair<Integer, Integer>[] safeZones = new Pair[5];
 
     int lX = 1, hX = 21;
 
@@ -53,12 +55,6 @@ public class Boss extends Character {
         setWidth(2);
         setHeight(2);
         resetFireBalls();
-
-    //    safeZones[0] = new Pair<Integer, Integer>(0, 0);
-    //    safeZones[1] = new Pair<Integer, Integer>(0, 0);
-    //    safeZones[2] = new Pair<Integer, Integer>(0, 0);
-    //    safeZones[3] = new Pair<Integer, Integer>(0, 0);
-    //    safeZones[4] = new Pair<Integer, Integer>(0, 0);
 
         setMode(BossMode.CHASE_MODE);
     }
@@ -72,7 +68,6 @@ public class Boss extends Character {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-//        Gdx.app.log("Alpha", getColor().a + " : " + getActions().size);
         batch.setColor(getColor());
         super.draw(batch, parentAlpha);
         batch.setColor(getColor().r, getColor().g, getColor().b, 1.0f);
@@ -104,20 +99,6 @@ public class Boss extends Character {
                     currDirection = Direction.RIGHT;
             }
         } else {
-//            if(heroY < 6){
-//                if(heroX < 12 ){
-//                    if( heroX > 2)
-//                        currDirection = Direction.LEFT;
-//                    else
-//                        currDirection = UP;
-//                } else {
-//                    if( heroX < 20)
-//                        currDirection = Direction.RIGHT;
-//                    else
-//                        currDirection = UP;
-//                }
-//
-//            }
             if(heroX < 12 ){
                 if((x -lX) >1 )
                     currDirection = Direction.LEFT;
@@ -159,7 +140,15 @@ public class Boss extends Character {
             }
             if(canGoIn.size() > 0){
                 Direction goIn = canGoIn.get(MathUtils.random(0, canGoIn.size() - 1));
-                currDirection = goIn;
+                if (goIn == Direction.UP) {
+                    if (Math.random() < 0.3)
+                        currDirection = goIn;
+                    else {
+                        currDirection = canGoIn.get(MathUtils.random(0, canGoIn.size() - 1));
+                    }
+                }
+                else
+                    currDirection = goIn;
             } else {
                 currDirection = walkedFrom;
             }
@@ -180,7 +169,7 @@ public class Boss extends Character {
 
     private void flipMode() {
         if (mode == BossMode.CHASE_MODE)
-            setMode(BossMode.CHASE_MODE);
+            setMode(BossMode.RAGE_MODE);
         else if (mode == BossMode.RAGE_MODE)
             setMode(BossMode.CHASE_MODE);
     }
@@ -190,15 +179,8 @@ public class Boss extends Character {
         if (nextArrowUse >= 0) {
             nextArrowUse -= delta;
         }
-//        if (onLava && mode != BossMode.LAVA_SUBDUED_MODE) {
-//            onLavaTime += delta;
-//            if (onLavaTime >= 0) {
-//                setMode(BossMode.LAVA_SUBDUED_MODE);
-//            }
-//        }
 
-
-        if (modeTimer < MODE_CHANGE_TIMEOUT)
+       if (modeTimer < MODE_CHANGE_TIMEOUT || modeTimer < MODE_SUBDUED_TIMEOUT)
             modeTimer += delta;
 
         if ((mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) && modeTimer > MODE_SUBDUED_TIMEOUT) {
@@ -215,11 +197,13 @@ public class Boss extends Character {
                 switching = true;
                 reset();
                 removeAction(getActions().first());
-                addAction(Actions.sequence(move, new RunnableAction(){
+                setColor(getColor().r, getColor().g, getColor().b, 1.0f);
+                addAction(Actions.sequence(move, new RunnableAction() {
                     @Override
                     public void run() {
                         reset();
                         switching = false;
+                        Gdx.app.log("Chase Mode", "Switched");
                         setMode(BossMode.CHASE_MODE);
                     }
                 }));
@@ -228,8 +212,15 @@ public class Boss extends Character {
 
         }
         if (mode != BossMode.SUBDUED_MODE && mode != BossMode.LAVA_SUBDUED_MODE && modeTimer > MODE_CHANGE_TIMEOUT) {
-            reset();
-            flipMode();
+            if ((mode == BossMode.CHASE_MODE && chaseCount == MIN_CHASE_COUNTS) || mode == BossMode.RAGE_MODE) {
+                reset();
+                chaseCount = 0;
+                flipMode();
+            }
+            else {
+                reset();
+                chaseCount++;
+            }
         }
         if (mode == BossMode.CHASE_MODE) {
             feedMovement();
@@ -252,9 +243,10 @@ public class Boss extends Character {
         modeTimer = 0;
         if (mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) {
             Action action = Actions.alpha(0.4f, 0.2f);
-            Action actionBack = Actions.alpha(1f, 0.2f);
+            Action actionBack = Actions.alpha(1.0f, 0.2f);
             Action addAction = Actions.sequence(Actions.forever(Actions.sequence(action, actionBack)));
             addAction(addAction);
+            Gdx.app.log("Actions : ", getMyStage().getActors().size + "");
         }
         else {
 
@@ -274,19 +266,22 @@ public class Boss extends Character {
 
         if (actor instanceof Sword && actor != swordActor) {
             if (mode == BossMode.SUBDUED_MODE)
-                this.health -= 50;
+                this.health -= 100;
             else
                 this.health -= 5;
             swordActor = (Sword) actor;
-        } else if (actor instanceof FireBall) {
+        } else if (actor instanceof FireBall && actor != arrowActor) {
+            this.arrowActor = (Arrow) actor;
             if (((FireBall) actor).isReflected) {
+                Gdx.app.log("Subdued Mode", "Switched");
                 setMode(BossMode.SUBDUED_MODE);
+                this.health -= 100;
                 reset();
             }
         } else if (actor instanceof Arrow && actor != arrowActor) {
             this.arrowActor = (Arrow) actor;
             if (mode == BossMode.LAVA_SUBDUED_MODE)
-                this.health -= 50;
+                this.health -= 100;
             else
                 this.health -= 1;
         } else if (actor instanceof Arrow && !(actor instanceof FireBall))
@@ -298,9 +293,10 @@ public class Boss extends Character {
                     if (onLava) {
 
                     }
-                    if (getMyStage().hero.onLava) {
+                    if (getMyStage().hero.onLava && mode == BossMode.CHASE_MODE) {
                         onLava = true;
                         onLavaTime = 0;
+                        Gdx.app.log("Lava Subdued Mode", "Switched");
                         setMode(BossMode.LAVA_SUBDUED_MODE);
                     }
                     break;
@@ -308,8 +304,6 @@ public class Boss extends Character {
         }
         if (this.health <= 0)
             getMyStage().gameCompleted();
-
-//        Gdx.app.log("BOSS", "Health is : " + this.health);
     }
 
     private void reset() {
