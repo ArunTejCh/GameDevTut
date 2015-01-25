@@ -33,7 +33,6 @@ public class MyStage extends Stage {
     public Boss boss;
     private float labelTimer;
 
-    Sound repeatSound;
 
     public MyStage(Hero initHero) {
         group = new Group();
@@ -96,7 +95,6 @@ public class MyStage extends Stage {
                 game.setScreen(new MenuScreen());
             }
         });
-        repeatSound.stop();
         table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
     }
 
@@ -117,7 +115,6 @@ public class MyStage extends Stage {
                 game.setScreen(new MenuScreen());
             }
         });
-        repeatSound.stop();
         table.add(textButton).padLeft(0 * Gdx.graphics.getWidth() * 0.4f).width(250).center().row();
     }
 
