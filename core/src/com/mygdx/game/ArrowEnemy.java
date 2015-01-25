@@ -12,6 +12,8 @@ public class ArrowEnemy extends Enemy{
         this.health = 20;
         this.maxHealth = 20;
         hasArrow = true;
+
+        ARROW_TIMEOUT = 1.3f;
     }
 
     @Override

@@ -53,7 +53,6 @@ public class Boss extends Character {
         safeZones[4] = new Pair<Integer, Integer>(0, 0);
 
         setMode(BossMode.CHASE_MODE);
-
     }
 
     @Override
@@ -65,7 +64,7 @@ public class Boss extends Character {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        Gdx.app.log("Alpha", getColor().a + " : " + getActions().size);
+//        Gdx.app.log("Alpha", getColor().a + " : " + getActions().size);
         batch.setColor(getColor());
         super.draw(batch, parentAlpha);
         batch.setColor(getColor().r, getColor().g, getColor().b, 1.0f);

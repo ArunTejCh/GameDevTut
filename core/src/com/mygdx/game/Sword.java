@@ -97,6 +97,15 @@ public class Sword extends Actor {
             batch.draw(drawTexture, hero.getX()  + getX(), hero.getY() + getY(), getWidth(), getHeight());
         }
 
+    }
 
+    @Override
+    public float getX() {
+        return super.getX() + hero.getX();
+    }
+
+    @Override
+    public float getY() {
+        return super.getY() + hero.getY();
     }
 }

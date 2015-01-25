@@ -14,6 +14,7 @@ public class FireBall extends Arrow {
     public boolean isReflected = false;
 
     public FireBall(Direction dir) {
+        super(0.2f);
         texture = new TextureRegion(new Texture(Gdx.files.internal("weapons/dark_ball.png")));
         this.shootDir = dir;
         width = 0.8f;

@@ -24,8 +24,8 @@ public class Arrow extends Actor {
     TextureRegion right, down, up, left;
     Direction shootDir;
 
-    public Arrow() {
-
+    public Arrow(float arrowTime) {
+        moveTime = arrowTime;
         right = new TextureRegion(new Texture(Gdx.files.internal("weapons/arrow_right.png")));
         left = new TextureRegion(new Texture(Gdx.files.internal("weapons/arrow_right.png")));
         left.flip(true, false);

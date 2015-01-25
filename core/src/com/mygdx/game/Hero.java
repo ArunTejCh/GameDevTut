@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -36,11 +35,13 @@ public class Hero extends Character {
     Arrow arrowActor;
     Sword hitSword;
     private float nextSwordUse = -1;
-    private float SWORD_TIMEOUT = 2f;
-    private float ARROW_TIMEOUT = 0.8f;
+    float SWORD_TIMEOUT = 1.3f;
+    float ARROW_TIMEOUT = 0.8f;
     protected float nextArrowUse = -1;
     Arrow hitArrow;
     boolean onLava = false;
+    float RECOCHET_TIME = 0.25f;
+    float arrowTime = 0.3f;
 
     public Hero(String fileName) {
         super(fileName);
@@ -156,7 +157,7 @@ public class Hero extends Character {
                         hitArrow.removeSelf();
                     }
                     if (hasShield && hitArrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
-                        if (timeDifference < 0.1f) {
+                        if (timeDifference < RECOCHET_TIME) {
                             hitArrow.removeSelf();
                             Arrow newArrow;
                             if (actor instanceof FireBall) {
@@ -164,7 +165,7 @@ public class Hero extends Character {
                                 ((FireBall)newArrow).isReflected = true;
                             }
                             else
-                                newArrow = new Arrow();
+                                newArrow = new Arrow(hitArrow.moveTime);
                             getMyStage().group.addActor(newArrow);
                             newArrow.setPosition(getX()+0.5f,getY()+0.5f);
                             newArrow.shoot(currShieldDirection);
@@ -226,12 +227,12 @@ public class Hero extends Character {
             swordActor.jab(currShieldDirection);
             nextSwordUse = SWORD_TIMEOUT;
         }
-        Gdx.app.log("arrow",hasArrow+"x"+nextArrowUse);
+//        Gdx.app.log("arrow",hasArrow+"x"+nextArrowUse);
         if(hasArrow && nextArrowUse < 0){
             if(arrowActor != null && arrowActor.getParent() != null){
 //                return;
             }
-            arrowActor = new Arrow();
+            arrowActor = new Arrow(arrowTime);
             getMyStage().group.addActor(arrowActor);
             arrowActor.setPosition(getX() + 0.5f, getY() + 0.5f);
             arrowActor.shoot(currShieldDirection);
