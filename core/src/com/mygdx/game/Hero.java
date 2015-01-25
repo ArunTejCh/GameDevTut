@@ -100,7 +100,16 @@ public class Hero extends Character {
             TexActor texActor = (TexActor) actor;
             ActorType type = texActor.type;
             if (type == ActorType.LAVA) {
-                getMyStage().gameOver();
+                if(hasAura){
+                    if(usingDefensiveWeapon){
+                          timeDifference = 0;
+                    }
+                    else {
+                        getMyStage().gameOver();
+                    }
+
+                }
+
             }
         }
         if (actor instanceof Sword && actor != swordActor && actor != hitSword) {
@@ -181,7 +190,8 @@ public class Hero extends Character {
     }
 
     public void useOffensiveWeapon() {
-        if(hasSword && (swordActor == null || swordActor.getParent() == null) && nextSwordUse < 0){
+        //(swordActor == null || swordActor.getParent() == null) &&
+        if(hasSword && ( nextSwordUse < 0)){
             swordActor = new Sword(this, getX(), getY());
             getMyStage().group.addActor(swordActor);
             swordActor.jab(currShieldDirection);
