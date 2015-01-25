@@ -29,6 +29,7 @@ public abstract class Character extends Actor implements Collides {
 
     Texture backRect;
     Texture healthRect;
+    Texture heroHealthRect;
 
     TextureRegion[] walkLeft = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkRight = new TextureRegion[FRAME_COLS];
@@ -49,6 +50,7 @@ public abstract class Character extends Actor implements Collides {
 
         backRect = new Texture("misc/back_health.png");
         healthRect = new Texture("misc/fore_health.png");
+        heroHealthRect = new Texture("misc/hero_health.png");
 
         for (int i = 0; i < FRAME_COLS; i++) {
             walkDown[i] = tmp[0][i];
@@ -179,7 +181,7 @@ public abstract class Character extends Actor implements Collides {
         float x = getX() - 0.3f;
         float y = getY() + 1f;
 
-        float width = 2f;
+        float width = 1.6f;
         float height = 0.1f;
 
         float yOffset = 0;
@@ -190,8 +192,12 @@ public abstract class Character extends Actor implements Collides {
             yOffset = 1f;
         }
 
+        float progWidth = 1.6f * progressWidth;
         batch.draw(backRect, x + xOffset, y + yOffset + 0.15f, width, height);
-        batch.draw(healthRect, x + xOffset+ 0.05f, y + yOffset + 0.15f + 0.05f, 2 * progressWidth, height - 0.05f);
+        if (this instanceof Boss || this instanceof Enemy)
+            batch.draw(healthRect, x + xOffset+ 0.05f, y + yOffset + 0.15f + 0.05f, progWidth, height - 0.05f);
+        else
+            batch.draw(heroHealthRect, x + xOffset+ 0.05f, y + yOffset + 0.15f + 0.05f, progWidth, height - 0.05f);
 
     }
 
