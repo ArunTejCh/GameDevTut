@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 public class Boss extends Character {
 
+    private Direction UP;
+
     private enum BossMode {
         CHASE_MODE,
         RAGE_MODE,
@@ -71,14 +73,16 @@ public class Boss extends Character {
     }
 
     private void takeXDir(float x, float y, float heroX, float heroY) {
-        if (!(isDirFeasible(Direction.LEFT) || isDirFeasible(Direction.RIGHT)))
+        if (!(isDirFeasible(Direction.LEFT) || isDirFeasible(Direction.RIGHT))) {
+            currDirection = (isDirFeasible(Direction.UP) ? UP : Direction.DOWN);
             return;
+        }    
         if (x > heroX)
             currDirection = Direction.LEFT;
         else
             currDirection = Direction.RIGHT;
-        //if (!isDirFeasible(currDirection))
-            //takeYDir(x, y, heroX, heroY);
+//        if (!isDirFeasible(currDirection))
+//            takeYDir(x, y, heroX, heroY);
     }
 
     private void takeYDir(float x, float y, float heroX, float heroY) {
@@ -88,8 +92,8 @@ public class Boss extends Character {
             currDirection = Direction.DOWN;
         else
             currDirection = Direction.UP;
-        //if (!isDirFeasible(currDirection))
-            //takeXDir(x, y, heroX, heroY);
+//        if (!isDirFeasible(currDirection))
+//            takeXDir(x, y, heroX, heroY);
     }
 
     private void flipMode() {
@@ -179,15 +183,15 @@ public class Boss extends Character {
     @Override
     public boolean isDirFeasible(Direction dir) {
         return isFeasibleFrom(dir, getX(), getY())
-                && isFeasibleFrom(dir, getX(), getY() + getHeight())
-                && isFeasibleFrom(dir, getX() + getWidth(), getY())
-                && isFeasibleFrom(dir, getX() + getWidth(), getY() + getHeight());
+                && isFeasibleFrom(dir, getX(), getY() + getHeight()/2f)
+                && isFeasibleFrom(dir, getX() + getWidth()/2f, getY())
+                && isFeasibleFrom(dir, getX() + getWidth()/2f, getY() + getHeight()/2f);
 
     }
 
     private boolean isFeasibleFrom(Direction dir, float px, float py) {
-        float x = (px + 0.5f + dir.vector.x);
-        float y = (py + 0.5f + dir.vector.y);
+        float x = (px + dir.vector.x);
+        float y = (py + dir.vector.y);
         boolean[][] collides = getMyStage().gameEngine.collides;
         if (x < 0 || x >= GameDisplayEngine.GRIDX) {
             return false;

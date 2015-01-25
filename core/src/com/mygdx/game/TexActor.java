@@ -15,14 +15,14 @@ public class TexActor extends Actor{
     public TexActor(ActorType type,int x ,int y){
         this.type = type;
         setPosition(x,y);
-        setHeight(1);
-        setWidth(1);
+        setHeight(0.7f);
+        setWidth(0.7f);
         texture = new Texture(type.fileName);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+        batch.draw(texture, getX(), getY(), 1, 1);
     }
 }

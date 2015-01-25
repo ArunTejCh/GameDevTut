@@ -91,7 +91,7 @@
  </layer>
  <layer name="collides" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBhZgJ8RgYkB4oy0xcMNsAH9xI4Dc+DxLxsBeRgQwxOWEnj08wHlBKgY3ujupbb56OaRaj4bgTCn1HwxAmEuhiaHzh8uAFdapxYeBfgBAC+MBdE=
+   eJxjYBhZgJ8RgUcB9QEbMFzZcWAOPGHORkAeBsSAasRxYAk8+vmAcgJUjHN091LbfHTzSDWfjUCYU2q+GIEwF0OTQ+ePglFADQAA8OoC0Q==
   </data>
  </layer>
  <layer name="actors" width="24" height="18">
