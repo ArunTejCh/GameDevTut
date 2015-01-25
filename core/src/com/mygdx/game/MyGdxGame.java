@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,12 +15,15 @@ public class MyGdxGame extends ApplicationAdapter {
 
 
 	@Override
-	public void create () {
+	public void create() {
 		batch = new SpriteBatch();
 //		packTextures();
 		screen = new MenuScreen();//new MyScreen();
 //        screen = new MyScreen("sample.tmx");
 		screen.show();
+
+		Sound repeatSound = Gdx.audio.newSound(Gdx.files.internal("sounds/repeat.mp3"));
+		repeatSound.loop(1f, 1f, 0);
 	}
 
 	@Override

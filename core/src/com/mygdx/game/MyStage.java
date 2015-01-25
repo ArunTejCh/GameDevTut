@@ -68,8 +68,7 @@ public class MyStage extends Stage {
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() - 60);
         addActor(table);
 
-        repeatSound = Gdx.audio.newSound(Gdx.files.internal("sounds/repeat.mp3"));
-        repeatSound.loop(1f, 1f, 0);
+
 
 //        boss = new Boss("boss/run");
 //        boss.setPosition(3, 7);
