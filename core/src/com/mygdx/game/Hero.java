@@ -29,7 +29,7 @@ public class Hero extends Character {
     public static float widthOffset = 0.8f;
     public static float heightOffset = 0.7f;
 
-    private Sword swordActor;
+    protected Sword swordActor;
 
     Texture sh_left, sh_right, sh_up, sh_down, sword, aura;
     Arrow arrowActor;
@@ -40,7 +40,7 @@ public class Hero extends Character {
     protected float nextArrowUse = -1;
     Arrow hitArrow;
     boolean onLava = false;
-    float RECOCHET_TIME = 0.25f;
+    float RECOCHET_TIME = 0.13f;
     float arrowTime = 0.3f;
 
     public Hero(String fileName) {

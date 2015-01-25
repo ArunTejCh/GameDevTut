@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -18,8 +19,11 @@ public class ArrowEnemy extends Enemy{
 
     @Override
     public void collideWith(Actor actor) {
-        if (actor instanceof Sword)
+        if (actor instanceof Sword && actor != swordActor && actor != hitSword) {
+            this.hitSword = (Sword) actor;
             this.health -= 15;
+            Gdx.app.log("sword hit","");
+        }
         else if (actor instanceof Arrow && actor != arrowActor) {
             this.health -= 10;
             ((Arrow) actor).removeSelf();

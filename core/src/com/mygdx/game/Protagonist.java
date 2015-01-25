@@ -15,8 +15,8 @@ public class Protagonist extends Hero {
         super(fileName);
         reset();
 //        hasAura = true;
-        hasArrow = true;
-        hasShield = true;
+//        hasArrow = true;
+//        hasShield = true;
 //        hasSword = true;
         arrowTime = 0.2f;
     }
