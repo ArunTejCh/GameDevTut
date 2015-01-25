@@ -76,7 +76,7 @@ public class MyStage extends Stage {
 
     public void gameCompleted() {
         hero.removeSelf();
-        boss.remove();
+        //boss.remove();
         String msg = "CONGRATULATIONS";
         label = new Label(msg, skin);
         label.setAlignment(Align.center);
