@@ -2,7 +2,12 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import javafx.util.Pair;
+
+import javax.swing.text.Position;
 
 /**
  * Created by Sudheer on 1/24/15.
@@ -16,17 +21,20 @@ public class Boss extends Character {
     private enum BossMode {
         CHASE_MODE,
         RAGE_MODE,
-        SUBDUED_MODE
+        SUBDUED_MODE,
+        LAVA_SUBDUED_MODE
     };
 
     private BossMode mode = BossMode.CHASE_MODE;
 
     private final float MODE_CHANGE_TIMEOUT = 3.0f;
+    private final float MODE_SUBDUED_TIMEOUT = 3.0f;
     private float modeTimer = 0;
 
     private Sword swordActor;
 
     private static FireBall[] fireBalls = new FireBall[4];
+    private static Pair<Integer, Integer>[] safeZones = new Pair[5];
 
     public Boss(String fileName) {
         super(fileName);
@@ -34,6 +42,13 @@ public class Boss extends Character {
         setWidth(2);
         setHeight(2);
         resetFireBalls();
+
+        safeZones[0] = new Pair<Integer, Integer>(0, 0);
+        safeZones[1] = new Pair<Integer, Integer>(0, 0);
+        safeZones[2] = new Pair<Integer, Integer>(0, 0);
+        safeZones[3] = new Pair<Integer, Integer>(0, 0);
+        safeZones[4] = new Pair<Integer, Integer>(0, 0);
+
     }
 
     @Override
@@ -45,9 +60,10 @@ public class Boss extends Character {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        Gdx.app.log("Alpha", getColor().a + " : " + getActions().size);
+        batch.setColor(getColor());
         super.draw(batch, parentAlpha);
-        float progressWidth = this.health/this.maxHealth * 1;
-        batch.draw(healthRect, getX() + 0.05f, getY() + getHeight() + 0.15f + 0.05f, 2 * progressWidth, getHeight() - 0.05f);
+        batch.setColor(getColor().r, getColor().g, getColor().b, 1.0f);
     }
 
     private void feedMovement() {
@@ -68,41 +84,48 @@ public class Boss extends Character {
         float xDiff = x - heroX;
         float yDiff = y - heroY;
 
-        if (Math.abs(xDiff) > Math.abs(yDiff))
-            takeXDir(x, y, heroX, heroY);
+        Direction possibleYDirection = takeYDir(x, y, heroX, heroY);
+        Direction possibleXDirection = takeXDir(x, y, heroX, heroY);
+        boolean isXPoss = isDirFeasible(possibleXDirection);
+        boolean isYPoss = isDirFeasible(possibleYDirection);
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            if (isXPoss)
+                currDirection = possibleXDirection;
+            else if (isYPoss)
+                currDirection = possibleYDirection;
+        } else if (isDirFeasible(possibleYDirection)) {
+            if (isYPoss)
+                currDirection = possibleYDirection;
+            else if (isXPoss)
+                currDirection = possibleXDirection;
+        }
         else
-            takeYDir(x, y, heroX, heroY);
+            currDirection = Direction.reverse(currDirection);
     }
 
-    private void takeXDir(float x, float y, float heroX, float heroY) {
-        if (!(isDirFeasible(Direction.LEFT) || isDirFeasible(Direction.RIGHT))) {
-            currDirection = (isDirFeasible(Direction.UP) ? UP : Direction.DOWN);
-            return;
-        }    
+    private Direction takeXDir(float x, float y, float heroX, float heroY) {
+        Direction possibleDir;
         if (x > heroX)
-            currDirection = Direction.LEFT;
+            possibleDir = Direction.LEFT;
         else
-            currDirection = Direction.RIGHT;
-//        if (!isDirFeasible(currDirection))
-//            takeYDir(x, y, heroX, heroY);
+            possibleDir = Direction.RIGHT;
+        return possibleDir;
     }
 
-    private void takeYDir(float x, float y, float heroX, float heroY) {
-        if (!(isDirFeasible(Direction.DOWN) || isDirFeasible(Direction.UP)))
-            return;
+    private Direction takeYDir(float x, float y, float heroX, float heroY) {
+        Direction possibleDir;
         if (y > heroY)
-            currDirection = Direction.DOWN;
+            possibleDir = Direction.DOWN;
         else
-            currDirection = Direction.UP;
-//        if (!isDirFeasible(currDirection))
-//            takeXDir(x, y, heroX, heroY);
+            possibleDir = Direction.UP;
+        return possibleDir;
     }
 
     private void flipMode() {
         if (mode == BossMode.CHASE_MODE)
-            mode = BossMode.RAGE_MODE;
+            setMode(BossMode.RAGE_MODE);
         else if (mode == BossMode.RAGE_MODE)
-            mode = BossMode.CHASE_MODE;
+            setMode(BossMode.CHASE_MODE);
     }
 
     @Override
@@ -115,13 +138,18 @@ public class Boss extends Character {
         if (modeTimer < MODE_CHANGE_TIMEOUT)
             modeTimer += delta;
 
-        if (modeTimer > MODE_CHANGE_TIMEOUT) {
+        if (mode == BossMode.SUBDUED_MODE && modeTimer > MODE_SUBDUED_TIMEOUT) {
+            removeAction(getActions().first());
+            setMode(BossMode.CHASE_MODE);
+        }
+        if (mode != BossMode.SUBDUED_MODE && modeTimer > MODE_CHANGE_TIMEOUT) {
             reset();
             flipMode();
         }
         if (mode == BossMode.CHASE_MODE) {
             feedMovement();
             super.act(delta);
+            makeItMove(delta);
         }
         else if (mode == BossMode.RAGE_MODE && nextArrowUse < 0 ) {
             for (FireBall ball : fireBalls) {
@@ -131,8 +159,18 @@ public class Boss extends Character {
             }
             resetFireBalls();
         }
-        else if (mode == BossMode.SUBDUED_MODE) {
+        else if (mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) {
+            super.act(delta);
+        }
+    }
 
+    private void setMode(BossMode mode) {
+        this.mode = mode;
+        if (mode == BossMode.SUBDUED_MODE || mode == BossMode.LAVA_SUBDUED_MODE) {
+            Action action = Actions.alpha(0.4f, 0.2f);
+            Action actionBack = Actions.alpha(1f, 0.2f);
+            Action addAction = Actions.sequence(Actions.forever(Actions.sequence(action, actionBack)));
+            addAction(addAction);
         }
     }
 
@@ -148,10 +186,24 @@ public class Boss extends Character {
     public void collideWith(Actor actor) {
         super.collideWith(actor);
         if (actor instanceof Sword && actor != swordActor) {
-            this.health -= 5;
+            if (mode == BossMode.SUBDUED_MODE)
+                this.health -= 50;
+            else
+                this.health -= 5;
             swordActor = (Sword) actor;
-        } else if (actor instanceof Arrow && ! (actor instanceof FireBall))
-            this.health -= 1;
+        }
+        else if (actor instanceof FireBall) {
+            if (((FireBall) actor).isReflected) {
+                setMode(BossMode.SUBDUED_MODE);
+                reset();
+            }
+        }
+        else if (actor instanceof Arrow) {
+            if (mode == BossMode.LAVA_SUBDUED_MODE)
+                this.health -= 50;
+            else
+                this.health -= 1;
+        }
         if (this.health <= 0)
             Gdx.app.exit();
         Gdx.app.log("BOSS", "Health is : " + this.health);

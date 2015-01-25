@@ -16,11 +16,6 @@
    <property name="type" value="boss"/>
   </properties>
  </tile>
- <tile id="2">
-  <properties>
-   <property name="type" value="bow"/>
-  </properties>
- </tile>
  <tile id="3">
   <properties>
    <property name="type" value="bow"/>
@@ -28,6 +23,7 @@
  </tile>
  <tile id="4">
   <properties>
+   <property name="path" value="oldman_3.tmx"/>
    <property name="type" value="door"/>
   </properties>
  </tile>
@@ -68,6 +64,7 @@
  </tile>
  <tile id="12">
   <properties>
+   <property name="msg" value="This is the text the people are meant to see, and have fun while at it"/>
    <property name="type" value="oldman"/>
   </properties>
  </tile>

@@ -35,7 +35,7 @@ public abstract class Character extends Actor implements Collides {
     TextureRegion[] walkUp = new TextureRegion[FRAME_COLS];
     TextureRegion[] walkDown = new TextureRegion[FRAME_COLS];
     Animation currAnimation;
-    private float animateTime;
+    float animateTime;
     TextureRegion currentFrame;
     public Direction currShieldDirection;
     Direction currDirection;
@@ -143,6 +143,9 @@ public abstract class Character extends Actor implements Collides {
     @Override
     public void act(float delta) {
         super.act(delta);
+    }
+
+    public void makeItMove(float delta) {
         if (currAnimation != null) {
             animateTime += delta;
         }

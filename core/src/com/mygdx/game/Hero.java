@@ -70,6 +70,7 @@ public class Hero extends Character {
     @Override
     public void act(float delta) {
         super.act(delta);
+        makeItMove(delta);
         if (hasShield && usingDefensiveWeapon) {
             timeDifference += delta;
             if (timeDifference > SHIELD_TIME)
@@ -98,9 +99,17 @@ public class Hero extends Character {
         if (actor instanceof TexActor) {
             TexActor texActor = (TexActor) actor;
             ActorType type = texActor.type;
-            if (type == ActorType.LAVA) {
+            if (type == ActorType.LAVA && !(this.hasAura && this.usingDefensiveWeapon)) {
                 getMyStage().gameOver();
             }
+            if (type == ActorType.AURA)
+                this.hasAura = true;
+            if (type == ActorType.SHIELD)
+                this.hasShield = true;
+            if (type == ActorType.SWORD)
+                this.hasSword = true;
+            if (type == ActorType.BOW)
+                this.hasArrow = true;
         }
         if (actor instanceof Sword && actor != swordActor && actor != hitSword) {
             this.hitSword = (Sword)actor;
@@ -128,7 +137,13 @@ public class Hero extends Character {
                     if (hasShield && hitArrow.getShootDir().vector.isCollinearOpposite(currShieldDirection.vector)) {
                         if (timeDifference < 0.1f) {
                             hitArrow.removeSelf();
-                            Arrow newArrow = new Arrow();
+                            Arrow newArrow;
+                            if (actor instanceof FireBall) {
+                                newArrow = new FireBall(Direction.reverse(hitArrow.getShootDir()));
+                                ((FireBall)newArrow).isReflected = true;
+                            }
+                            else
+                                newArrow = new Arrow();
                             getMyStage().group.addActor(newArrow);
                             newArrow.setPosition(getX()+0.5f,getY()+0.5f);
                             newArrow.shoot(currShieldDirection);
@@ -138,7 +153,10 @@ public class Hero extends Character {
                     }
             }
             else {
-                this.health -= 5;
+                if (actor instanceof FireBall)
+                    this.health -= 15;
+                else
+                    this.health -= 5;
                 hitArrow.removeSelf();
             }
         }
@@ -191,7 +209,7 @@ public class Hero extends Character {
             }
             arrowActor = new Arrow();
             getMyStage().group.addActor(arrowActor);
-            arrowActor.setPosition(getX()+0.5f,getY()+0.5f);
+            arrowActor.setPosition(getX() + 0.5f, getY() + 0.5f);
             arrowActor.shoot(currShieldDirection);
             nextArrowUse = ARROW_TIMEOUT;
         }

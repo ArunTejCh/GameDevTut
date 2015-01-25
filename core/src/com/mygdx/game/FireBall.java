@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class FireBall extends Arrow {
 
     TextureRegion texture;
+    public boolean isReflected = false;
 
     public FireBall(Direction dir) {
         texture = new TextureRegion(new Texture(Gdx.files.internal("weapons/dark_ball.png")));
