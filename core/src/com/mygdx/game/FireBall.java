@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -14,11 +15,22 @@ public class FireBall extends Arrow {
     public FireBall(Direction dir) {
         texture = new TextureRegion(new Texture(Gdx.files.internal("weapons/dark_ball.png")));
         this.shootDir = dir;
+        width = 0.8f;
+        height = 0.8f;
+
+
     }
 
     @Override
     public void shoot(Direction direction) {
         super.shoot(direction);
         this.drawTexture = this.texture;
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        if(drawTexture != null)
+            batch.draw(drawTexture, getX(), getY(), getWidth(), getHeight());
     }
 }

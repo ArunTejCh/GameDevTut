@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Boss extends Character {
 
     private Direction UP;
+    private float nextArrowUse;
+    private float ARROW_TIMEOUT = 2f;
 
     private enum BossMode {
         CHASE_MODE,
@@ -106,6 +108,10 @@ public class Boss extends Character {
     @Override
     public void act(float delta) {
 
+        if(nextArrowUse >= 0){
+            nextArrowUse -= delta;
+        }
+
         if (modeTimer < MODE_CHANGE_TIMEOUT)
             modeTimer += delta;
 
@@ -117,7 +123,7 @@ public class Boss extends Character {
             feedMovement();
             super.act(delta);
         }
-        else if (mode == BossMode.RAGE_MODE) {
+        else if (mode == BossMode.RAGE_MODE && nextArrowUse < 0 ) {
             for (FireBall ball : fireBalls) {
                 ball.shoot(ball.getShootDir());
                 getMyStage().group.addActor(ball);
@@ -135,6 +141,7 @@ public class Boss extends Character {
         fireBalls[1] = new FireBall(Direction.RIGHT);
         fireBalls[2] = new FireBall(Direction.UP);
         fireBalls[3] = new FireBall(Direction.DOWN);
+        nextArrowUse = ARROW_TIMEOUT;
     }
 
     @Override
