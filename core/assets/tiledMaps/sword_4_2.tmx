@@ -93,7 +93,7 @@
  </tileset>
  <layer name="backgrounds" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJzrYWRg6KETNkLDTDQwF12cWuaTIk4t82kR7vSMX1rbNdTMp0X40DrMh2I4j5o/eMynNQYAS7jhcw==
+   eJzrYWRg6BkgzERj841obA6tzR9s4UAKhoGh6qehYr4RmWZxMg+vcBg1nzxM63xKawwA3ePlbA==
   </data>
  </layer>
  <layer name="collides" width="24" height="18">
@@ -103,12 +103,12 @@
  </layer>
  <layer name="backgrounds2" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJyTZGJgkAJiaSBGBy+RxAIZGRg6kTCIDwLCjPixJtCMlUCsjcV8ZBCJZn4k1HxORuzqYeZbEjAXBkDmOAKxExA7MyLMJWQ+sYCTEROjm48tfAaz+cj20Mr9uMBgM58YsygJH2qbH4nG52bExOhypIBMKpvPDsQcRJiJz3x8asSBWALJ7Egqm68OxBp4wgebv/ABcuJkoMwnJnzIMZ8YDACllBIa
+   eJyTZGJgkAJiaSBGBy+RxAIZGRg6kTCIDwLCjPixJtCMlUCsjcV8ZBCJZn4k1HxORuzqYeZbEjAXBkDmOAKxExA7MyLMJWS+IRAb41CDbj46RjcfW/gMZvOR7SHVfHRxfOZiAzDzcQF6m0+MWdgwrc3HZU4kGp+bEROjy5Hizkwqm88OZHMQYSY+87FhmPniQHUSSGZHUtl8daA6DTzhg81f+AC6+aQAUszvgWJKzCcmDMkxnxgMAIyOGMg=
   </data>
  </layer>
  <layer name="actors" width="24" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYCAesDIjMAxwMGNXy4lDHBnwo6nBZv4oQABuZgSmFBATP8QArtG4AgN84UmtsEYHuPLecAO0TmOEzB8p4QwCsLRKqzSLC/CQYB8HUjkIAFGyATM=
+   eJxjYCAesDIjMAxwMGNXy4lDHBnwo6nBZv4oQABuZgSmFBATP8QArtG4AgNc4QkSp1ZYowNceY8YQCs30QLQOo0RMp+ScB5qAJYu6J0+eEiwjwOpHAQAm4wBSw==
   </data>
  </layer>
 </map>
