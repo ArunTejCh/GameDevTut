@@ -50,7 +50,7 @@ public abstract class Character extends Actor implements Collides {
 
         backRect = new Texture("misc/back_health.png");
         healthRect = new Texture("misc/fore_health.png");
-        heroHealthRect = new Texture("misc/hero_health.png");
+        heroHealthRect = new Texture("misc/hero_health_green.png");
 
         for (int i = 0; i < FRAME_COLS; i++) {
             walkDown[i] = tmp[0][i];

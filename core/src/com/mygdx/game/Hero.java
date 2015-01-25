@@ -137,15 +137,16 @@ public class Hero extends Character {
                 if (hasAura) {
                     //Nothing happens
                 }
-                if (hasShield && hitSword.getJabDirection().vector.isCollinearOpposite(currShieldDirection.vector)) {
-
+                else if (hasShield && hitSword.getJabDirection().vector.isCollinearOpposite(currShieldDirection.vector)) {
+                    //Nothing happens
                 }
+                else
+                    this.health -= 10;
             }
-            this.health -= 10;
         }
         else if (actor instanceof Boss && ((Boss)actor).mode != Boss.BossMode.SUBDUED_MODE) {
-            if (!usingDefensiveWeapon)
-                this.health -= 30;
+            if (!usingDefensiveWeapon || (!hasShield && !hasAura))
+                this.health -= 10;
             float x = (getX() + 8) % 16;
             float y = (getY() + 4) % 9;
             if(Math.random() > 0.5){
