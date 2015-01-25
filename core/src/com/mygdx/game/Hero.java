@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 /**
  * Created by durga.p on 1/24/15.
@@ -116,8 +117,9 @@ public class Hero extends Character {
         }
         else if (actor instanceof Boss) {
             this.health -= 30;
-            this.setX((getX() + 8) % 16);
-            this.setY((getY() + 4) % 9);
+            float x = (getX() + 8) % 16;
+            float y = (getY() + 4) % 9;
+            addAction(Actions.moveTo(x, y, 0.4f));
         }
         else if (actor instanceof Arrow && actor != arrowActor && actor != hitArrow) {
             this.hitArrow = (Arrow) actor;
