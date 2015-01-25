@@ -17,6 +17,6 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {font:default, down: yellowBtn, up: yellowBtn, fontColor: white, pressedOffsetX:3, pressedOffsetY:3 },
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-	default: { font: default, fontColor: black },
+	default: { font: default, fontColor: black, background: blank },
 }
 }

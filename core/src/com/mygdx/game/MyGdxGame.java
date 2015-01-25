@@ -6,20 +6,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Screen screen;
 
-	TextureAtlas atlas;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 //		packTextures();
-		atlas = new TextureAtlas("packed/buildings.atlas");
 		screen = new MenuScreen();//new MyScreen();
 //        screen = new MyScreen("sample.tmx");
 		screen.show();

@@ -58,7 +58,9 @@ public class MyStage extends Stage {
         skin = new Skin(Gdx.files.internal("newskin.json"), new TextureAtlas("packed/skin.atlas"));
         table = new Table();
         String msg = "sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample sample";
+        msg = "";
         label = new Label(msg, skin);
+        label.setVisible(false);
         label.setAlignment(Align.center);
         label.setWrap(true);
         table.add(label).fillX().width(Gdx.graphics.getWidth()*0.85f).row();
@@ -132,7 +134,8 @@ public class MyStage extends Stage {
         if (labelTimer > 0) {
             labelTimer -= delta;
             if (labelTimer < 0) {
-                label.setText("");
+                label.setText(null);
+                label.setVisible(false);
             }
         }
 
@@ -234,5 +237,6 @@ public class MyStage extends Stage {
     public void showMessage(String message) {
         label.setText(message);
         labelTimer = 2;
+        label.setVisible(true);
     }
 }
