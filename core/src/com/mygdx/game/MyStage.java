@@ -143,22 +143,22 @@ public class MyStage extends Stage {
                     group.addActor(boss);
                 }
                 if ("eax".equalsIgnoreCase(type)) {
-                    Enemy enemy = new ArrowEnemy("test", true);
+                    Enemy enemy = new ArrowEnemy("arrow_enemy", true);
                     enemy.setPosition(i, j);
                     group.addActor(enemy);
                 }
                 if ("eay".equalsIgnoreCase(type)) {
-                    Enemy enemy = new ArrowEnemy("test", false);
+                    Enemy enemy = new ArrowEnemy("arrow_enemy", false);
                     enemy.setPosition(i, j);
                     group.addActor(enemy);
                 }
                 if ("esx".equalsIgnoreCase(type)) {
-                    Enemy enemy = new SwordEnemy("test", true);
+                    Enemy enemy = new SwordEnemy("sword_enemy", true);
                     enemy.setPosition(i, j);
                     group.addActor(enemy);
                 }
                 if ("esy".equalsIgnoreCase(type)) {
-                    Enemy enemy = new SwordEnemy("test", false);
+                    Enemy enemy = new SwordEnemy("sword_enemy", false);
                     enemy.setPosition(i, j);
                     group.addActor(enemy);
                 }
